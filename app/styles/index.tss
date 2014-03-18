@@ -1,8 +1,15 @@
 ".container": {
-	backgroundColor:"white"
+  backgroundColor:"white",
+  layout: "vertical"
 },
 "Label": {
-	width: Ti.UI.SIZE,
-	height: Ti.UI.SIZE,
-	color: "#000"
-} 
+  width: Ti.UI.SIZE,
+  height: Ti.UI.SIZE,
+  color: "#000",
+  top: 50,
+  margin: 150
+},
+".subscribe": {
+  
+}
+

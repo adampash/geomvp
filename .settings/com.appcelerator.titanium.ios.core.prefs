@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+iosLaunchConfigurationAttributes/ATTR_MINIFY=true
+iosLaunchConfigurationAttributes/ATTR_PROJECT_NAME=GeoMVP
+iosLaunchConfigurationAttributes/appid=com.adampash.geomvp
+iosLaunchConfigurationAttributes/certificate=Adam PASH (934RPAA652)
+iosLaunchConfigurationAttributes/keychain=
+iosLaunchConfigurationAttributes/sdk_version=7.1
+iosLaunchConfigurationAttributes/uuid=4E6DB37A-D929-4FB2-96FD-24CA782D375E
+provisioning_profiles/development/49C86D76-1A63-45B4-AE62-692B678E0A25/appid=com.adampash.whereuat
+provisioning_profiles/development/49C86D76-1A63-45B4-AE62-692B678E0A25/name=Where u at?
+provisioning_profiles/development/49C86D76-1A63-45B4-AE62-692B678E0A25/uuid=49C86D76-1A63-45B4-AE62-692B678E0A25
+provisioning_profiles/development/4E6DB37A-D929-4FB2-96FD-24CA782D375E/appid=com.adampash.geomvp
+provisioning_profiles/development/4E6DB37A-D929-4FB2-96FD-24CA782D375E/name=Beacon
+provisioning_profiles/development/4E6DB37A-D929-4FB2-96FD-24CA782D375E/uuid=4E6DB37A-D929-4FB2-96FD-24CA782D375E
+provisioning_profiles/development/F13A1D92-D8F2-42E8-BFF5-F77621EFE719/appid=com.adampash.whereuat
+provisioning_profiles/development/F13A1D92-D8F2-42E8-BFF5-F77621EFE719/name=Where u at?
+provisioning_profiles/development/F13A1D92-D8F2-42E8-BFF5-F77621EFE719/uuid=F13A1D92-D8F2-42E8-BFF5-F77621EFE719
