@@ -4,5 +4,6 @@ build
 npm-debug.log
 tmp
 .map
+.project
 node_modules
 Resources
