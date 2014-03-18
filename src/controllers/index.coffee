@@ -1,5 +1,11 @@
 Cloud = require 'ti.cloud'
-deviceToken = null
+
+securely = require 'bencoding.securely'
+properties = securely.createProperties
+    secret:"901083jjkn38jfsksKJk209jKJXj8"
+    identifier:"deviceToken"
+    accessGroup:"myAccessGroup"
+    encryptFieldNames:false
 
 createUser = ->
   Cloud.Users.secureCreate
@@ -8,6 +14,7 @@ createUser = ->
       (e) ->
         if (e.success)
             alert('Success:\\n' + e)
+            alert Cloud.accessToken
         else
             alert('Error:\\n' +
                 ((e.error && e.message) || JSON.stringify(e)))
@@ -34,6 +41,7 @@ subscribe = ->
     success: (e) ->
       alert 'that was successful'
       deviceToken = e.deviceToken
+      properties.setString 'deviceToken', e.deviceToken
       registerWithCloud(e)
     error: (e) ->
       Ti.API.debug 'that was an error'
@@ -45,7 +53,7 @@ subscribe = ->
 registerWithCloud = (e) ->
   Cloud.PushNotifications.subscribe
       channel: 'test'
-      device_token: e.deviceToken
+      device_token: properties.getString 'deviceToken'
       type: 'ios'
   , (e) ->
       if (e.success)

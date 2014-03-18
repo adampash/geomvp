@@ -55,6 +55,7 @@
     </mobileweb>
     <modules>
         <module platform="commonjs">ti.cloud</module>
+        <module>bencoding.securely</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>
