@@ -27,6 +27,7 @@ module.exports = (grunt) ->
       dev:
         options:
           sourceMap: true
+          bare: true
         expand: true
         cwd: 'src'
         src: ['**/*.coffee']
