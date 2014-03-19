@@ -88,7 +88,6 @@ currentUser = Parse.User.current();
 
 if (currentUser) {
   Ti.API.info("Current user id: " + currentUser.id);
-  openLogin();
 } else {
   openLogin();
 }
