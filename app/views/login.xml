@@ -1,0 +1,17 @@
+<Alloy>
+  <Window id="login" class="container">
+    <Label id="header">Login</Label>
+    <TextField id="name" hintText="Jane Doe" />
+    <TextField id="email" hintText="your.email@example.com" />
+    <TextField id="password" hintText="*********" />
+    <View class="actionButtons">
+      <Button onClick="createUser" id="createButton">Sign up</Button>
+      <Button onClick="loginUser" id="loginButton">Log in</Button>
+    </View>
+    <View id="changeLoginType">
+      <Label onClick="changeToLogin" id="changeToLogin">I already have an account</Label>
+      <Label onClick="changeToRegister" id="changeToRegister">I need to register for an account</Label>
+    </View>
+    <Label onClick="close">Cancel</Label>
+  </Window>
+</Alloy>

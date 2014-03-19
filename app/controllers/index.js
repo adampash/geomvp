@@ -1,6 +1,4 @@
-var Cloud, Parse, ParsePush, createUser, currentUser, errorFromParse, registerWithParse, registeredWithParse, subscribe, testSinglePush;
-
-Cloud = require('ti.cloud');
+var Parse, ParsePush, createUser, currentUser, errorFromParse, openLogin, registerWithParse, registeredWithParse, subscribe, testSinglePush;
 
 ParsePush = require('parsePush');
 
@@ -8,14 +6,6 @@ Parse = require('tiparse')({
   applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
   javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
 });
-
-currentUser = Parse.User.current();
-
-if (currentUser) {
-  Ti.API.info("Current user id: " + currentUser.id);
-} else {
-  Ti.API.info('No current user?');
-}
 
 createUser = function() {
   var user;
@@ -87,5 +77,20 @@ testSinglePush = function() {
 };
 
 $.index.open();
+
+openLogin = function() {
+  var login;
+  login = Alloy.createController('login').getView();
+  return login.open();
+};
+
+currentUser = Parse.User.current();
+
+if (currentUser) {
+  Ti.API.info("Current user id: " + currentUser.id);
+  openLogin();
+} else {
+  openLogin();
+}
 
 //# sourceMappingURL=index.js.map

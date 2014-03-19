@@ -1,6 +1,6 @@
 <Alloy>
   <Window class="container">
-    <Label id="label" onClick="createUser">Register</Label>
+    <Label id="label" onClick="openLogin">openLogin</Label>
     <Label id="subscribe" onClick="subscribe">Subscribe to Push</Label>
     <Label id="push" onClick="testSinglePush">Test Push</Label>
   </Window>

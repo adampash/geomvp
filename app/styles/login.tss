@@ -1,0 +1,49 @@
+".container" : {
+  "backgroundColor": "#dddddd",
+  layout: "vertical"
+},
+".actionButtons": {
+  layout: "absolute",
+  height: "50dp"
+},
+"#changeLoginType": {
+  layout: "absolute",
+  height: "50dp",
+},
+"#header": {
+  marginTop: 150
+},
+"Label" : {
+  "height": "50dp",
+  "width": Ti.UI.SIZE,
+  margin: 10
+},
+"TextField": {
+  left: "5dp",
+  right: "5dp",
+  height: "50dp",
+  width: Ti.UI.FILL,
+  backgroundColor: "white",
+  marginTop: "10p",
+  autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE
+},
+"Button": {
+  left: "5dp",
+  right: "5dp",
+  height: "50dp",
+  width: Ti.UI.FILL,
+  backgroundColor: "blue"
+},
+"#email": {
+  keyboardType: Ti.UI.KEYBOARD_EMAIL
+},
+"#password": {
+  passwordMask: true
+},
+"#loginButton": {
+  visible: false
+},
+"#changeToRegister": {
+  visible: false
+}
+

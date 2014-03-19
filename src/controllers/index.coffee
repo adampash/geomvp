@@ -1,17 +1,8 @@
-Cloud = require 'ti.cloud'
-
 ParsePush = require 'parsePush'
 Parse = require('tiparse')(
   applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K'
   javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
 )
-
-currentUser = Parse.User.current()
-if currentUser
-  Ti.API.info "Current user id: " + currentUser.id
-else
-  Ti.API.info 'No current user?'
-
 
 createUser = ->
   user = new Parse.User()
@@ -73,3 +64,16 @@ testSinglePush = ->
       alert 'it did not work'
 
 $.index.open()
+
+openLogin = ->
+  login = Alloy.createController('login').getView()
+  login.open()
+
+currentUser = Parse.User.current()
+if currentUser
+  Ti.API.info "Current user id: " + currentUser.id
+  openLogin()
+else
+  openLogin()
+
+

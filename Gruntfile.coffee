@@ -22,6 +22,9 @@ module.exports = (grunt) ->
       controllers: [
         '<%= project.js %>/controllers/*'
       ]
+      lib: [
+        '<%= project.js %>/lib/*'
+      ]
 
     coffee:
       dev:
@@ -42,7 +45,11 @@ module.exports = (grunt) ->
 
     watch:
       coffeescripts:
-        files: ['<%= project.models %>', '<%= project.controllers %>']
+        files: [
+          '<%= project.models %>',
+          '<%= project.controllers %>',
+          '<%= project.lib %>'
+        ]
         tasks: ['coffee:dev']
         options:
           spawn: false
