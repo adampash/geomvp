@@ -1,4 +1,4 @@
-var Cloud, createUser, login, registerWithCloud, sendTestNotification, subscribe;
+var Cloud, createUser, registerWithCloud, sendTestNotification, subscribe;
 
 Cloud = require('ti.cloud');
 
@@ -15,20 +15,9 @@ createUser = function() {
   });
 };
 
-login = function() {
-  return Cloud.Users.secureLogin({
-    title: 'Log In Here'
-  }, function(e) {
-    if (e.success) {
-      return alert('Logged in:\n' + Cloud.accessToken);
-    } else {
-      return alert('Error:\n' + ((e.error && e.message) || JSON.stringify(e)));
-    }
-  });
-};
-
 subscribe = function() {
-  Ti.Network.registerForPushNotifications({
+  alert('register for push');
+  return Ti.Network.registerForPushNotifications({
     types: [Ti.Network.NOTIFICATION_TYPE_ALERT, Ti.Network.NOTIFICATION_TYPE_BADGE, Ti.Network.NOTIFICATION_TYPE_SOUND],
     callback: function(e) {
       return alert('got a push notification!');
@@ -42,10 +31,9 @@ subscribe = function() {
     error: function(e) {
       Ti.API.debug('that was an error');
       Ti.API.debug(e);
-      return alert(e);
+      return alert(JSON.stringify(e));
     }
   });
-  return Ti.API.info('registering');
 };
 
 registerWithCloud = function(e) {

@@ -1,12 +1,5 @@
 Cloud = require 'ti.cloud'
 
-# securely = require 'bencoding.securely'
-# properties = securely.createProperties
-#     secret:"901083jjkn38jfsksKJk209jKJXj8"
-#     identifier:"deviceToken"
-#     accessGroup:"myAccessGroup"
-#     encryptFieldNames:false
-
 createUser = ->
   Cloud.Users.secureCreate
       title: 'Sign Up Here'
@@ -19,17 +12,8 @@ createUser = ->
             alert('Error:\\n' +
                 ((e.error && e.message) || JSON.stringify(e)))
 
-login = ->
-  Cloud.Users.secureLogin
-    title: 'Log In Here'
-  , (e) ->
-    if (e.success)
-        alert('Logged in:\n' + Cloud.accessToken)
-    else
-        alert('Error:\n' +
-            ((e.error && e.message) || JSON.stringify(e)))
-
 subscribe = ->
+  alert 'register for push'
   Ti.Network.registerForPushNotifications
     types: [
       Ti.Network.NOTIFICATION_TYPE_ALERT,
@@ -43,12 +27,12 @@ subscribe = ->
       deviceToken = e.deviceToken
       # properties.setString 'deviceToken', e.deviceToken
       registerWithCloud(e)
+      # registerWithParse(e)
     error: (e) ->
       Ti.API.debug 'that was an error'
       Ti.API.debug e
-      alert e
 
-  Ti.API.info 'registering'
+      alert JSON.stringify e
 
 registerWithCloud = (e) ->
   Cloud.PushNotifications.subscribe
@@ -62,6 +46,12 @@ registerWithCloud = (e) ->
           alert('Error:\n' +
               ((e.error && e.message) || JSON.stringify(e)))
 
+# registerWithParse = (e) ->
+#   alert 'register with parse'
+#   Parse.register
+#     deviceType: 'ios'
+#     deviceToken: e.deviceToken
+#     channels: ['']
 
 sendTestNotification = () ->
     # Sends an 'This is a test.' alert to specified device if its subscribed to the 'test' channel.
