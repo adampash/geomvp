@@ -1,5 +1,14 @@
 Cloud = require 'ti.cloud'
 
+Parse = require 'parse'
+
+# securely = require 'bencoding.securely'
+# properties = securely.createProperties
+#     secret:"901083jjkn38jfsksKJk209jKJXj8"
+#     identifier:"deviceToken"
+#     accessGroup:"myAccessGroup"
+#     encryptFieldNames:false
+
 createUser = ->
   Cloud.Users.secureCreate
       title: 'Sign Up Here'
@@ -26,8 +35,8 @@ subscribe = ->
       alert 'registration was successful'
       deviceToken = e.deviceToken
       # properties.setString 'deviceToken', e.deviceToken
-      registerWithCloud(e)
-      # registerWithParse(e)
+      # registerWithCloud(e)
+      registerWithParse(e)
     error: (e) ->
       Ti.API.debug 'that was an error'
       Ti.API.debug e
@@ -46,12 +55,21 @@ registerWithCloud = (e) ->
           alert('Error:\n' +
               ((e.error && e.message) || JSON.stringify(e)))
 
-# registerWithParse = (e) ->
-#   alert 'register with parse'
-#   Parse.register
-#     deviceType: 'ios'
-#     deviceToken: e.deviceToken
-#     channels: ['']
+registerWithParse = (e) ->
+  alert 'register with parse'
+  Parse.register
+    deviceType: 'ios'
+    deviceToken: e.deviceToken
+    channels: ['']
+  , registeredWithParse
+  , errorFromParse
+
+registeredWithParse = (e, status) ->
+  alert 'It worked'
+  alert JSON.stringify e
+  alert status
+errorFromParse = (e) ->
+  alert 'It did not work'
 
 sendTestNotification = () ->
     # Sends an 'This is a test.' alert to specified device if its subscribed to the 'test' channel.

@@ -1,6 +1,8 @@
-var Cloud, createUser, registerWithCloud, sendTestNotification, subscribe;
+var Cloud, Parse, createUser, errorFromParse, registerWithCloud, registerWithParse, registeredWithParse, sendTestNotification, subscribe;
 
 Cloud = require('ti.cloud');
+
+Parse = require('parse');
 
 createUser = function() {
   return Cloud.Users.secureCreate({
@@ -26,7 +28,7 @@ subscribe = function() {
       var deviceToken;
       alert('registration was successful');
       deviceToken = e.deviceToken;
-      return registerWithCloud(e);
+      return registerWithParse(e);
     },
     error: function(e) {
       Ti.API.debug('that was an error');
@@ -48,6 +50,25 @@ registerWithCloud = function(e) {
       return alert('Error:\n' + ((e.error && e.message) || JSON.stringify(e)));
     }
   });
+};
+
+registerWithParse = function(e) {
+  alert('register with parse');
+  return Parse.register({
+    deviceType: 'ios',
+    deviceToken: e.deviceToken,
+    channels: ['']
+  }, registeredWithParse, errorFromParse);
+};
+
+registeredWithParse = function(e, status) {
+  alert('It worked');
+  alert(JSON.stringify(e));
+  return alert(status);
+};
+
+errorFromParse = function(e) {
+  return alert('It did not work');
 };
 
 sendTestNotification = function() {

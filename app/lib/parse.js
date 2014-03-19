@@ -1,9 +1,8 @@
 var baseUrl = 'https://api.parse.com/1',
-  appId = 'cZ7fOnxWbzcH9HLOfpUJ644MhCCCz1YCpqtdcDsY',
-  apiKey = 'GubyKSq1JQYU0MwUi094wbRWlUG9qp0qy3feioUs'; // make sure to use the REST API Key
+  appId = '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
+  apiKey = 'u4AqOvWnG0qCRcLXjPMdAgSSuOmLniqgQdugbQL9'; // make sure to use the REST API Key
 
 var _register = function(params, lambda, lambdaerror) {
-  alert('Registering');
   var method = 'POST',
       url = baseUrl + '/installations',
       payload = (params) ? JSON.stringify(params) : '';
