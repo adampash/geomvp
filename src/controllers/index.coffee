@@ -1,25 +1,37 @@
 Cloud = require 'ti.cloud'
 
-Parse = require 'parse'
+ParsePush = require 'parsePush'
+Parse = require('tiparse')(
+  applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K'
+  javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
+)
 
-# securely = require 'bencoding.securely'
-# properties = securely.createProperties
-#     secret:"901083jjkn38jfsksKJk209jKJXj8"
-#     identifier:"deviceToken"
-#     accessGroup:"myAccessGroup"
-#     encryptFieldNames:false
+Ti.API.info Parse
 
 createUser = ->
-  Cloud.Users.secureCreate
-      title: 'Sign Up Here'
-      ,
-      (e) ->
-        if (e.success)
-            alert('Success:\\n' + e)
-            alert Cloud.accessToken
-        else
-            alert('Error:\\n' +
-                ((e.error && e.message) || JSON.stringify(e)))
+  user = new Parse.User()
+  user.set 'username', 'adampash'
+  user.set 'password', 'pass'
+  user.set 'email', 'adam.pash@gmail.com'
+
+  user.signUp(null,
+    success: (user) ->
+      alert 'WHOA, that worked'
+    ,
+    error: (user, error) ->
+      alert "Error: " + error.code + " " + error.message
+  )
+
+  # Cloud.Users.secureCreate
+  #     title: 'Sign Up Here'
+  #     ,
+  #     (e) ->
+  #       if (e.success)
+  #           alert('Success:\\n' + e)
+  #           alert Cloud.accessToken
+  #       else
+  #           alert('Error:\\n' +
+  #               ((e.error && e.message) || JSON.stringify(e)))
 
 subscribe = ->
   alert 'register for push'
@@ -57,7 +69,7 @@ registerWithCloud = (e) ->
 
 registerWithParse = (e) ->
   alert 'register with parse'
-  Parse.register
+  ParsePush.register
     deviceType: 'ios'
     deviceToken: e.deviceToken
     channels: ['']

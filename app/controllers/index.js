@@ -1,18 +1,28 @@
-var Cloud, Parse, createUser, errorFromParse, registerWithCloud, registerWithParse, registeredWithParse, sendTestNotification, subscribe;
+var Cloud, Parse, ParsePush, createUser, errorFromParse, registerWithCloud, registerWithParse, registeredWithParse, sendTestNotification, subscribe;
 
 Cloud = require('ti.cloud');
 
-Parse = require('parse');
+ParsePush = require('parsePush');
+
+Parse = require('tiparse')({
+  applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
+  javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
+});
+
+Ti.API.info(Parse);
 
 createUser = function() {
-  return Cloud.Users.secureCreate({
-    title: 'Sign Up Here'
-  }, function(e) {
-    if (e.success) {
-      alert('Success:\\n' + e);
-      return alert(Cloud.accessToken);
-    } else {
-      return alert('Error:\\n' + ((e.error && e.message) || JSON.stringify(e)));
+  var user;
+  user = new Parse.User();
+  user.set('username', 'adampash');
+  user.set('password', 'pass');
+  user.set('email', 'adam.pash@gmail.com');
+  return user.signUp(null, {
+    success: function(user) {
+      return alert('WHOA, that worked');
+    },
+    error: function(user, error) {
+      return alert("Error: " + error.code + " " + error.message);
     }
   });
 };
@@ -54,7 +64,7 @@ registerWithCloud = function(e) {
 
 registerWithParse = function(e) {
   alert('register with parse');
-  return Parse.register({
+  return ParsePush.register({
     deviceType: 'ios',
     deviceToken: e.deviceToken,
     channels: ['']
