@@ -18,6 +18,7 @@ createUser = ->
 
   user.signUp(null,
     success: (user) ->
+      registerForPush()
       close()
     ,
     error: (user, error) ->
@@ -46,13 +47,18 @@ loginUser = ->
   ).then(
     (user) ->
       alert 'Successful login!'
+      registerForPush()
       close()
   , (error) ->
     alert 'Error'
     alert JSON.stringify error
   )
 
+registerForPush = ->
+  PushRegistration = require 'registerForPush'
+  PushRegistration.subscribe()
+
 getUserCredentials = ->
-  email:     $.email.value.trim()
+  email:     $.email.value.trim().toLowerCase()
   password:  $.password.value
   name:  $.name.value

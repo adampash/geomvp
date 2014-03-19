@@ -1,4 +1,4 @@
-var Parse, args, changeToLogin, changeToRegister, close, createUser, getUserCredentials, loginUser;
+var Parse, args, changeToLogin, changeToRegister, close, createUser, getUserCredentials, loginUser, registerForPush;
 
 Parse = require('tiparse')({
   applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
@@ -21,6 +21,7 @@ createUser = function() {
   user.set('name', userCredentials.name);
   return user.signUp(null, {
     success: function(user) {
+      registerForPush();
       return close();
     },
     error: function(user, error) {
@@ -50,6 +51,7 @@ loginUser = function() {
   userCredentials = getUserCredentials();
   return Parse.User.logIn(userCredentials.email, userCredentials.password).then(function(user) {
     alert('Successful login!');
+    registerForPush();
     return close();
   }, function(error) {
     alert('Error');
@@ -57,9 +59,15 @@ loginUser = function() {
   });
 };
 
+registerForPush = function() {
+  var PushRegistration;
+  PushRegistration = require('registerForPush');
+  return PushRegistration.subscribe();
+};
+
 getUserCredentials = function() {
   return {
-    email: $.email.value.trim(),
+    email: $.email.value.trim().toLowerCase(),
     password: $.password.value,
     name: $.name.value
   };
