@@ -27,11 +27,15 @@
   marginTop: "10p",
   autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE
 },
+"#name": {
+  autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS
+},
 "Button": {
   left: "5dp",
   right: "5dp",
   height: "50dp",
   width: Ti.UI.FILL,
+  color: "white",
   backgroundColor: "blue"
 },
 "#email": {
