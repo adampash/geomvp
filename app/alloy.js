@@ -9,3 +9,5 @@
 // object. For example:
 //
 // Alloy.Globals.someGlobalFunction = function(){};
+Alloy.Globals.Map = require('ti.map');
+Alloy.Globals.halfWidth = Ti.UI.Size / 2

@@ -1,0 +1,41 @@
+".container" : {
+  "backgroundColor": "#dddddd"
+},
+"Label" : {
+  "height": "50dp",
+  "width": Ti.UI.SIZE,
+  margin: 10
+},
+"#map": {
+  top: 5,
+  left: 5,
+  right: 5,
+  bottom: 5,
+  "width": Ti.UI.SIZE,
+},
+"TextField": {
+  left: "5dp",
+  right: "5dp",
+  height: "50dp",
+  top: "20dp",
+  width: Ti.UI.FILL,
+  backgroundColor: "white",
+},
+"#confirm": {
+  backgroundColor: "white",
+  layout: "vertical",
+  bottom: 0,
+  height: "150dp",
+  right: 0,
+  left: 0,
+  visible: false
+},
+"#buttons": {
+  layout: "horizontal"
+},
+".confirmButton": {
+  width: Ti.UI.FILL,
+  height: "50dp",
+  backgroundColor: "blue",
+  color: "white"
+}

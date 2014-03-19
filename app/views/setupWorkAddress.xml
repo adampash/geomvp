@@ -1,0 +1,14 @@
+<Alloy>
+  <Window id="setupWorkAddress" class="container">
+    <View id="mapview" ns="Alloy.Globals.Map" animate="true" />
+    <TextField id="workAddress" hintText="Your work address" 
+      onReturn="findAddress" />
+    <View id="confirm">
+      <Label>Does that look right?</Label>
+      <View id="buttons">
+        <Button class="confirmButton" onClick="finishUp" >Yep!</Button>
+        <Button class="confirmButton" onClick="searchAgain" >Nope</Button>
+      </View>
+    </View>
+  </Window>
+</Alloy>

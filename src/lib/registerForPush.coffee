@@ -22,6 +22,8 @@ PushRegistration =
             Ti.API.debug e
 
             alert JSON.stringify e
+    else if OS_ANDROID
+      alert 'need to register for push on android'
 
   registerWithParse: (e) ->
     ParsePush.register

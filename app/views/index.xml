@@ -1,6 +1,7 @@
 <Alloy>
   <Window class="container">
     <Label id="label" onClick="openLogin">openLogin</Label>
+    <Label id="label" onClick="launchSetup">launchSetup</Label>
     <!-- <Label id="subscribe" onClick="subscribe">Subscribe to Push</Label> -->
     <Label id="push" onClick="testSinglePush">Test Push</Label>
   </Window>

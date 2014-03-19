@@ -1,4 +1,4 @@
-var Parse, ParsePush, currentUser, openLogin, testSinglePush;
+var Parse, ParsePush, currentUser, launchSetup, openLogin, testSinglePush;
 
 ParsePush = require('parsePush');
 
@@ -20,18 +20,31 @@ testSinglePush = function() {
 
 openLogin = function() {
   var login;
+  Ti.API.info("Open login");
   login = Alloy.createController('login').getView();
   return login.open();
 };
 
+launchSetup = function() {
+  var setup;
+  Ti.API.info("Launch setup");
+  setup = Alloy.createController('setupWorkAddress').getView();
+  return setup.open();
+};
+
+$.index.open();
+
 currentUser = Parse.User.current();
 
 if (currentUser) {
-  Ti.API.info("Current user id: " + currentUser.id);
+  Ti.API.info("User is currently logged in: " + currentUser.id);
+  if (Alloy.Globals.setupComplete) {
+    Ti.API.info("Setup is complete");
+  } else {
+    launchSetup();
+  }
 } else {
   openLogin();
 }
-
-$.index.open();
 
 //# sourceMappingURL=index.js.map

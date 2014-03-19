@@ -25,6 +25,8 @@ PushRegistration = {
           }
         });
       }
+    } else if (OS_ANDROID) {
+      return alert('need to register for push on android');
     }
   },
   registerWithParse: function(e) {
