@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "GeoMVP": {
+            "applicationId": "1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K", 
+            "masterKey": "84pNHLNg5JVqJQpyexYvoOcgBqA7a2BzNbJH5k3b"
+        }, 
+        "_default": {
+            "link": "GeoMVP"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.18"
+    }
+}

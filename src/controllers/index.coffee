@@ -15,9 +15,9 @@ else
 
 createUser = ->
   user = new Parse.User()
-  user.set 'username', 'adampash'
+  user.set 'username', 'aop'
   user.set 'password', 'pass'
-  user.set 'email', 'adam.pash@gmail.com'
+  user.set 'email', 'adam.pash+123@gmail.com'
 
   user.signUp(null,
     success: (user) ->
@@ -37,6 +37,7 @@ subscribe = ->
     ]
     callback: (e) ->
       alert 'got a push notification!'
+      alert JSON.stringify e
     success: (e) ->
       alert 'registration was successful'
       deviceToken = e.deviceToken
@@ -52,7 +53,7 @@ registerWithParse = (e) ->
   ParsePush.register
     deviceType: 'ios'
     deviceToken: e.deviceToken
-    channels: ['']
+    channels: [Parse.User.current().id]
   , registeredWithParse
   , errorFromParse
 
@@ -62,5 +63,13 @@ registeredWithParse = (e, status) ->
   alert status
 errorFromParse = (e) ->
   alert 'It did not work'
+
+testSinglePush = ->
+  Parse.Cloud.run 'testpush', {},
+    success: (res) ->
+      alert 'it worked'
+      alert res
+    error: (err) ->
+      alert 'it did not work'
 
 $.index.open()
