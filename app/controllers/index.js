@@ -1,4 +1,4 @@
-var Cloud, Parse, ParsePush, createUser, errorFromParse, registerWithCloud, registerWithParse, registeredWithParse, sendTestNotification, subscribe;
+var Cloud, Parse, ParsePush, createUser, currentUser, errorFromParse, registerWithParse, registeredWithParse, subscribe;
 
 Cloud = require('ti.cloud');
 
@@ -9,7 +9,13 @@ Parse = require('tiparse')({
   javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
 });
 
-Ti.API.info(Parse);
+currentUser = Parse.User.current();
+
+if (currentUser) {
+  Ti.API.info("Current user id: " + currentUser.id);
+} else {
+  Ti.API.info('No current user?');
+}
 
 createUser = function() {
   var user;
@@ -48,20 +54,6 @@ subscribe = function() {
   });
 };
 
-registerWithCloud = function(e) {
-  return Cloud.PushNotifications.subscribe({
-    channel: 'test',
-    device_token: e.deviceToken,
-    type: 'ios'
-  }, function(e) {
-    if (e.success) {
-      return alert('Subscribed :' + ((e.error && e.message) || JSON.stringify(e)));
-    } else {
-      return alert('Error:\n' + ((e.error && e.message) || JSON.stringify(e)));
-    }
-  });
-};
-
 registerWithParse = function(e) {
   alert('register with parse');
   return ParsePush.register({
@@ -79,20 +71,6 @@ registeredWithParse = function(e, status) {
 
 errorFromParse = function(e) {
   return alert('It did not work');
-};
-
-sendTestNotification = function() {
-  return Cloud.PushNotifications.notifyTokens({
-    to_tokens: deviceToken,
-    channel: 'test',
-    payload: 'This is a test.'
-  }, function(e) {
-    if (e.success) {
-      return alert('Push notification sent');
-    } else {
-      return alert('Error:\n' + ((e.error && e.message) || JSON.stringify(e)));
-    }
-  });
 };
 
 $.index.open();

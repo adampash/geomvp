@@ -2,6 +2,5 @@
   <Window class="container">
     <Label id="label" onClick="createUser">Register</Label>
     <Label id="subscribe" onClick="subscribe">Subscribe to Push</Label>
-    <Label id="test" onClick="sendTestNotification">Test notification</Label>
   </Window>
 </Alloy>

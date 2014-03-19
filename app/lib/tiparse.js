@@ -7,18 +7,6 @@
  */
 
 var TiParse = function(options) {
-  FB = {
-    init: function() {
-      debugger;
-      Ti.API.info("called FB.init()");
-    },
-    login: function() {
-      Ti.API.info("called FB.login()");
-    },
-    logout: function() {
-      Ti.API.info("called FB.logout()");
-    }
-  };
   Ti.include("parse-1.2.18.js");
   Parse.localStorage = {
     getItem: function(_key) {
@@ -63,7 +51,6 @@ var TiParse = function(options) {
   };
 
   Parse.initialize(options.applicationId, options.javascriptkey);
-  Parse.FacebookUtils.init();
   return Parse;
 };
 
