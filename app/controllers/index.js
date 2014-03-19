@@ -1,15 +1,6 @@
-var Cloud, createUser, login, properties, registerWithCloud, securely, sendTestNotification, subscribe;
+var Cloud, createUser, login, registerWithCloud, sendTestNotification, subscribe;
 
 Cloud = require('ti.cloud');
-
-securely = require('bencoding.securely');
-
-properties = securely.createProperties({
-  secret: "901083jjkn38jfsksKJk209jKJXj8",
-  identifier: "deviceToken",
-  accessGroup: "myAccessGroup",
-  encryptFieldNames: false
-});
 
 createUser = function() {
   return Cloud.Users.secureCreate({
@@ -44,9 +35,8 @@ subscribe = function() {
     },
     success: function(e) {
       var deviceToken;
-      alert('that was successful');
+      alert('registration was successful');
       deviceToken = e.deviceToken;
-      properties.setString('deviceToken', e.deviceToken);
       return registerWithCloud(e);
     },
     error: function(e) {
@@ -55,13 +45,13 @@ subscribe = function() {
       return alert(e);
     }
   });
-  return alert('push');
+  return Ti.API.info('registering');
 };
 
 registerWithCloud = function(e) {
   return Cloud.PushNotifications.subscribe({
     channel: 'test',
-    device_token: properties.getString('deviceToken'),
+    device_token: e.deviceToken,
     type: 'ios'
   }, function(e) {
     if (e.success) {
