@@ -32,14 +32,13 @@ launchSetup = function() {
   return setup.open();
 };
 
-$.index.open();
-
 currentUser = Parse.User.current();
 
 if (currentUser) {
   Ti.API.info("User is currently logged in: " + currentUser.id);
   if (Alloy.Globals.setupComplete) {
     Ti.API.info("Setup is complete");
+    $.index.open();
   } else {
     launchSetup();
   }

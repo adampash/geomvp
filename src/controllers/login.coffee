@@ -7,6 +7,12 @@ args = arguments[0] || {}
 
 close = ->
   $.login.close()
+  launchSetup()
+
+launchSetup = ->
+  Ti.API.info "Launch setup"
+  setup = Alloy.createController('setupWorkAddress').getView()
+  setup.open()
 
 createUser = ->
   userCredentials = getUserCredentials()

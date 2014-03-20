@@ -4,7 +4,7 @@
     <TextField id="workAddress" hintText="Your work address" 
       onReturn="findAddress" />
     <View id="confirm">
-      <Label>Does that look right?</Label>
+      <Label>Is this where you work?</Label>
       <View id="buttons">
         <Button class="confirmButton" onClick="finishUp" >Yep!</Button>
         <Button class="confirmButton" onClick="searchAgain" >Nope</Button>

@@ -1,4 +1,4 @@
-var Parse, args, changeToLogin, changeToRegister, close, createUser, getUserCredentials, loginUser, registerForPush;
+var Parse, args, changeToLogin, changeToRegister, close, createUser, getUserCredentials, launchSetup, loginUser, registerForPush;
 
 Parse = require('tiparse')({
   applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
@@ -8,7 +8,15 @@ Parse = require('tiparse')({
 args = arguments[0] || {};
 
 close = function() {
-  return $.login.close();
+  $.login.close();
+  return launchSetup();
+};
+
+launchSetup = function() {
+  var setup;
+  Ti.API.info("Launch setup");
+  setup = Alloy.createController('setupWorkAddress').getView();
+  return setup.open();
 };
 
 createUser = function() {

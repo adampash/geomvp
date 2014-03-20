@@ -1,4 +1,4 @@
-var args, findAddress, finishUp, report, searchAgain, setLocation;
+var args, findAddress, finishUp, launchLastStep, report, searchAgain, setLocation, setPin;
 
 args = arguments[0] || {};
 
@@ -24,7 +24,20 @@ searchAgain = function() {
 };
 
 finishUp = function() {
-  return alert('almost done!');
+  var workLocation;
+  workLocation = {
+    latitude: $.mapview.annotations[0].latitude,
+    longitude: $.mapview.annotations[0].longitude,
+    address: $.mapview.annotations[0].subtitle
+  };
+  return Ti.App.Properties.setObject('workLocation', workLocation);
+};
+
+launchLastStep = function() {
+  var chooseContact;
+  Ti.API.info("Launch last step");
+  chooseContact = Alloy.createController('chooseContact').getView();
+  return chooseContact.open();
 };
 
 findAddress = function() {
@@ -32,28 +45,32 @@ findAddress = function() {
   geo = require('geo');
   workAddress = $.workAddress.value;
   return geo.forwardGeocode(workAddress, function(geodata) {
-    var coords, workLocation;
+    var coords;
     coords = geodata.coords;
     Ti.API.info(coords);
-    $.mapview.region = {
-      latitude: coords.latitude,
-      longitude: coords.longitude,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01
-    };
-    workLocation = Alloy.Globals.Map.createAnnotation({
-      latitude: coords.latitude,
-      longitude: coords.longitude,
-      title: "Your work",
-      subtitle: geodata.closestResult.formatted_address,
-      pincolor: Alloy.Globals.Map.ANNOTATION_RED,
-      id: 'workPin'
-    });
-    $.mapview.addAnnotation(workLocation);
-    Ti.API.info(JSON.stringify(workLocation));
-    workLocation.fireEvent('click');
-    return $.confirm.show();
+    return setPin(geodata.closestResult.formatted_address, coords);
   });
+};
+
+setPin = function(formattedAddress, coords) {
+  var workLocation;
+  $.mapview.region = {
+    latitude: coords.latitude,
+    longitude: coords.longitude,
+    latitudeDelta: 0.01,
+    longitudeDelta: 0.01
+  };
+  workLocation = Alloy.Globals.Map.createAnnotation({
+    latitude: coords.latitude,
+    longitude: coords.longitude,
+    title: "Your work",
+    subtitle: formattedAddress,
+    pincolor: Alloy.Globals.Map.ANNOTATION_RED,
+    id: 'workPin'
+  });
+  $.mapview.addAnnotation(workLocation);
+  $.mapview.annotations[0].fireEvent('click');
+  return $.confirm.show();
 };
 
 Ti.Geolocation.purpose = "Share you location";
@@ -67,7 +84,13 @@ if (Ti.Geolocation.locationServicesEnabled) {
 }
 
 $.setupWorkAddress.addEventListener('open', function() {
-  return $.workAddress.focus();
+  var workLocation;
+  workLocation = Ti.App.Properties.getObject('workLocation');
+  if (workLocation != null) {
+    return setPin(workLocation.address, workLocation);
+  } else {
+    return $.workAddress.focus();
+  }
 });
 
 //# sourceMappingURL=setupWorkAddress.js.map

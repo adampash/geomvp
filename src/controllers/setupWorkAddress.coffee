@@ -22,7 +22,17 @@ searchAgain = ->
   $.workAddress.focus()
 
 finishUp = ->
-  alert 'almost done!'
+  workLocation = 
+    latitude: $.mapview.annotations[0].latitude
+    longitude: $.mapview.annotations[0].longitude
+    address: $.mapview.annotations[0].subtitle
+  Ti.App.Properties.setObject('workLocation', workLocation)
+  # launchLastStep()
+
+launchLastStep = ->
+  Ti.API.info "Launch last step"
+  chooseContact = Alloy.createController('chooseContact').getView()
+  chooseContact.open()
 
 findAddress = ->
   geo = require 'geo'
@@ -33,28 +43,28 @@ findAddress = ->
       coords = geodata.coords
       Ti.API.info coords
 
-      $.mapview.region =
-        latitude: coords.latitude
-        longitude: coords.longitude
-        latitudeDelta: 0.01
-        longitudeDelta: 0.01
-
-      workLocation = Alloy.Globals.Map.createAnnotation
-        latitude:coords.latitude
-        longitude:coords.longitude
-        title:"Your work"
-        subtitle:geodata.closestResult.formatted_address
-        pincolor:Alloy.Globals.Map.ANNOTATION_RED
-        id: 'workPin'
-
-      $.mapview.addAnnotation workLocation
-      Ti.API.info JSON.stringify workLocation
-      # $.mapview.fireEvent 'click'
-      workLocation.fireEvent 'click'
-      $.confirm.show()
-      # workLocation.select()
-
+      setPin(geodata.closestResult.formatted_address, coords)
   )
+
+setPin = (formattedAddress, coords) ->
+  $.mapview.region =
+    latitude: coords.latitude
+    longitude: coords.longitude
+    latitudeDelta: 0.01
+    longitudeDelta: 0.01
+
+  workLocation = Alloy.Globals.Map.createAnnotation
+    latitude:coords.latitude
+    longitude:coords.longitude
+    title:"Your work"
+    subtitle:formattedAddress
+    pincolor:Alloy.Globals.Map.ANNOTATION_RED
+    id: 'workPin'
+
+  $.mapview.addAnnotation workLocation
+  # Ti.API.info JSON.stringify workLocation
+  $.mapview.annotations[0].fireEvent 'click'
+  $.confirm.show()
 
 Ti.Geolocation.purpose = "Share you location"
 if (Ti.Geolocation.locationServicesEnabled)
@@ -65,4 +75,8 @@ else
   alert("Please enable location services")
 
 $.setupWorkAddress.addEventListener 'open', ->
-  $.workAddress.focus()
+  workLocation = Ti.App.Properties.getObject('workLocation')
+  if workLocation?
+    setPin(workLocation.address, workLocation)
+  else
+    $.workAddress.focus()
