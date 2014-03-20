@@ -1,0 +1,9 @@
+<Alloy>
+  <Window id="chooseContact" class="container">
+    <View id="confirm">
+      <Button id="contactPicker" onClick="launchContactPicker" >
+        Pick your partner
+      </Button>
+    </View>
+  </Window>
+</Alloy>

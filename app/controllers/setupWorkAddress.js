@@ -1,12 +1,6 @@
-var args, findAddress, finishUp, launchLastStep, report, searchAgain, setLocation, setPin;
+var args, findAddress, finishUp, launchLastStep, searchAgain, setLocation, setPin;
 
 args = arguments[0] || {};
-
-Ti.API.info('setting up some business');
-
-report = function() {
-  return alert('clicked');
-};
 
 setLocation = function(location) {
   var coords;
@@ -30,14 +24,16 @@ finishUp = function() {
     longitude: $.mapview.annotations[0].longitude,
     address: $.mapview.annotations[0].subtitle
   };
-  return Ti.App.Properties.setObject('workLocation', workLocation);
+  Ti.App.Properties.setObject('workLocation', workLocation);
+  return launchLastStep();
 };
 
 launchLastStep = function() {
   var chooseContact;
   Ti.API.info("Launch last step");
   chooseContact = Alloy.createController('chooseContact').getView();
-  return chooseContact.open();
+  chooseContact.open();
+  return $.setupWorkAddress.close();
 };
 
 findAddress = function() {

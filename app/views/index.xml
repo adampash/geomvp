@@ -1,8 +1,15 @@
 <Alloy>
   <Window class="container">
-    <Label id="label" onClick="openLogin">openLogin</Label>
-    <Label id="label" onClick="launchSetup">launchSetup</Label>
+    <View id="mapview" ns="Alloy.Globals.Map" draggable="false" />
+    <Label>Setup complete!</Label>
+    <Label>When you leave work</Label>
+    <Label>between 5pm and 8pm</Label>
+    <Label id="contact">we'll send a push notification</Label>
+    <Label>letting her know you're on your way</Label>
+    <!-- <Label id="label" onClick="openLogin">openLogin</Label> -->
+    <!-- <Label id="label" onClick="launchSetup">launchSetup</Label> -->
     <!-- <Label id="subscribe" onClick="subscribe">Subscribe to Push</Label> -->
-    <Label id="push" onClick="testSinglePush">Test Push</Label>
+    <!-- <Label id="push" onClick="testSinglePush">Test Push</Label> -->
+    <Button onClick="startOver">Start over</Button>
   </Window>
 </Alloy>

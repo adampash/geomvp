@@ -7,7 +7,7 @@
     <property name="acs-oauth-key-development" type="string">3IVh4PNpD38Bgd7EhaAGun06VQroNN2O</property>
     <property name="acs-api-key-development" type="string">5sQDWLbVLVysxrm4YSsriqE5mPltubXh</property>
     <id>com.adampash.geomvp</id>
-    <name>GeoMVP</name>
+    <name>OMW</name>
     <version>1.0</version>
     <publisher>Adam Pash</publisher>
     <url>http://adampash.com</url>

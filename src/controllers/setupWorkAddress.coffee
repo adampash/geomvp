@@ -1,10 +1,5 @@
 args = arguments[0] || {}
 
-Ti.API.info 'setting up some business'
-
-report = ->
-  alert 'clicked'
-
 setLocation = (location) ->
   Ti.API.info "Set location"
   coords = location.coords
@@ -27,12 +22,13 @@ finishUp = ->
     longitude: $.mapview.annotations[0].longitude
     address: $.mapview.annotations[0].subtitle
   Ti.App.Properties.setObject('workLocation', workLocation)
-  # launchLastStep()
+  launchLastStep()
 
 launchLastStep = ->
   Ti.API.info "Launch last step"
   chooseContact = Alloy.createController('chooseContact').getView()
   chooseContact.open()
+  $.setupWorkAddress.close()
 
 findAddress = ->
   geo = require 'geo'

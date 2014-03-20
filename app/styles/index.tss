@@ -4,12 +4,19 @@
 },
 "Label": {
   width: Ti.UI.SIZE,
-  height: Ti.UI.SIZE,
+  height: "30dp",
   color: "#000",
-  top: 50,
-  margin: 150
+  margin: 30
 },
-".subscribe": {
-  
+"#mapview": {
+  top: 0,
+  height: "200dp",
+  width: Ti.UI.FILL
+},
+"Button": {
+  bottom: 5,
+  height: "30dp",
+  width: Ti.UI.FILL,
+  color: "white",
+  backgroundColor: "blue"
 }
-
