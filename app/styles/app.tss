@@ -1,0 +1,8 @@
+"Button": {
+  left: "5dp",
+  right: "5dp",
+  height: "50dp",
+  width: Ti.UI.FILL,
+  color: "white",
+  backgroundColor: "blue"
+}

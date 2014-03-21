@@ -1,0 +1,37 @@
+<Alloy>
+  <Window id="leaveWorkAt" class="container">
+    <View id="positionContainer">
+      <Label>When do you normally leave work?</Label>
+      <Picker id="picker" selectionIndicator="true" useSpinner="true" 
+        onChange="setTime">
+        <Column id="hour">
+          <Row title="1"/>
+          <Row title="2"/>
+          <Row title="3"/>
+          <Row title="4"/>
+          <Row title="5"/>
+          <Row title="6"/>
+          <Row title="7"/>
+          <Row title="8"/>
+          <Row title="9"/>
+          <Row title="10"/>
+          <Row title="11"/>
+          <Row title="12"/>
+        </Column>
+        <Column id="minute">
+          <Row title="00"/>
+          <Row title="15"/>
+          <Row title="30"/>
+          <Row title="45"/>
+        </Column>
+        <Column id="meridian">
+          <Row title="am"/>
+          <Row title="pm"/>
+        </Column>
+      </Picker>
+    </View>
+    <View class="actionButtons">
+      <Button id="saveTime" onClick="saveTime">Looks good!</Button>
+    </View>
+  </Window>
+</Alloy>

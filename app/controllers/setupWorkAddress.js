@@ -1,4 +1,4 @@
-var args, findAddress, finishUp, launchLastStep, searchAgain, setLocation, setPin;
+var args, findAddress, finishUp, launchLastStep, launchNextStep, searchAgain, setLocation, setPin;
 
 args = arguments[0] || {};
 
@@ -25,7 +25,15 @@ finishUp = function() {
     address: $.mapview.annotations[0].subtitle
   };
   Ti.App.Properties.setObject('workLocation', workLocation);
-  return launchLastStep();
+  return launchNextStep();
+};
+
+launchNextStep = function() {
+  var leaveWorkAt;
+  Ti.API.info("Launch next step");
+  leaveWorkAt = Alloy.createController('leaveWorkAt').getView();
+  leaveWorkAt.open();
+  return $.setupWorkAddress.close();
 };
 
 launchLastStep = function() {

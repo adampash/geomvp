@@ -22,7 +22,13 @@ finishUp = ->
     longitude: $.mapview.annotations[0].longitude
     address: $.mapview.annotations[0].subtitle
   Ti.App.Properties.setObject('workLocation', workLocation)
-  launchLastStep()
+  launchNextStep()
+
+launchNextStep = ->
+  Ti.API.info "Launch next step"
+  leaveWorkAt = Alloy.createController('leaveWorkAt').getView()
+  leaveWorkAt.open()
+  $.setupWorkAddress.close()
 
 launchLastStep = ->
   Ti.API.info "Launch last step"

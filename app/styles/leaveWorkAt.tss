@@ -1,0 +1,25 @@
+".container" : {
+  layout: "vertical",
+  backgroundColor: "white",
+  height: Ti.UI.FILL
+},
+"#positionContainer": {
+  top: "100dp",
+  layout: "vertical",
+  height: Ti.UI.SIZE
+},
+"#picker": {
+  top: 0
+},
+"PickerColumn": {
+  width: "43dp"
+},
+"#meridian": {
+  width: "50dp"
+},
+".actionButtons": {
+  bottom: 5,
+  layout: "vertical",
+  width: Ti.UI.SIZE,
+  height: Ti.UI.SIZE
+}
