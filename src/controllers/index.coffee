@@ -45,6 +45,42 @@ setPin = (formattedAddress, coords) ->
   # Ti.API.info JSON.stringify workLocation
   $.mapview.annotations[0].fireEvent 'click'
 
+setupGeofence = ->
+  if OS_IOS
+    ci_geofencing = require('ci.geofencing')
+    Ti.API.info("module is =&gt; " + ci_geofencing)
+
+    workLocation = Ti.App.Properties.getObject('workLocation')
+
+    regions = []
+    regions.push
+      "title" : "Work"
+      "latitude" : workLocation.latitude
+      "longitude" : workLocation.longitude
+      "radius" : 50
+
+
+    ci_geofencing.startGeoFencing(regions, (event) ->
+      Ti.API.info('info ' + JSON.stringify(event, null, 2))
+
+      if event.type is "entered_region"
+        # ci_geofencing.stopGeoFencing()
+        alert("ENTERED REGION!")
+
+      if event.type is "monitoring_region"
+        # ci_geofencing.stopGeoFencing()
+        alert("MONITORING REGION!")
+
+      if event.type is "exited_region"
+        # ci_geofencing.stopGeoFencing();
+        # alert("LEFT REGION!")
+        Parse.Cloud.run 'testpush', {},
+          success: (res) ->
+            alert 'it worked'
+          error: (err) ->
+            alert 'it did not work'
+    )
+
 # If user isn't logged in, prompt user
 # If setup isn't complete, launch setup
 # Otherwise, show index
@@ -64,9 +100,14 @@ init = ->
       contact = Ti.Contacts.getPersonByID(parseInt(contactRecordId,10))
 
       if contact?
-        $.contact.text = "we'll send " + contact.firstName + " a push notification"
+        Ti.API.info JSON.stringify contact
+        name = contact.firstName
+        name = contact.fullName.split(' ')[0] unless name?
+        $.contact.text = "we'll send " + name + " a push notification"
 
       $.index.open()
+
+      setupGeofence()
 
     else
       launchSetup()

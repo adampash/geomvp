@@ -1,4 +1,4 @@
-var args, findAddress, finishUp, launchLastStep, launchNextStep, searchAgain, setLocation, setPin;
+var args, findAddress, finishUp, launchNextStep, searchAgain, setLocation, setPin;
 
 args = arguments[0] || {};
 
@@ -33,14 +33,6 @@ launchNextStep = function() {
   Ti.API.info("Launch next step");
   leaveWorkAt = Alloy.createController('leaveWorkAt').getView();
   leaveWorkAt.open();
-  return $.setupWorkAddress.close();
-};
-
-launchLastStep = function() {
-  var chooseContact;
-  Ti.API.info("Launch last step");
-  chooseContact = Alloy.createController('chooseContact').getView();
-  chooseContact.open();
   return $.setupWorkAddress.close();
 };
 

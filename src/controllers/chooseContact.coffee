@@ -33,7 +33,7 @@ setContact = (contact) ->
     completeSetup()
   else if OS_ANDROID
     Ti.App.Properties.setString('contactRecordId', contact.person.id)
-    alert contact.person.id
+    completeSetup()
 
 contactError = (error) ->
   Ti.API.info 'There was an error selecting a contact'
@@ -46,3 +46,9 @@ completeSetup = ->
   index = Alloy.createController('index').getView()
   index.open()
   $.chooseContact.close()
+
+init = ->
+  time = Ti.App.Properties.getString('departureTime')
+  $.message.text = $.message.text.replace("{tk}", time)
+
+init()

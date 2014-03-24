@@ -1,7 +1,13 @@
 ".container" : {
-  "backgroundColor": "#dddddd",
-  layout: "vertical"
+  "backgroundColor": "white",
+  layout: "vertical",
+  height: Ti.UI.FILL
 },
+"#confirm": {
+  top: "50dp",
+  layout: "vertical",
+  height: Ti.UI.SIZE
+}
 "Button": {
   width: Ti.UI.FILL,
   height: "50dp",

@@ -30,12 +30,6 @@ launchNextStep = ->
   leaveWorkAt.open()
   $.setupWorkAddress.close()
 
-launchLastStep = ->
-  Ti.API.info "Launch last step"
-  chooseContact = Alloy.createController('chooseContact').getView()
-  chooseContact.open()
-  $.setupWorkAddress.close()
-
 findAddress = ->
   geo = require 'geo'
   workAddress = $.workAddress.value

@@ -1,4 +1,4 @@
-var addressBookDisallowed, args, completeSetup, contactError, launchContactPicker, performAddressBookFunction, setContact,
+var addressBookDisallowed, args, completeSetup, contactError, init, launchContactPicker, performAddressBookFunction, setContact,
   __hasProp = {}.hasOwnProperty;
 
 args = arguments[0] || {};
@@ -44,7 +44,7 @@ setContact = function(contact) {
     return completeSetup();
   } else if (OS_ANDROID) {
     Ti.App.Properties.setString('contactRecordId', contact.person.id);
-    return alert(contact.person.id);
+    return completeSetup();
   }
 };
 
@@ -63,5 +63,13 @@ completeSetup = function() {
   index.open();
   return $.chooseContact.close();
 };
+
+init = function() {
+  var time;
+  time = Ti.App.Properties.getString('departureTime');
+  return $.message.text = $.message.text.replace("{tk}", time);
+};
+
+init();
 
 //# sourceMappingURL=chooseContact.js.map

@@ -14,9 +14,5 @@
   width: Ti.UI.FILL
 },
 "Button": {
-  bottom: 5,
-  height: "30dp",
-  width: Ti.UI.FILL,
-  color: "white",
-  backgroundColor: "blue"
+  bottom: 5
 }

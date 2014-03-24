@@ -10,4 +10,16 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 Alloy.Globals.Map = require('ti.map');
+Ti.API.debug("Google Play available???");
+var gpAvailable = Alloy.Globals.Map.isGooglePlayServicesAvailable()
+if (gpAvailable == Alloy.Globals.Map.SUCCESS) {
+  Ti.API.debug("SUCCESS");
+}
+else if (gpAvailable == Alloy.Globals.Map.SERVICE_MISSING) {
+  Ti.API.debug("MISSING");
+}
+else {
+  Ti.API.debug("SOMETHING ELSE");
+}
+Ti.API.debug();
 Alloy.Globals.halfWidth = Ti.UI.Size / 2

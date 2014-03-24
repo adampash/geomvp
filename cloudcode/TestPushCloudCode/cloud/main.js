@@ -8,7 +8,7 @@ Parse.Cloud.define("testpush", function(request, response) {
     {
       channels: [objectId],
       data: {
-        alert: "This came from the cloud"
+        alert: "This came from the cloud because you left work!"
       }
     });
 

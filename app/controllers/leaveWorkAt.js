@@ -1,12 +1,19 @@
-var args, init, saveTime, setTime, time, timeToString;
+var args, init, launchNextStep, saveTime, setTime, time, timeToString;
 
 args = arguments[0] || {};
 
 time = {};
 
 saveTime = function() {
-  Ti.API.info(timeToString());
-  return Ti.App.Properties.setString('departureTime', timeToString());
+  Ti.App.Properties.setString('departureTime', timeToString());
+  return launchNextStep();
+};
+
+launchNextStep = function() {
+  var chooseContact;
+  chooseContact = Alloy.createController('chooseContact').getView();
+  chooseContact.open();
+  return $.leaveWorkAt.close();
 };
 
 timeToString = function() {

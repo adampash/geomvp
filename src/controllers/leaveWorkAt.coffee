@@ -2,8 +2,13 @@ args = arguments[0] || {}
 time = {}
 
 saveTime = ->
-  Ti.API.info timeToString()
   Ti.App.Properties.setString('departureTime', timeToString())
+  launchNextStep()
+
+launchNextStep = ->
+  chooseContact = Alloy.createController('chooseContact').getView()
+  chooseContact.open()
+  $.leaveWorkAt.close()
 
 timeToString = ->
   '' + time.hour + ':' + time.minute + ' ' + time.meridian
