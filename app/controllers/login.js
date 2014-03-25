@@ -1,4 +1,4 @@
-var Parse, args, changeToLogin, changeToRegister, close, createUser, getUserCredentials, launchSetup, loginUser, registerForPush;
+var Parse, args, changeToLogin, changeToRegister, createUser, getUserCredentials, launchSetup, loginUser, registerForPush;
 
 Parse = require('tiparse')({
   applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
@@ -7,16 +7,11 @@ Parse = require('tiparse')({
 
 args = arguments[0] || {};
 
-close = function() {
-  $.login.close();
-  return launchSetup();
-};
-
 launchSetup = function() {
-  var setup;
+  var scrollableView;
   Ti.API.info("Launch setup");
-  setup = Alloy.createController('setupWorkAddress').getView();
-  return setup.open();
+  scrollableView = $.login.getParent();
+  return scrollableView.scrollToView(1);
 };
 
 createUser = function() {
@@ -29,8 +24,7 @@ createUser = function() {
   user.set('name', userCredentials.name);
   return user.signUp(null, {
     success: function(user) {
-      registerForPush();
-      return close();
+      return registerForPush();
     },
     error: function(user, error) {
       return alert("Error: " + error.code + " " + error.message);
@@ -58,9 +52,7 @@ loginUser = function() {
   var userCredentials;
   userCredentials = getUserCredentials();
   return Parse.User.logIn(userCredentials.email, userCredentials.password).then(function(user) {
-    alert('Successful login!');
-    registerForPush();
-    return close();
+    return registerForPush();
   }, function(error) {
     alert('Error');
     return alert(JSON.stringify(error));
@@ -69,6 +61,7 @@ loginUser = function() {
 
 registerForPush = function() {
   var PushRegistration;
+  launchSetup();
   PushRegistration = require('registerForPush');
   return PushRegistration.subscribe();
 };

@@ -12,6 +12,6 @@
       <Label onClick="changeToLogin" id="changeToLogin">I already have an account</Label>
       <Label onClick="changeToRegister" id="changeToRegister">I need to register for an account</Label>
     </View>
-    <Label onClick="close">Cancel</Label>
+    <!-- <Label onClick="close">Cancel</Label> -->
   </Window>
 </Alloy>

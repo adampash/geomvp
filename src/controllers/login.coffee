@@ -5,14 +5,11 @@ Parse = require('tiparse')(
 
 args = arguments[0] || {}
 
-close = ->
-  $.login.close()
-  launchSetup()
-
 launchSetup = ->
   Ti.API.info "Launch setup"
-  setup = Alloy.createController('setupWorkAddress').getView()
-  setup.open()
+
+  scrollableView = $.login.getParent()
+  scrollableView.scrollToView 1
 
 createUser = ->
   userCredentials = getUserCredentials()
@@ -25,7 +22,6 @@ createUser = ->
   user.signUp(null,
     success: (user) ->
       registerForPush()
-      close()
     ,
     error: (user, error) ->
       alert "Error: " + error.code + " " + error.message
@@ -52,15 +48,14 @@ loginUser = ->
     userCredentials.password
   ).then(
     (user) ->
-      alert 'Successful login!'
       registerForPush()
-      close()
   , (error) ->
     alert 'Error'
     alert JSON.stringify error
   )
 
 registerForPush = ->
+  launchSetup()
   PushRegistration = require 'registerForPush'
   PushRegistration.subscribe()
 

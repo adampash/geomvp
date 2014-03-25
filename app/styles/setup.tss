@@ -1,0 +1,16 @@
+"#setup": {
+  layout: "vertical",
+  top: 0,
+  backgroundColor: 'white'
+},
+"ScrollableView": {
+  height: Ti.UI.FILL
+},
+"#pagingControl": {
+  backgroundColor: 'white',
+  top: "50dp",
+  right: "10dp",
+  left: "10dp",
+  layout: "horizontal",
+  horizontalWrap: false
+}

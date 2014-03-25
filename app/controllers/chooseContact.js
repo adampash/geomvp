@@ -57,11 +57,12 @@ addressBookDisallowed = function() {
 };
 
 completeSetup = function() {
-  var index;
+  var index, setupView;
   Ti.App.Properties.setBool('setupComplete', true);
   index = Alloy.createController('index').getView();
   index.open();
-  return $.chooseContact.close();
+  setupView = $.chooseContact.getParent().getParent();
+  return setupView.close();
 };
 
 init = function() {

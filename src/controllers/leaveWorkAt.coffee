@@ -6,9 +6,11 @@ saveTime = ->
   launchNextStep()
 
 launchNextStep = ->
-  chooseContact = Alloy.createController('chooseContact').getView()
-  chooseContact.open()
-  $.leaveWorkAt.close()
+  scrollableView = $.leaveWorkAt.getParent()
+  scrollableView.scrollToView 3
+  # chooseContact = Alloy.createController('chooseContact').getView()
+  # chooseContact.open()
+  # $.leaveWorkAt.close()
 
 timeToString = ->
   '' + time.hour + ':' + time.minute + ' ' + time.meridian

@@ -2,7 +2,7 @@ PushRegistration =
   subscribe: ->
     if OS_IOS
       if Ti.Network.remoteNotificationsEnabled
-        alert 'all is well'
+        Ti.API.info 'remove notifications are already enabled'
       else
         Ti.Network.registerForPushNotifications
           types: [

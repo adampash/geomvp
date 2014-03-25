@@ -45,7 +45,9 @@ completeSetup = ->
   Ti.App.Properties.setBool('setupComplete', true)
   index = Alloy.createController('index').getView()
   index.open()
-  $.chooseContact.close()
+
+  setupView = $.chooseContact.getParent().getParent()
+  setupView.close()
 
 init = ->
   time = Ti.App.Properties.getString('departureTime')

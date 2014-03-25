@@ -34,7 +34,7 @@ openLogin = function() {
 launchSetup = function() {
   var setup;
   Ti.API.info("Launch setup");
-  setup = Alloy.createController('setupWorkAddress').getView();
+  setup = Alloy.createController('setup').getView();
   return setup.open();
 };
 
@@ -121,7 +121,7 @@ init = function() {
       return launchSetup();
     }
   } else {
-    return openLogin();
+    return launchSetup();
   }
 };
 

@@ -10,10 +10,9 @@ saveTime = function() {
 };
 
 launchNextStep = function() {
-  var chooseContact;
-  chooseContact = Alloy.createController('chooseContact').getView();
-  chooseContact.open();
-  return $.leaveWorkAt.close();
+  var scrollableView;
+  scrollableView = $.leaveWorkAt.getParent();
+  return scrollableView.scrollToView(3);
 };
 
 timeToString = function() {

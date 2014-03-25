@@ -23,7 +23,7 @@ openLogin = ->
 
 launchSetup = ->
   Ti.API.info "Launch setup"
-  setup = Alloy.createController('setupWorkAddress').getView()
+  setup = Alloy.createController('setup').getView()
   setup.open()
 
 setPin = (formattedAddress, coords) ->
@@ -112,6 +112,7 @@ init = ->
     else
       launchSetup()
   else
-    openLogin()
+    launchSetup()
+    # openLogin()
 
 init()

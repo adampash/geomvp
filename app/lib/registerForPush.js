@@ -4,7 +4,7 @@ PushRegistration = {
   subscribe: function() {
     if (OS_IOS) {
       if (Ti.Network.remoteNotificationsEnabled) {
-        return alert('all is well');
+        return Ti.API.info('remove notifications are already enabled');
       } else {
         return Ti.Network.registerForPushNotifications({
           types: [Ti.Network.NOTIFICATION_TYPE_ALERT, Ti.Network.NOTIFICATION_TYPE_BADGE, Ti.Network.NOTIFICATION_TYPE_SOUND],

@@ -25,10 +25,12 @@ finishUp = ->
   launchNextStep()
 
 launchNextStep = ->
-  Ti.API.info "Launch next step"
-  leaveWorkAt = Alloy.createController('leaveWorkAt').getView()
-  leaveWorkAt.open()
-  $.setupWorkAddress.close()
+  scrollableView = $.setupWorkAddress.getParent()
+  scrollableView.scrollToView 2
+  # Ti.API.info "Launch next step"
+  # leaveWorkAt = Alloy.createController('leaveWorkAt').getView()
+  # leaveWorkAt.open()
+  # $.setupWorkAddress.close()
 
 findAddress = ->
   geo = require 'geo'
@@ -70,9 +72,13 @@ if (Ti.Geolocation.locationServicesEnabled)
 else
   alert("Please enable location services")
 
+focusAddress = ->
+  $.workAddress.focus()
+
+
 $.setupWorkAddress.addEventListener 'open', ->
   workLocation = Ti.App.Properties.getObject('workLocation')
   if workLocation?
     setPin(workLocation.address, workLocation)
   else
-    $.workAddress.focus()
+    focusAddress()

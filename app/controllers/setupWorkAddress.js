@@ -1,4 +1,4 @@
-var args, findAddress, finishUp, launchNextStep, searchAgain, setLocation, setPin;
+var args, findAddress, finishUp, focusAddress, launchNextStep, searchAgain, setLocation, setPin;
 
 args = arguments[0] || {};
 
@@ -29,11 +29,9 @@ finishUp = function() {
 };
 
 launchNextStep = function() {
-  var leaveWorkAt;
-  Ti.API.info("Launch next step");
-  leaveWorkAt = Alloy.createController('leaveWorkAt').getView();
-  leaveWorkAt.open();
-  return $.setupWorkAddress.close();
+  var scrollableView;
+  scrollableView = $.setupWorkAddress.getParent();
+  return scrollableView.scrollToView(2);
 };
 
 findAddress = function() {
@@ -79,13 +77,17 @@ if (Ti.Geolocation.locationServicesEnabled) {
   alert("Please enable location services");
 }
 
+focusAddress = function() {
+  return $.workAddress.focus();
+};
+
 $.setupWorkAddress.addEventListener('open', function() {
   var workLocation;
   workLocation = Ti.App.Properties.getObject('workLocation');
   if (workLocation != null) {
     return setPin(workLocation.address, workLocation);
   } else {
-    return $.workAddress.focus();
+    return focusAddress();
   }
 });
 
