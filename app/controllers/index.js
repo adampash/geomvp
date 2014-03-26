@@ -58,39 +58,33 @@ setPin = function(formattedAddress, coords) {
   return $.mapview.annotations[0].fireEvent('click');
 };
 
-setupGeofence = function() {
-  var ci_geofencing, regions, workLocation;
-  if (OS_IOS) {
-    ci_geofencing = require('ci.geofencing');
-    Ti.API.info("module is =&gt; " + ci_geofencing);
-    workLocation = Ti.App.Properties.getObject('workLocation');
-    regions = [];
-    regions.push({
+setupGeofence = function(workLocation) {
+  var geofence;
+  geofence = require('geofence');
+  return geofence.setup([
+    {
       "title": "Work",
       "latitude": workLocation.latitude,
       "longitude": workLocation.longitude,
       "radius": 50
-    });
-    return ci_geofencing.startGeoFencing(regions, function(event) {
-      Ti.API.info('info ' + JSON.stringify(event, null, 2));
-      if (event.type === "entered_region") {
-        alert("ENTERED REGION!");
-      }
-      if (event.type === "monitoring_region") {
-        alert("MONITORING REGION!");
-      }
-      if (event.type === "exited_region") {
-        return Parse.Cloud.run('testpush', {}, {
-          success: function(res) {
-            return alert('it worked');
-          },
-          error: function(err) {
-            return alert('it did not work');
-          }
-        });
-      }
-    });
-  }
+    }
+  ], {
+    onexit: function() {
+      alert('Elvis has left the building');
+      return Parse.Cloud.run('testpush', {}, {
+        success: function(res) {
+          alert('push notification successfully sent');
+          return alert(res);
+        },
+        error: function(err) {
+          return alert('it did not work');
+        }
+      });
+    },
+    onenter: function() {
+      return alert('Elvis has entered the building');
+    }
+  });
 };
 
 init = function() {
@@ -116,7 +110,7 @@ init = function() {
         $.contact.text = "we'll send " + name + " a push notification";
       }
       $.index.open();
-      return setupGeofence();
+      return setupGeofence(workLocation);
     } else {
       return launchSetup();
     }

@@ -1,3 +1,5 @@
+ParsePush = require 'parsePush'
+
 PushRegistration =
   subscribe: ->
     if OS_IOS

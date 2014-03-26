@@ -1,4 +1,6 @@
-var PushRegistration;
+var ParsePush, PushRegistration;
+
+ParsePush = require('parsePush');
 
 PushRegistration = {
   subscribe: function() {
