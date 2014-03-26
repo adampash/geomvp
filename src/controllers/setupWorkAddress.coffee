@@ -1,4 +1,5 @@
 args = arguments[0] || {}
+WorkAddress = require 'workAddress'
 
 setLocation = (location) ->
   Ti.API.info "Set location"
@@ -22,6 +23,7 @@ finishUp = ->
     longitude: $.mapview.annotations[0].longitude
     address: $.mapview.annotations[0].subtitle
   Ti.App.Properties.setObject('workLocation', workLocation)
+  WorkAddress.findOrCreate(workLocation)
   launchNextStep()
 
 launchNextStep = ->
@@ -45,6 +47,8 @@ findAddress = ->
   )
 
 setPin = (formattedAddress, coords) ->
+  if $.mapview.annotations.length > 0
+    $.mapview.removeAnnotation($.mapview.annotations[0].title)
   $.mapview.region =
     latitude: coords.latitude
     longitude: coords.longitude

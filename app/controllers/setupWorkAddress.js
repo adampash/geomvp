@@ -1,6 +1,8 @@
-var args, findAddress, finishUp, focusAddress, launchNextStep, searchAgain, setLocation, setPin;
+var WorkAddress, args, findAddress, finishUp, focusAddress, launchNextStep, searchAgain, setLocation, setPin;
 
 args = arguments[0] || {};
+
+WorkAddress = require('workAddress');
 
 setLocation = function(location) {
   var coords;
@@ -25,6 +27,7 @@ finishUp = function() {
     address: $.mapview.annotations[0].subtitle
   };
   Ti.App.Properties.setObject('workLocation', workLocation);
+  WorkAddress.findOrCreate(workLocation);
   return launchNextStep();
 };
 
@@ -48,6 +51,9 @@ findAddress = function() {
 
 setPin = function(formattedAddress, coords) {
   var workLocation;
+  if ($.mapview.annotations.length > 0) {
+    $.mapview.removeAnnotation($.mapview.annotations[0].title);
+  }
   $.mapview.region = {
     latitude: coords.latitude,
     longitude: coords.longitude,
