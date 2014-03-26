@@ -3,7 +3,7 @@ geofence = require 'geofence'
 AppStates =
   setup: ->
     Ti.API.info('Registering background service')
-    bgGeofence = Ti.App.iOS.registerBackgroundService({url:'bgGeofence.js'})
+    # bgGeofence = Ti.App.iOS.registerBackgroundService({url:'bgGeofence.js'})
 
     Ti.App.addEventListener 'pause', ->
       Ti.API.info 'app is pause'
