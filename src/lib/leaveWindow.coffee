@@ -3,9 +3,9 @@ Parse = Parse || require('tiparse')(
   javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
 )
 
-WorkAddress = Parse.Object.extend("WorkAddress")
+LeaveWindow = Parse.Object.extend("LeaveWindow")
 
-WorkAddressFactory =
+LeaveWindowFactory =
   findOrCreate: (params) ->
     @find
       success: (results) =>
@@ -18,7 +18,7 @@ WorkAddressFactory =
         Ti.API.info 'Looks like something went wrong!'
 
   find: (callbacks) ->
-    query = new Parse.Query(WorkAddress)
+    query = new Parse.Query(LeaveWindow)
     query.equalTo("parent", Parse.User.current())
     query.find(
       success: (results) ->
@@ -28,19 +28,18 @@ WorkAddressFactory =
     )
 
   create: (params) ->
-    workAddress = new WorkAddress()
-    workAddress.set params
-    workAddress.set "parent", Parse.User.current()
+    leaveWindow = new LeaveWindow()
+    leaveWindow.set params
+    leaveWindow.set "parent", Parse.User.current()
     Ti.API.info "Saving new work address"
-    workAddress.save()
+    leaveWindow.save()
     Ti.API.info "New work address saved"
 
-  update: (workAddress, params) ->
-    workAddress.set params
+  update: (leaveWindow, params) ->
+    leaveWindow.set params
     Ti.API.info "Updating work address"
-    workAddress.save()
+    leaveWindow.save()
     Ti.API.info "Work address updated"
 
 
-module.exports = WorkAddressFactory
-
+module.exports = LeaveWindowFactory

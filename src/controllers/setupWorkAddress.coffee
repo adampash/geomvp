@@ -80,9 +80,9 @@ focusAddress = ->
   $.workAddress.focus()
 
 
-$.setupWorkAddress.addEventListener 'open', ->
-  workLocation = Ti.App.Properties.getObject('workLocation')
-  if workLocation?
-    setPin(workLocation.address, workLocation)
-  else
-    focusAddress()
+# $.setupWorkAddress.addEventListener 'open', ->
+#   workLocation = Ti.App.Properties.getObject('workLocation')
+#   if workLocation?
+#     setPin(workLocation.address, workLocation)
+#   else
+#     focusAddress()

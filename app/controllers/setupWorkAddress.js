@@ -87,14 +87,4 @@ focusAddress = function() {
   return $.workAddress.focus();
 };
 
-$.setupWorkAddress.addEventListener('open', function() {
-  var workLocation;
-  workLocation = Ti.App.Properties.getObject('workLocation');
-  if (workLocation != null) {
-    return setPin(workLocation.address, workLocation);
-  } else {
-    return focusAddress();
-  }
-});
-
 //# sourceMappingURL=setupWorkAddress.js.map

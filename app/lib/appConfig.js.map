@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "appConfig.js",
+  "sourceRoot": "../../src/lib/",
+  "sources": [
+    "appConfig.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA,IAAA,SAAA;;AAAA,SAAA,GACE;AAAA,EAAA,UAAA,EAAY,qBAAZ;AAAA,EACA,IAAA,EAAM,QADN;AAAA,EAEA,OAAA,EAAS,GAFT;CADF,CAAA;;AAAA,MAKM,CAAC,OAAP,GAAiB,SALjB,CAAA"
+}

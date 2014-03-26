@@ -1,11 +1,17 @@
-var args, init, launchNextStep, saveTime, setTime, time, timeToString;
+var args, init, launchNextStep, saveTime, setTime, time, timeToMachine, timeToString;
 
 args = arguments[0] || {};
 
 time = {};
 
 saveTime = function() {
+  var LeaveWindow;
   Ti.App.Properties.setString('departureTime', timeToString());
+  Ti.API.info(timeToMachine());
+  LeaveWindow = require('leaveWindow');
+  LeaveWindow.findOrCreate({
+    humanTime: timeToString()
+  });
   return launchNextStep();
 };
 
@@ -17,6 +23,18 @@ launchNextStep = function() {
 
 timeToString = function() {
   return '' + time.hour + ':' + time.minute + ' ' + time.meridian;
+};
+
+timeToMachine = function() {
+  var hour, moment;
+  moment = require('alloy/moment');
+  if (time.meridian === 'pm') {
+    hour = time.hour + 12;
+  }
+  return moment({
+    hour: hour,
+    minute: time.minute
+  }).format();
 };
 
 setTime = function(event) {

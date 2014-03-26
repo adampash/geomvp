@@ -3,9 +3,9 @@ ParsePush = require 'parsePush'
 PushRegistration =
   subscribe: ->
     if OS_IOS
-      if Ti.Network.remoteNotificationsEnabled
-        Ti.API.info 'remove notifications are already enabled'
-      else
+      # if Ti.Network.remoteNotificationsEnabled
+      #   Ti.API.info 'notifications are already enabled'
+      # else
         Ti.Network.registerForPushNotifications
           types: [
             Ti.Network.NOTIFICATION_TYPE_ALERT,
@@ -13,34 +13,35 @@ PushRegistration =
             Ti.Network.NOTIFICATION_TYPE_SOUND
           ]
           callback: (e) ->
-            alert 'got a push notification!'
             alert JSON.stringify e
-          success: (e) ->
-            alert 'registration was successful'
+          success: (e) =>
             deviceToken = e.deviceToken
             @registerWithParse(e)
           error: (e) ->
             Ti.API.debug 'that was an error'
             Ti.API.debug e
-
             alert JSON.stringify e
+
     else if OS_ANDROID
       alert 'need to register for push on android'
 
   registerWithParse: (e) ->
+    appConfig = require 'appConfig'
     ParsePush.register
       deviceType: 'ios'
       deviceToken: e.deviceToken
       channels: [Parse.User.current().id]
+      appName: appConfig.name
+      timeZone: "America/Los_Angeles"
     , @registeredWithParse
     , @errorFromParse
 
   registeredWithParse: (e, status) ->
-    alert 'It worked'
-    alert JSON.stringify e
-    alert status
+    Ti.API.info 'It worked'
+    Ti.API.info JSON.stringify e
   errorFromParse: (e) ->
     alert 'It did not work'
+    alert JSON.stringify e
 
 
 module.exports = PushRegistration

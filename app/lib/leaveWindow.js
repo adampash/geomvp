@@ -1,13 +1,13 @@
-var Parse, WorkAddress, WorkAddressFactory;
+var LeaveWindow, LeaveWindowFactory, Parse;
 
 Parse = Parse || require('tiparse')({
   applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
   javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
 });
 
-WorkAddress = Parse.Object.extend("WorkAddress");
+LeaveWindow = Parse.Object.extend("LeaveWindow");
 
-WorkAddressFactory = {
+LeaveWindowFactory = {
   findOrCreate: function(params) {
     return this.find({
       success: (function(_this) {
@@ -26,7 +26,7 @@ WorkAddressFactory = {
   },
   find: function(callbacks) {
     var query;
-    query = new Parse.Query(WorkAddress);
+    query = new Parse.Query(LeaveWindow);
     query.equalTo("parent", Parse.User.current());
     return query.find({
       success: function(results) {
@@ -38,22 +38,22 @@ WorkAddressFactory = {
     });
   },
   create: function(params) {
-    var workAddress;
-    workAddress = new WorkAddress();
-    workAddress.set(params);
-    workAddress.set("parent", Parse.User.current());
+    var leaveWindow;
+    leaveWindow = new LeaveWindow();
+    leaveWindow.set(params);
+    leaveWindow.set("parent", Parse.User.current());
     Ti.API.info("Saving new work address");
-    workAddress.save();
+    leaveWindow.save();
     return Ti.API.info("New work address saved");
   },
-  update: function(workAddress, params) {
-    workAddress.set(params);
+  update: function(leaveWindow, params) {
+    leaveWindow.set(params);
     Ti.API.info("Updating work address");
-    workAddress.save();
+    leaveWindow.save();
     return Ti.API.info("Work address updated");
   }
 };
 
-module.exports = WorkAddressFactory;
+module.exports = LeaveWindowFactory;
 
-//# sourceMappingURL=workAddress.js.map
+//# sourceMappingURL=leaveWindow.js.map
