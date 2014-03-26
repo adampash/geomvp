@@ -13,6 +13,7 @@ Parse.Cloud.define("testpush", function(request, response) {
         }
       });
   }
+  Parse.Analytics.track('exit', { fenceId: request.params.identifier });
 
   response.success();
 });

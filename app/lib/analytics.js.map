@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "analytics.js",
+  "sourceRoot": "../../src/lib/",
+  "sources": [
+    "analytics.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA,IAAA,SAAA;;AAAA,SAAA,GACE;AAAA,EAAA,KAAA,EAAO,SAAC,KAAD,EAAQ,UAAR,GAAA;WACL,KAAK,CAAC,SAAS,CAAC,KAAhB,CAAsB,KAAtB,EAA6B,UAA7B,EADK;EAAA,CAAP;CADF,CAAA;;AAAA,MAKM,CAAC,OAAP,GAAiB,SALjB,CAAA"
+}

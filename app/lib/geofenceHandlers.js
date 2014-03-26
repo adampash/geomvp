@@ -1,9 +1,11 @@
-var GeofenceHandlers, Parse;
+var Analytics, GeofenceHandlers, Parse;
 
 Parse = require('tiparse')({
   applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
   javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
 });
+
+Analytics = require('analytics');
 
 GeofenceHandlers = {
   onexit: function(e) {
@@ -18,8 +20,11 @@ GeofenceHandlers = {
       }
     });
   },
-  onenter: function() {
-    return Ti.API.info('Elvis has entered the building');
+  onenter: function(e) {
+    Ti.API.info('Elvis has entered the building');
+    return Analytics.track('entered', {
+      fenceId: e.identifier
+    });
   }
 };
 
