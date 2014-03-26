@@ -4,13 +4,15 @@
 Parse.Cloud.define("testpush", function(request, response) {
   user = request.user
   objectId = user.id
-  Parse.Push.send(
-    {
-      channels: [objectId],
-      data: {
-        alert: "This came from the cloud because you left work!"
-      }
-    });
+  if (request.params.identifier === "Work") {
+    Parse.Push.send(
+      {
+        channels: [objectId],
+        data: {
+          alert: "This came from the cloud because you left work!"
+        }
+      });
+  }
 
-  response.success("Hello world!");
+  response.success(request.params);
 });

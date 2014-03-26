@@ -11,7 +11,7 @@ Geofence = {
         Ti.API.info('info ' + JSON.stringify(event, null, 2));
         if (event.type === "entered_region") {
           if (callbacks.onenter != null) {
-            callbacks.onenter();
+            callbacks.onenter(event);
           }
         }
         if (event.type === "monitoring_region") {
@@ -20,7 +20,7 @@ Geofence = {
         if (event.type === "exited_region") {
           Ti.API.info('exit event');
           if (callbacks.onexit != null) {
-            return callbacks.onexit();
+            return callbacks.onexit(event);
           }
         }
       });

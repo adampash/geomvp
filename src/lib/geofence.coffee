@@ -10,14 +10,14 @@ Geofence =
         Ti.API.info('info ' + JSON.stringify(event, null, 2))
 
         if event.type is "entered_region"
-          callbacks.onenter() if callbacks.onenter?
+          callbacks.onenter(event) if callbacks.onenter?
 
         if event.type is "monitoring_region"
           Ti.API.info 'monitoring a region'
 
         if event.type is "exited_region"
           Ti.API.info 'exit event'
-          callbacks.onexit() if callbacks.onexit?
+          callbacks.onexit(event) if callbacks.onexit?
       )
     else if OS_ANDROID
       alert 'Need to figure this one out dude'

@@ -6,11 +6,12 @@ Parse = require('tiparse')({
 });
 
 GeofenceHandlers = {
-  onexit: function() {
+  onexit: function(e) {
     Ti.API.info('Elvis has left the building');
-    return Parse.Cloud.run('testpush', {}, {
+    return Parse.Cloud.run('testpush', e, {
       success: function(res) {
-        return Ti.API.info('push notification successfully sent');
+        Ti.API.info('push notification successfully sent');
+        return Ti.API.info(res);
       },
       error: function(err) {
         Ti.API.info('it did not work');
