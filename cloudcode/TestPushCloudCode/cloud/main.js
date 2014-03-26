@@ -14,5 +14,5 @@ Parse.Cloud.define("testpush", function(request, response) {
       });
   }
 
-  response.success(request.params);
+  response.success();
 });

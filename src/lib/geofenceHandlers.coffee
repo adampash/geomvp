@@ -8,8 +8,7 @@ GeofenceHandlers =
     Ti.API.info 'Elvis has left the building'
     Parse.Cloud.run 'testpush', e,
       success: (res) ->
-        Ti.API.info 'push notification successfully sent'
-        Ti.API.info res
+        Ti.API.info 'Parse code successfully ran'
       error: (err) ->
         Ti.API.info 'it did not work'
         Ti.API.info err

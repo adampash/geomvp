@@ -10,8 +10,7 @@ GeofenceHandlers = {
     Ti.API.info('Elvis has left the building');
     return Parse.Cloud.run('testpush', e, {
       success: function(res) {
-        Ti.API.info('push notification successfully sent');
-        return Ti.API.info(res);
+        return Ti.API.info('Parse code successfully ran');
       },
       error: function(err) {
         Ti.API.info('it did not work');
