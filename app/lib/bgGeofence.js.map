@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "bgGeofence.js",
+  "sourceRoot": "../../src/lib/",
+  "sources": [
+    "bgGeofence.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA,EAAE,CAAC,GAAG,CAAC,IAAP,CAAY,4CAAZ,CAAA,CAAA"
+}

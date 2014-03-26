@@ -1,11 +1,11 @@
-var Geofence;
+var Geofence, ci_geofencing;
+
+ci_geofencing = require('ci.geofencing');
 
 Geofence = {
   setup: function(regionArray, callbacks) {
-    var ci_geofencing;
     callbacks = callbacks || {};
     if (OS_IOS) {
-      ci_geofencing = require('ci.geofencing');
       Ti.API.info("module is =&gt; " + ci_geofencing);
       return ci_geofencing.startGeoFencing(regionArray, function(event) {
         Ti.API.info('info ' + JSON.stringify(event, null, 2));
@@ -18,6 +18,7 @@ Geofence = {
           Ti.API.info('monitoring a region');
         }
         if (event.type === "exited_region") {
+          Ti.API.info('exit event');
           if (callbacks.onexit != null) {
             return callbacks.onexit();
           }
@@ -26,6 +27,10 @@ Geofence = {
     } else if (OS_ANDROID) {
       return alert('Need to figure this one out dude');
     }
+  },
+  stop: function() {
+    Ti.API.info('stopping geofence');
+    return ci_geofencing.stopGeoFencing();
   }
 };
 

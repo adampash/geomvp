@@ -46,25 +46,6 @@ setPin = (formattedAddress, coords) ->
   $.mapview.annotations[0].fireEvent 'click'
 
 
-setupGeofence = (workLocation) ->
-  geofence = require 'geofence'
-  geofence.setup [
-    "title" : "Work"
-    "latitude" : workLocation.latitude
-    "longitude" : workLocation.longitude
-    "radius" : 50
-  ],
-  onexit: ->
-    alert 'Elvis has left the building'
-    Parse.Cloud.run 'testpush', {},
-      success: (res) ->
-        alert 'push notification successfully sent'
-        alert res
-      error: (err) ->
-        alert 'it did not work'
-  onenter: ->
-    alert 'Elvis has entered the building'
-
 # If user isn't logged in, prompt user
 # If setup isn't complete, launch setup
 # Otherwise, show index
@@ -91,7 +72,11 @@ init = ->
 
       $.index.open()
 
-      setupGeofence(workLocation)
+      alwaysOn = require 'alwaysOn'
+      alwaysOn.setupGeofence()
+      if OS_IOS
+        appStates = require 'appStates'
+        appStates.setup()
 
     else
       launchSetup()

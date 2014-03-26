@@ -1,4 +1,4 @@
-var Parse, ParsePush, init, launchSetup, openLogin, setPin, setupGeofence, startOver, testSinglePush;
+var Parse, ParsePush, init, launchSetup, openLogin, setPin, startOver, testSinglePush;
 
 ParsePush = require('parsePush');
 
@@ -58,37 +58,8 @@ setPin = function(formattedAddress, coords) {
   return $.mapview.annotations[0].fireEvent('click');
 };
 
-setupGeofence = function(workLocation) {
-  var geofence;
-  geofence = require('geofence');
-  return geofence.setup([
-    {
-      "title": "Work",
-      "latitude": workLocation.latitude,
-      "longitude": workLocation.longitude,
-      "radius": 50
-    }
-  ], {
-    onexit: function() {
-      alert('Elvis has left the building');
-      return Parse.Cloud.run('testpush', {}, {
-        success: function(res) {
-          alert('push notification successfully sent');
-          return alert(res);
-        },
-        error: function(err) {
-          return alert('it did not work');
-        }
-      });
-    },
-    onenter: function() {
-      return alert('Elvis has entered the building');
-    }
-  });
-};
-
 init = function() {
-  var contact, contactRecordId, currentUser, name, workLocation;
+  var alwaysOn, appStates, contact, contactRecordId, currentUser, name, workLocation;
   currentUser = Parse.User.current();
   if (currentUser) {
     Ti.API.info("User is currently logged in: " + currentUser.id);
@@ -110,7 +81,12 @@ init = function() {
         $.contact.text = "we'll send " + name + " a push notification";
       }
       $.index.open();
-      return setupGeofence(workLocation);
+      alwaysOn = require('alwaysOn');
+      alwaysOn.setupGeofence();
+      if (OS_IOS) {
+        appStates = require('appStates');
+        return appStates.setup();
+      }
     } else {
       return launchSetup();
     }
