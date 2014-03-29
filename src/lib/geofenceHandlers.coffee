@@ -20,13 +20,12 @@ GeofenceHandlers =
     Ti.API.info 'Elvis has left the building'
     debugNotification('onexit', e)
     e.device = Ti.Platform.model
-    if e.identifier is "Work"
-      Parse.Cloud.run 'leftWorkPush', e,
-        success: (res) ->
-          Ti.API.info 'Parse code successfully ran'
-        error: (err) ->
-          Ti.API.info 'it did not work'
-          Ti.API.info err
+    Parse.Cloud.run 'leftWorkPush', e,
+      success: (res) ->
+        Ti.API.info 'Parse code successfully ran'
+      error: (err) ->
+        Ti.API.info 'it did not work'
+        Ti.API.info err
   onenter: (e) ->
     Ti.API.info 'Elvis has entered the building'
     debugNotification('onenter', e)
