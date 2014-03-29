@@ -9,7 +9,9 @@ Parse.Cloud.define("testpush", function(request, response) {
       {
         channels: [objectId],
         data: {
-          alert: "This came from the cloud because you left work!"
+          alert: "This came from the cloud because you left work!",
+          badge: 0,
+          sound: ""
         }
       });
     Beacon = Parse.Object.extend("Beacon");

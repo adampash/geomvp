@@ -3,9 +3,9 @@ ParsePush = require 'parsePush'
 PushRegistration =
   subscribe: ->
     if OS_IOS
-      # if Ti.Network.remoteNotificationsEnabled
-      #   Ti.API.info 'notifications are already enabled'
-      # else
+      if Ti.Network.remoteNotificationsEnabled
+        Ti.API.info 'notifications are already enabled'
+      else
         Ti.Network.registerForPushNotifications
           types: [
             Ti.Network.NOTIFICATION_TYPE_ALERT,

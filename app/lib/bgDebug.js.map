@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "bgDebug.js",
+  "sourceRoot": "../../src/lib/",
+  "sources": [
+    "bgDebug.coffee"
+  ],
+  "names": [],
+  "mappings": "AAoB0B"
+}

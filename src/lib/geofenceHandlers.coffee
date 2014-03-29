@@ -6,15 +6,14 @@ Analytics = require 'analytics'
 
 debugNotification = (type, e) ->
   Ti.API.info 'debugNotification'
+  Ti.Media.vibrate()
   notification = Ti.App.iOS.scheduleLocalNotification
     alertBody: 'Triggered ' + type + 'through ' + e.identifier
     alertAction:"Re-Launch!"
     userInfo:
       "hello":"world"
     date: new Date(new Date().getTime()) # 3 seconds after backgrounding
-  # Ti.App.IOS.scheduleLocalNotification
-  #   date: new Date()
-  Ti.Media.vibrate()
+    sound: "sounds/horn.wav"
 
 GeofenceHandlers =
   onexit: (e) ->

@@ -10,15 +10,16 @@ Analytics = require('analytics');
 debugNotification = function(type, e) {
   var notification;
   Ti.API.info('debugNotification');
-  notification = Ti.App.iOS.scheduleLocalNotification({
+  Ti.Media.vibrate();
+  return notification = Ti.App.iOS.scheduleLocalNotification({
     alertBody: 'Triggered ' + type + 'through ' + e.identifier,
     alertAction: "Re-Launch!",
     userInfo: {
       "hello": "world"
     },
-    date: new Date(new Date().getTime())
+    date: new Date(new Date().getTime()),
+    sound: "sounds/horn.wav"
   });
-  return Ti.Media.vibrate();
 };
 
 GeofenceHandlers = {

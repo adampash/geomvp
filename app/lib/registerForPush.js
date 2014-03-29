@@ -5,25 +5,29 @@ ParsePush = require('parsePush');
 PushRegistration = {
   subscribe: function() {
     if (OS_IOS) {
-      return Ti.Network.registerForPushNotifications({
-        types: [Ti.Network.NOTIFICATION_TYPE_ALERT, Ti.Network.NOTIFICATION_TYPE_BADGE, Ti.Network.NOTIFICATION_TYPE_SOUND],
-        callback: function(e) {
-          alert(JSON.stringify(e));
-          return Ti.Media.vibrate();
-        },
-        success: (function(_this) {
-          return function(e) {
-            var deviceToken;
-            deviceToken = e.deviceToken;
-            return _this.registerWithParse(e);
-          };
-        })(this),
-        error: function(e) {
-          Ti.API.debug('that was an error');
-          Ti.API.debug(e);
-          return alert(JSON.stringify(e));
-        }
-      });
+      if (Ti.Network.remoteNotificationsEnabled) {
+        return Ti.API.info('notifications are already enabled');
+      } else {
+        return Ti.Network.registerForPushNotifications({
+          types: [Ti.Network.NOTIFICATION_TYPE_ALERT, Ti.Network.NOTIFICATION_TYPE_BADGE, Ti.Network.NOTIFICATION_TYPE_SOUND],
+          callback: function(e) {
+            alert(JSON.stringify(e));
+            return Ti.Media.vibrate();
+          },
+          success: (function(_this) {
+            return function(e) {
+              var deviceToken;
+              deviceToken = e.deviceToken;
+              return _this.registerWithParse(e);
+            };
+          })(this),
+          error: function(e) {
+            Ti.API.debug('that was an error');
+            Ti.API.debug(e);
+            return alert(JSON.stringify(e));
+          }
+        });
+      }
     } else if (OS_ANDROID) {
       return alert('need to register for push on android');
     }
