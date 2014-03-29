@@ -27,7 +27,7 @@ GeofenceHandlers = {
     Ti.API.info('Elvis has left the building');
     debugNotification('onexit', e);
     e.device = Ti.Platform.model;
-    return Parse.Cloud.run('testpush', e, {
+    return Parse.Cloud.run('leftWorkPush', e, {
       success: function(res) {
         return Ti.API.info('Parse code successfully ran');
       },

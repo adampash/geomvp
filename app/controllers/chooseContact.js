@@ -1,4 +1,5 @@
-var addressBookDisallowed, args, completeSetup, contactError, init, launchContactPicker, performAddressBookFunction, setContact;
+var addressBookDisallowed, args, completeSetup, contactError, init, launchContactPicker, performAddressBookFunction, setContact,
+  __hasProp = {}.hasOwnProperty;
 
 args = arguments[0] || {};
 
@@ -29,7 +30,38 @@ performAddressBookFunction = function() {
 };
 
 setContact = function(contact) {
+  var ConnectedContact, email, emails, helper, key, phone, phones, _ref, _ref1;
   Ti.API.info(contact);
+  Ti.API.info(contact.person);
+  emails = [];
+  phones = [];
+  _ref = contact.person.email;
+  for (key in _ref) {
+    if (!__hasProp.call(_ref, key)) continue;
+    email = _ref[key];
+    emails.push(email.toString());
+  }
+  _ref1 = contact.person.phone;
+  for (key in _ref1) {
+    if (!__hasProp.call(_ref1, key)) continue;
+    phone = _ref1[key];
+    helper = require('helper');
+    phones.push(helper.normalizePhone(phone.toString()));
+  }
+  ConnectedContact = require('connectedContact');
+  ConnectedContact.findOrCreate({
+    phones: phones,
+    emails: emails
+  });
+  Parse.Cloud.run('connectUsers', null, {
+    success: function(res) {
+      return Ti.API.info('Parse code successfully ran');
+    },
+    error: function(err) {
+      Ti.API.info('it did not work');
+      return Ti.API.info(err);
+    }
+  });
   if (OS_IOS) {
     Ti.App.Properties.setString('contactRecordId', contact.person.recordId);
     return completeSetup();

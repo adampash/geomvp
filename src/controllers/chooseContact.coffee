@@ -25,9 +25,32 @@ performAddressBookFunction = () ->
 
 setContact = (contact) ->
   Ti.API.info contact
+  Ti.API.info contact.person
   # for own key, email of contact.person.email
   #   Ti.API.info email.toString()
   # Ti.API.info contact.person.phone.mobile.toString()
+
+  emails = []
+  phones = []
+  for own key, email of contact.person.email
+    emails.push email.toString()
+
+  for own key, phone of contact.person.phone
+    helper = require 'helper'
+    phones.push helper.normalizePhone phone.toString()
+
+  ConnectedContact = require 'connectedContact'
+  ConnectedContact.findOrCreate
+    phones: phones
+    emails: emails
+
+  Parse.Cloud.run 'connectUsers', null,
+    success: (res) ->
+      Ti.API.info 'Parse code successfully ran'
+    error: (err) ->
+      Ti.API.info 'it did not work'
+      Ti.API.info err
+
   if OS_IOS
     Ti.App.Properties.setString('contactRecordId', contact.person.recordId)
     completeSetup()

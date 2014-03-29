@@ -24,7 +24,16 @@ createUser = function() {
   user.set('name', userCredentials.name);
   return user.signUp(null, {
     success: function(user) {
-      return registerForPush();
+      registerForPush();
+      return Parse.Cloud.run('connectUsers', null, {
+        success: function(res) {
+          return Ti.API.info('Parse code successfully ran');
+        },
+        error: function(err) {
+          Ti.API.info('it did not work');
+          return Ti.API.info(err);
+        }
+      });
     },
     error: function(user, error) {
       return alert("Error: " + error.code + " " + error.message);

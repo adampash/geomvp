@@ -20,7 +20,7 @@ GeofenceHandlers =
     Ti.API.info 'Elvis has left the building'
     debugNotification('onexit', e)
     e.device = Ti.Platform.model
-    Parse.Cloud.run 'testpush', e,
+    Parse.Cloud.run 'leftWorkPush', e,
       success: (res) ->
         Ti.API.info 'Parse code successfully ran'
       error: (err) ->

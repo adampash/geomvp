@@ -22,6 +22,12 @@ createUser = ->
   user.signUp(null,
     success: (user) ->
       registerForPush()
+      Parse.Cloud.run 'connectUsers', null,
+        success: (res) ->
+          Ti.API.info 'Parse code successfully ran'
+        error: (err) ->
+          Ti.API.info 'it did not work'
+          Ti.API.info err
     ,
     error: (user, error) ->
       alert "Error: " + error.code + " " + error.message

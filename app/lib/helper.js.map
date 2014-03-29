@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "helper.js",
+  "sourceRoot": "../../src/lib/",
+  "sources": [
+    "helper.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA,IAAA,MAAA;;AAAA,MAAA,GACE;AAAA,EAAA,cAAA,EAAgB,SAAC,GAAD,GAAA;WACd,GAAG,CAAC,OAAJ,CAAY,YAAZ,EAA0B,EAA1B,EADc;EAAA,CAAhB;CADF,CAAA;;AAAA,MAIM,CAAC,OAAP,GAAiB,MAJjB,CAAA"
+}
