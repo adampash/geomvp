@@ -8,7 +8,8 @@ PushRegistration = {
       return Ti.Network.registerForPushNotifications({
         types: [Ti.Network.NOTIFICATION_TYPE_ALERT, Ti.Network.NOTIFICATION_TYPE_BADGE, Ti.Network.NOTIFICATION_TYPE_SOUND],
         callback: function(e) {
-          return alert(JSON.stringify(e));
+          alert(JSON.stringify(e));
+          return Ti.Media.vibrate();
         },
         success: (function(_this) {
           return function(e) {

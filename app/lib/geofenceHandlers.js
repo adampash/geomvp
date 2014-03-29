@@ -1,4 +1,4 @@
-var Analytics, GeofenceHandlers, Parse;
+var Analytics, GeofenceHandlers, Parse, debugNotification;
 
 Parse = require('tiparse')({
   applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
@@ -7,9 +7,25 @@ Parse = require('tiparse')({
 
 Analytics = require('analytics');
 
+debugNotification = function(type, e) {
+  var notification;
+  Ti.API.info('debugNotification');
+  notification = Ti.App.iOS.scheduleLocalNotification({
+    alertBody: 'Triggered ' + type + 'through ' + e.identifier,
+    alertAction: "Re-Launch!",
+    userInfo: {
+      "hello": "world"
+    },
+    date: new Date(new Date().getTime())
+  });
+  return Ti.Media.vibrate();
+};
+
 GeofenceHandlers = {
   onexit: function(e) {
     Ti.API.info('Elvis has left the building');
+    debugNotification('onexit', e);
+    e.device = Ti.Platform.model;
     return Parse.Cloud.run('testpush', e, {
       success: function(res) {
         return Ti.API.info('Parse code successfully ran');
@@ -22,8 +38,10 @@ GeofenceHandlers = {
   },
   onenter: function(e) {
     Ti.API.info('Elvis has entered the building');
+    debugNotification('onenter', e);
     return Analytics.track('entered', {
-      fenceId: e.identifier
+      fenceId: e.identifier,
+      device: Ti.Platform.model
     });
   }
 };

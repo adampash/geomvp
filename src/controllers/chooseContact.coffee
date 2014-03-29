@@ -25,9 +25,9 @@ performAddressBookFunction = () ->
 
 setContact = (contact) ->
   Ti.API.info contact
-  for own key, email of contact.person.email
-    Ti.API.info email.toString()
-  Ti.API.info contact.person.phone.mobile.toString()
+  # for own key, email of contact.person.email
+  #   Ti.API.info email.toString()
+  # Ti.API.info contact.person.phone.mobile.toString()
   if OS_IOS
     Ti.App.Properties.setString('contactRecordId', contact.person.recordId)
     completeSetup()

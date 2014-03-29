@@ -14,6 +14,7 @@ PushRegistration =
           ]
           callback: (e) ->
             alert JSON.stringify e
+            Ti.Media.vibrate()
           success: (e) =>
             deviceToken = e.deviceToken
             @registerWithParse(e)

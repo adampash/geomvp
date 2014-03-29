@@ -1,5 +1,4 @@
-var addressBookDisallowed, args, completeSetup, contactError, init, launchContactPicker, performAddressBookFunction, setContact,
-  __hasProp = {}.hasOwnProperty;
+var addressBookDisallowed, args, completeSetup, contactError, init, launchContactPicker, performAddressBookFunction, setContact;
 
 args = arguments[0] || {};
 
@@ -30,15 +29,7 @@ performAddressBookFunction = function() {
 };
 
 setContact = function(contact) {
-  var email, key, _ref;
   Ti.API.info(contact);
-  _ref = contact.person.email;
-  for (key in _ref) {
-    if (!__hasProp.call(_ref, key)) continue;
-    email = _ref[key];
-    Ti.API.info(email.toString());
-  }
-  Ti.API.info(contact.person.phone.mobile.toString());
   if (OS_IOS) {
     Ti.App.Properties.setString('contactRecordId', contact.person.recordId);
     return completeSetup();

@@ -27,4 +27,3 @@ if (OS_ANDROID) {
 Alloy.Globals.halfWidth = Ti.UI.Size / 2
 
 Alloy.Globals.ci_geofencing = require('ci.geofencing')
-

@@ -4,9 +4,23 @@ Parse = require('tiparse')(
 )
 Analytics = require 'analytics'
 
+debugNotification = (type, e) ->
+  Ti.API.info 'debugNotification'
+  notification = Ti.App.iOS.scheduleLocalNotification
+    alertBody: 'Triggered ' + type + 'through ' + e.identifier
+    alertAction:"Re-Launch!"
+    userInfo:
+      "hello":"world"
+    date: new Date(new Date().getTime()) # 3 seconds after backgrounding
+  # Ti.App.IOS.scheduleLocalNotification
+  #   date: new Date()
+  Ti.Media.vibrate()
+
 GeofenceHandlers =
   onexit: (e) ->
     Ti.API.info 'Elvis has left the building'
+    debugNotification('onexit', e)
+    e.device = Ti.Platform.model
     Parse.Cloud.run 'testpush', e,
       success: (res) ->
         Ti.API.info 'Parse code successfully ran'
@@ -15,7 +29,9 @@ GeofenceHandlers =
         Ti.API.info err
   onenter: (e) ->
     Ti.API.info 'Elvis has entered the building'
+    debugNotification('onenter', e)
     Analytics.track 'entered',
       fenceId: e.identifier
+      device: Ti.Platform.model
 
 module.exports = GeofenceHandlers
