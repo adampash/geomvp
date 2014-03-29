@@ -30,7 +30,7 @@ performAddressBookFunction = function() {
 };
 
 setContact = function(contact) {
-  var ConnectedContact, email, emails, helper, key, phone, phones, _ref, _ref1;
+  var ConnectedContact, email, emails, helper, key, name, phone, phones, _ref, _ref1;
   Ti.API.info(contact);
   Ti.API.info(contact.person);
   emails = [];
@@ -49,7 +49,12 @@ setContact = function(contact) {
     phones.push(helper.normalizePhone(phone.toString()));
   }
   ConnectedContact = require('connectedContact');
+  name = contact.person.firstName;
+  if (name == null) {
+    name = contact.person.fullName.split(' ')[0];
+  }
   ConnectedContact.findOrCreate({
+    name: name,
     phones: phones,
     emails: emails
   });

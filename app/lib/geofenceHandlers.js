@@ -27,15 +27,17 @@ GeofenceHandlers = {
     Ti.API.info('Elvis has left the building');
     debugNotification('onexit', e);
     e.device = Ti.Platform.model;
-    return Parse.Cloud.run('leftWorkPush', e, {
-      success: function(res) {
-        return Ti.API.info('Parse code successfully ran');
-      },
-      error: function(err) {
-        Ti.API.info('it did not work');
-        return Ti.API.info(err);
-      }
-    });
+    if (e.identifier === "Work") {
+      return Parse.Cloud.run('leftWorkPush', e, {
+        success: function(res) {
+          return Ti.API.info('Parse code successfully ran');
+        },
+        error: function(err) {
+          Ti.API.info('it did not work');
+          return Ti.API.info(err);
+        }
+      });
+    }
   },
   onenter: function(e) {
     Ti.API.info('Elvis has entered the building');

@@ -40,7 +40,10 @@ setContact = (contact) ->
     phones.push helper.normalizePhone phone.toString()
 
   ConnectedContact = require 'connectedContact'
+  name = contact.person.firstName
+  name = contact.person.fullName.split(' ')[0] unless name?
   ConnectedContact.findOrCreate
+    name:   name
     phones: phones
     emails: emails
 

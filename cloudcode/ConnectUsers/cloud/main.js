@@ -19,20 +19,27 @@ Parse.Cloud.define("connectUsers", function(request, response) {
           else {
             console.log("Didn't find user this round");
           }
-        if (index === emails.length - 1) {
-          if (user2 !== null) {
-            console.log("It's all over and we've got our user");
-            var ConnectedUsers = Parse.Object.extend("ConnectedUsers");
-            connectedUsers = new ConnectedUsers();
-            connectedUsers.set("parent", Parse.User.current());
-            connectedUsers.set("connectedUser", user2);
-            connectedUsers.save();
-            response.success();
+          if (index === emails.length - 1) {
+            if (user2 !== null) {
+              console.log("It's all over and we've got our user");
+              var ConnectedUsers = Parse.Object.extend("ConnectedUsers");
+              connectedUsers = new ConnectedUsers();
+              connectedUsers.set("parent", Parse.User.current());
+              connectedUsers.set("connectedUser", user2);
+              connectedUsers.save();
+              if (request.params.thenPush) {
+                console.log("Now try pushing again");
+                request.params.secondTry = true
+                Parse.Cloud.run("leftWorkPush", request.params);
+              }
+              response.success();
+            }
+            else {
+              response.error("No user to connect to");
+            }
           }
-        }
         });
       });
-
     }
   });
 
@@ -41,57 +48,78 @@ Parse.Cloud.define("connectUsers", function(request, response) {
 Parse.Cloud.define("leftWorkPush", function(request, response) {
   if (request.params.identifier === "Work") {
     user = request.user
-  objectId = user.id
+    objectId = user.id
 
-  var query = new Parse.Query("ConnectedUsers");
-query.equalTo("parent", user);
+    var query = new Parse.Query("ConnectedUsers");
+    query.equalTo("parent", user);
 
-query.find().then(function(connectedUsers) {
-  if (connectedUsers.length === 0) {
-    Parse.Cloud.run("sendSMS", user);
+    query.find().then(function(connectedUsers) {
+      if (connectedUsers.length === 0 && !request.params.secondTry) {
+        // Parse.Cloud.run("sendSMS", user);
+        request.params.thenPush = true
+        Parse.Cloud.run("connectUsers", request.params,
+          {
+            success: function(response) {
+              console.log("Was able to connect user, try again");
+            },
+            error: function(error) {
+              console.log("There was an error");
+            }
+          }
+        );
+        return false;
+      }
+      else {
+        user2 = connectedUsers[0].get("connectedUser");
+        return user2.fetch();
+      }
+    }).then(function(user2) {
+      if (user2) {
+        Parse.Push.send(
+          {
+            channels: [user2.id],
+          data: {
+            alert: user.get("name").split(" ")[0] + " just left work!",
+            badge: 0,
+            sound: ""
+            }
+          });
+        Parse.Push.send(
+          {
+            channels: [objectId],
+            data: {
+              alert: "Heads up: We just let " + user2.get("name").split(" ")[0] + " know you've left work.",
+              badge: 0,
+              sound: ""
+            }
+          });
+        Beacon = Parse.Object.extend("Beacon");
+        beacon = new Beacon();
+        beacon.set(request.params);
+        beacon.set("parent", Parse.User.current());
+        beacon.save();
+        Parse.Analytics.track('exit', {
+          fenceId: request.params.identifier,
+          device: request.params.device
+        });
+        response.success();
+      }
+      else {
+        response.error("no user2 to send to");
+      }
+    }, function(error) {
+      // This error handler WILL be called. error will be "There was an error.".
+      // Let's handle the error by returning a new promise.
+      return response.error("something went wrong");
+    });
   }
   else {
-    user2 = connectedUsers[0].get("connectedUser");
-    return user2.fetch();
+    Parse.Analytics.track('exit', {
+      fenceId: request.params.identifier,
+      device: request.params.device
+    });
+    response.success();
   }
-}).then(function(user2) {
-  Parse.Push.send(
-    {
-      channels: [user2.id],
-    data: {
-      alert: user.get("name").split(" ")[0] + " just left work!",
-    badge: 0,
-    sound: ""
-    }
-    });
-  Parse.Push.send(
-    {
-      channels: [objectId],
-    data: {
-      alert: "Heads up: We just let " + user2.get("name").split(" ")[0] + " know you've left work.",
-    badge: 0,
-    sound: ""
-    }
-    });
-  Beacon = Parse.Object.extend("Beacon");
-  beacon = new Beacon();
-  beacon.set(request.params);
-  beacon.set("parent", Parse.User.current());
-  beacon.save();
-  Parse.Analytics.track('exit', {
-    fenceId: request.params.identifier,
-    device: request.params.device
-  });
-  response.success();
-});
-}
-else {
-  Parse.Analytics.track('exit', {
-    fenceId: request.params.identifier,
-    device: request.params.device
-  });
-  response.success();
-}
 
 });
 
