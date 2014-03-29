@@ -1,4 +1,4 @@
-var args, init, launchNextStep, saveTime, setTime, time, timeToMachine, timeToString;
+var args, getUTCTime, init, launchNextStep, saveTime, setTime, time, timeToString;
 
 args = arguments[0] || {};
 
@@ -7,10 +7,10 @@ time = {};
 saveTime = function() {
   var LeaveWindow;
   Ti.App.Properties.setString('departureTime', timeToString());
-  Ti.API.info(timeToMachine());
   LeaveWindow = require('leaveWindow');
   LeaveWindow.findOrCreate({
-    humanTime: timeToString()
+    humanTime: timeToString(),
+    utcTime: getUTCTime()
   });
   return launchNextStep();
 };
@@ -25,16 +25,20 @@ timeToString = function() {
   return '' + time.hour + ':' + time.minute + ' ' + time.meridian;
 };
 
-timeToMachine = function() {
-  var hour, moment;
-  moment = require('alloy/moment');
+getUTCTime = function() {
+  var date, hour;
   if (time.meridian === 'pm') {
-    hour = time.hour + 12;
+    hour = parseInt(time.hour) + 12;
+  } else {
+    hour = parseInt(time.hour);
   }
-  return moment({
-    hour: hour,
-    minute: time.minute
-  }).format();
+  date = new Date();
+  date.setHours(hour);
+  date.setMinutes(parseInt(time.minute));
+  return {
+    hour: date.getUTCHours(),
+    minute: date.getMinutes()
+  };
 };
 
 setTime = function(event) {

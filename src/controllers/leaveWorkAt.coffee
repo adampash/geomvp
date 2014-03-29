@@ -4,11 +4,10 @@ time = {}
 saveTime = ->
   Ti.App.Properties.setString('departureTime', timeToString())
 
-  Ti.API.info timeToMachine()
   LeaveWindow = require 'leaveWindow'
   LeaveWindow.findOrCreate(
     humanTime: timeToString()
-    # machineTime: timeToMachine()
+    utcTime: getUTCTime()
   )
 
   launchNextStep()
@@ -23,13 +22,26 @@ launchNextStep = ->
 timeToString = ->
   '' + time.hour + ':' + time.minute + ' ' + time.meridian
 
-timeToMachine = ->
-  moment = require('alloy/moment')
-  hour = time.hour + 12 if time.meridian is 'pm'
-  moment(
-    hour: hour
-    minute: time.minute
-  ).format()
+getUTCTime = ->
+  if time.meridian is 'pm'
+    hour = parseInt(time.hour) + 12
+  else
+    hour = parseInt(time.hour)
+
+  date = new Date()
+  date.setHours(hour)
+  date.setMinutes(parseInt time.minute)
+
+  hour: date.getUTCHours()
+  minute: date.getMinutes()
+
+
+  # Ti.API.info hour
+  # Ti.API.info parseInt time.minute
+  # moment(
+  #   hour: hour
+  #   minute: parseInt(time.minute)
+  # ).format()
 
 setTime = (event) ->
   time =
