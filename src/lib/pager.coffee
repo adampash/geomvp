@@ -2,7 +2,7 @@ PagingControl =
   create: (numViews) ->
     Ti.API.info 'create a control for ' + numViews + ' pages'
     views = []
-    colors = ['red', 'green', 'blue', 'yellow']
+    colors = ['red', 'green', 'blue', 'yellow', 'gray']
 
     size = 100/numViews
 

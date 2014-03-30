@@ -1,0 +1,7 @@
+<Alloy>
+  <View id="welcome" class="container">
+    <Label class="header">Hey there friend!</Label>
+    <Label class="details">Thanks so much for taking the time to help us test this app! Etc. Etc.</Label>
+    <Button onClick="launchNextStep">GET STARTED!</Button>
+  </View>
+</Alloy>

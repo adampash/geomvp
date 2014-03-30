@@ -1,4 +1,4 @@
-var args, getUTCTime, init, launchNextStep, saveTime, setTime, time, timeToString;
+var args, getUTCTime, init, launchNextStep, saveTime, setPicker, setTime, time, timeToString;
 
 args = arguments[0] || {};
 
@@ -18,7 +18,7 @@ saveTime = function() {
 launchNextStep = function() {
   var scrollableView;
   scrollableView = $.leaveWorkAt.getParent();
-  return scrollableView.scrollToView(3);
+  return scrollableView.scrollToView(scrollableView.currentPage + 1);
 };
 
 timeToString = function() {
@@ -49,6 +49,12 @@ setTime = function(event) {
   };
 };
 
+setPicker = function() {
+  $.picker.setSelectedRow(0, setRows.hour, true);
+  $.picker.setSelectedRow(1, setRows.minute, true);
+  return $.picker.setSelectedRow(2, setRows.meridian, true);
+};
+
 init = function() {
   var hour, meridian, minute, setRows;
   setRows = {
@@ -70,12 +76,17 @@ init = function() {
     }
   }
   return setTimeout(function() {
+    Ti.API.info('setting picker');
+    Ti.API.info($.picker);
+    Ti.API.info(setRows);
     $.picker.setSelectedRow(0, setRows.hour, true);
     $.picker.setSelectedRow(1, setRows.minute, true);
     return $.picker.setSelectedRow(2, setRows.meridian, true);
-  }, 100);
+  }, 1000);
 };
 
-init();
+$.leaveWorkAt.addEventListener('postlayout', function(e) {
+  return init();
+});
 
 //# sourceMappingURL=leaveWorkAt.js.map

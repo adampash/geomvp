@@ -9,7 +9,13 @@ launchSetup = ->
   Ti.API.info "Launch setup"
 
   scrollableView = $.login.getParent()
-  scrollableView.scrollToView 1
+  scrollableView.scrollToView scrollableView.currentPage + 1
+
+focusEmail = ->
+  $.email.focus()
+focusPassword = ->
+  $.password.focus()
+
 
 createUser = ->
   userCredentials = getUserCredentials()

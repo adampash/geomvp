@@ -2,13 +2,17 @@
   backgroundColor:"white",
   layout: "vertical"
 },
+"#mapContainer": {
+  layout: "absolute",
+  height: "200dp"
+},
 "Label": {
   width: Ti.UI.SIZE,
   height: "30dp",
   color: "#000",
   margin: 30
 },
-"#mapview": {
+".mapOverlay": {
   top: 0,
   height: "200dp",
   width: Ti.UI.FILL

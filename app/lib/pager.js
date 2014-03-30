@@ -5,7 +5,7 @@ PagingControl = {
     var colors, num, size, view, views, _i;
     Ti.API.info('create a control for ' + numViews + ' pages');
     views = [];
-    colors = ['red', 'green', 'blue', 'yellow'];
+    colors = ['red', 'green', 'blue', 'yellow', 'gray'];
     size = 100 / numViews;
     for (num = _i = 0; 0 <= numViews ? _i < numViews : _i > numViews; num = 0 <= numViews ? ++_i : --_i) {
       view = Ti.UI.createView({

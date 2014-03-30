@@ -1,9 +1,9 @@
 <Alloy>
-  <Window id="login" class="container">
+  <View id="login" class="container">
     <Label id="header">Login</Label>
-    <TextField id="name" hintText="Jane Doe" />
-    <TextField id="email" hintText="your.email@example.com" />
-    <TextField id="password" hintText="*********" />
+    <TextField id="name" hintText="Jane Doe" returnKeyType="Ti.UI.RETURNKEY_NEXT" onReturn="focusEmail" />
+    <TextField id="email" hintText="your.email@example.com" returnKeyType="Ti.UI.RETURNKEY_NEXT" onReturn="focusPassword" />
+    <TextField id="password" hintText="*********" returnKeyType="Ti.UI.RETURNKEY_DONE" onReturn="loginUser" />
     <View class="actionButtons">
       <Button onClick="createUser" id="createButton">Sign up</Button>
       <Button onClick="loginUser" id="loginButton">Log in</Button>
@@ -12,6 +12,5 @@
       <Label onClick="changeToLogin" id="changeToLogin">I already have an account</Label>
       <Label onClick="changeToRegister" id="changeToRegister">I need to register for an account</Label>
     </View>
-    <!-- <Label onClick="close">Cancel</Label> -->
-  </Window>
+  </View>
 </Alloy>

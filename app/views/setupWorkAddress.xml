@@ -1,14 +1,19 @@
 <Alloy>
-  <Window id="setupWorkAddress" class="container">
-    <View id="mapview" ns="Alloy.Globals.Map" animate="true" />
-    <TextField id="workAddress" hintText="Your work address" 
-      onReturn="findAddress" />
-    <View id="confirm">
-      <Label>Is this where you work?</Label>
-      <View id="buttons">
-        <Button class="confirmButton" onClick="finishUp" >Yep!</Button>
-        <Button class="confirmButton" onClick="searchAgain" >Nope</Button>
+  <View id="setupWorkAddress" class="container">
+    <View id="searchForAddress">
+      <Label class="header">What's your work address?</Label>
+      <TextField id="workAddress" hintText="Your work address"
+        onReturn="findAddress" returnKeyType="Ti.UI.RETURNKEY_DONE" />
+    </View>
+    <View id="mapContainer">
+      <View id="mapview" ns="Alloy.Globals.Map" animate="true" />
+      <View id="confirm">
+        <Label id="confirmText">Is this where you work?</Label>
+        <View id="buttons">
+          <Button class="confirmButton" onClick="finishUp" >Yep!</Button>
+          <Button class="confirmButton" onClick="searchAgain" >Nope</Button>
+        </View>
       </View>
     </View>
-  </Window>
+  </View>
 </Alloy>

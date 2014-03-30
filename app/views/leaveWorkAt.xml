@@ -1,8 +1,8 @@
 <Alloy>
-  <Window id="leaveWorkAt" class="container">
+  <View id="leaveWorkAt" class="container">
     <View id="positionContainer">
       <Label>When do you normally leave work?</Label>
-      <Picker id="picker" selectionIndicator="true" useSpinner="true" 
+      <Picker id="picker" selectionIndicator="true" useSpinner="true"
         onChange="setTime">
         <Column id="hour">
           <Row title="1"/>
@@ -33,5 +33,5 @@
     <View class="actionButtons">
       <Button id="saveTime" onClick="saveTime">Looks good!</Button>
     </View>
-  </Window>
+  </View>
 </Alloy>

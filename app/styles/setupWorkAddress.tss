@@ -1,44 +1,58 @@
 ".container" : {
-  "backgroundColor": "#dddddd"
+  "backgroundColor": "#dddddd",
+  layout: "absolute"
 },
-"Label" : {
-  "height": "50dp",
-  "width": Ti.UI.SIZE,
-  margin: 10
-},
-"#map": {
-  top: 5,
-  left: 5,
-  right: 5,
-  bottom: 5,
-  "width": Ti.UI.SIZE,
-},
-"#mapview": {
-  mapType: Alloy.Globals.Map.NORMAL_TYPE
-},
-"TextField": {
-  left: "5dp",
-  right: "5dp",
-  height: "50dp",
-  top: "20dp",
-  width: Ti.UI.FILL,
-  backgroundColor: "white",
-},
-"#confirm": {
-  backgroundColor: "white",
-  layout: "vertical",
-  bottom: 0,
-  height: "150dp",
-  right: 0,
-  left: 0,
-  visible: false
-},
-"#buttons": {
-  layout: "horizontal"
-},
-".confirmButton": {
-  width: Ti.UI.FILL,
-  height: "50dp",
-  backgroundColor: "blue",
-  color: "white"
-}
+  "#searchForAddress": {
+    layout: "absolute",
+    visible: true,
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+    ".header": {
+      top: "10dp"
+    },
+    "#workAddress": {
+      left: "5dp",
+      right: "5dp",
+      top: "40dp",
+      height: "50dp",
+      width: Ti.UI.FILL,
+      backgroundColor: "white",
+    },
+
+
+
+  "#mapContainer": {
+    visible: false,
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+    "#confirmText" : {
+      "height": "50dp",
+      "width": Ti.UI.SIZE,
+      margin: 10
+    },
+    "#mapview": {
+      mapType: Alloy.Globals.Map.NORMAL_TYPE
+    },
+    "#confirm": {
+      backgroundColor: "white",
+      layout: "vertical",
+      bottom: 0,
+      height: "150dp",
+      right: 0,
+      left: 0
+    },
+    "#buttons": {
+      layout: "horizontal"
+    },
+    ".confirmButton": {
+      width: Ti.UI.FILL,
+      height: "50dp",
+      backgroundColor: "blue",
+      color: "white"
+    }

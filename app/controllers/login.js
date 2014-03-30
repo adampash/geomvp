@@ -1,4 +1,4 @@
-var Parse, args, changeToLogin, changeToRegister, createUser, getUserCredentials, launchSetup, loginUser, registerForPush;
+var Parse, args, changeToLogin, changeToRegister, createUser, focusEmail, focusPassword, getUserCredentials, launchSetup, loginUser, registerForPush;
 
 Parse = require('tiparse')({
   applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
@@ -11,7 +11,15 @@ launchSetup = function() {
   var scrollableView;
   Ti.API.info("Launch setup");
   scrollableView = $.login.getParent();
-  return scrollableView.scrollToView(1);
+  return scrollableView.scrollToView(scrollableView.currentPage + 1);
+};
+
+focusEmail = function() {
+  return $.email.focus();
+};
+
+focusPassword = function() {
+  return $.password.focus();
 };
 
 createUser = function() {

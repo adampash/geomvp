@@ -14,10 +14,7 @@ saveTime = ->
 
 launchNextStep = ->
   scrollableView = $.leaveWorkAt.getParent()
-  scrollableView.scrollToView 3
-  # chooseContact = Alloy.createController('chooseContact').getView()
-  # chooseContact.open()
-  # $.leaveWorkAt.close()
+  scrollableView.scrollToView scrollableView.currentPage + 1
 
 timeToString = ->
   '' + time.hour + ':' + time.minute + ' ' + time.meridian
@@ -36,18 +33,16 @@ getUTCTime = ->
   minute: date.getMinutes()
 
 
-  # Ti.API.info hour
-  # Ti.API.info parseInt time.minute
-  # moment(
-  #   hour: hour
-  #   minute: parseInt(time.minute)
-  # ).format()
-
 setTime = (event) ->
   time =
     hour: event.selectedValue[0]
     minute: event.selectedValue[1]
     meridian: event.selectedValue[2]
+
+setPicker = ->
+  $.picker.setSelectedRow 0, setRows.hour, true
+  $.picker.setSelectedRow 1, setRows.minute, true
+  $.picker.setSelectedRow 2, setRows.meridian, true
 
 init = ->
   setRows =
@@ -60,6 +55,7 @@ init = ->
     hour = parseInt time.split(':')[0]
     minute = parseInt time.split(':')[1].split(' ')[0]
     meridian = time.split(' ')[1]
+
     setRows.hour = hour - 1
     setRows.minute = minute / 15
     if meridian is 'am'
@@ -68,9 +64,14 @@ init = ->
       setRows.meridian = 1
 
   setTimeout ->
+    Ti.API.info 'setting picker'
+    Ti.API.info $.picker
+    Ti.API.info setRows
     $.picker.setSelectedRow 0, setRows.hour, true
     $.picker.setSelectedRow 1, setRows.minute, true
     $.picker.setSelectedRow 2, setRows.meridian, true
-  , 100
+  , 1000
 
-init()
+
+$.leaveWorkAt.addEventListener 'postlayout', (e) ->
+  init()

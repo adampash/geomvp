@@ -1,15 +1,13 @@
 <Alloy>
   <Window class="container">
-    <View id="mapview" ns="Alloy.Globals.Map" draggable="false" />
-    <Label>Setup complete!</Label>
-    <Label>When you leave work</Label>
-    <Label>between 5pm and 8pm</Label>
-    <Label id="contact">we'll send a push notification</Label>
-    <Label>letting her know you're on your way</Label>
-    <!-- <Label id="label" onClick="openLogin">openLogin</Label> -->
-    <!-- <Label id="label" onClick="launchSetup">launchSetup</Label> -->
-    <!-- <Label id="subscribe" onClick="subscribe">Subscribe to Push</Label> -->
-    <!-- <Label id="push" onClick="testSinglePush">Test Push</Label> -->
+    <View id="mapContainer">
+      <View class="mapOverlay" id="mapview" ns="Alloy.Globals.Map" draggable="false" />
+      <View class="mapOverlay" />
+    </View>
+    <Label class="header">Setup complete!</Label>
+    <Label class="details">When you leave work between 5pm and 8pm</Label>
+    <Label id="contact" class="details">we'll send a push notification</Label>
+    <Label class="details">letting her know you're on your way</Label>
     <Button onClick="startOver">Start over</Button>
   </Window>
 </Alloy>

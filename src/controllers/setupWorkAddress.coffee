@@ -7,14 +7,10 @@ setLocation = (location) ->
   Alloy.Globals.location =
     latitude: coords.latitude
     longitude: coords.longitude
-  # $.mapview.region =
-  #   latitude: coords.latitude
-  #   longitude: coords.longitude
-  #   latitudeDelta: 0.01
-  #   longitudeDelta: 0.01
 
 searchAgain = ->
-  $.confirm.hide()
+  $.searchForAddress.show()
+  $.mapContainer.hide()
   $.workAddress.focus()
 
 finishUp = ->
@@ -28,11 +24,7 @@ finishUp = ->
 
 launchNextStep = ->
   scrollableView = $.setupWorkAddress.getParent()
-  scrollableView.scrollToView 2
-  # Ti.API.info "Launch next step"
-  # leaveWorkAt = Alloy.createController('leaveWorkAt').getView()
-  # leaveWorkAt.open()
-  # $.setupWorkAddress.close()
+  scrollableView.scrollToView scrollableView.currentPage + 1
 
 findAddress = ->
   geo = require 'geo'
@@ -44,6 +36,10 @@ findAddress = ->
       Ti.API.info coords
 
       setPin(geodata.closestResult.formatted_address, coords)
+      $.searchForAddress.hide()
+      $.mapContainer.show()
+      Ti.API.info $.mapContainer
+      Ti.API.info $.mapContainer.getVisible()
   )
 
 setPin = (formattedAddress, coords) ->
@@ -66,7 +62,6 @@ setPin = (formattedAddress, coords) ->
   $.mapview.addAnnotation workLocation
   # Ti.API.info JSON.stringify workLocation
   $.mapview.annotations[0].fireEvent 'click'
-  $.confirm.show()
 
 Ti.Geolocation.purpose = "Share you location"
 if (Ti.Geolocation.locationServicesEnabled)
@@ -80,9 +75,9 @@ focusAddress = ->
   $.workAddress.focus()
 
 
-# $.setupWorkAddress.addEventListener 'open', ->
-#   workLocation = Ti.App.Properties.getObject('workLocation')
-#   if workLocation?
-#     setPin(workLocation.address, workLocation)
-#   else
-#     focusAddress()
+$.setupWorkAddress.addEventListener 'open', ->
+  workLocation = Ti.App.Properties.getObject('workLocation')
+  if workLocation?
+    setPin(workLocation.address, workLocation)
+  # else
+  # focusAddress()

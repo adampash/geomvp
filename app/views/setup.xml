@@ -1,12 +1,13 @@
 <Alloy>
-  <Window id="setup">
+  <Window id="setup" class="container">
     <View id="pagingControl" layout="horizontal" height="20dp" />
     <ScrollableView id="scrollableView" showPagingControl="false"
       scrollingEnabled="false" >
-      <Require type="view" src="login" id="login"/>
-      <Require type="view" src="setupWorkAddress" id="setupWorkAddress"/>
-      <Require type="view" src="leaveWorkAt" id="leaveWorkAt"/>
-      <Require type="view" src="chooseContact" id="chooseContact"/>
+      <Require type="view" src="welcome" />
+      <Require type="view" src="login" />
+      <Require type="view" src="setupWorkAddress" />
+      <Require type="view" src="leaveWorkAt" />
+      <Require type="view" src="chooseContact" />
     </ScrollableView>
   </Window>
 </Alloy>

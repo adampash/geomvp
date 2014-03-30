@@ -15,7 +15,8 @@ setLocation = function(location) {
 };
 
 searchAgain = function() {
-  $.confirm.hide();
+  $.searchForAddress.show();
+  $.mapContainer.hide();
   return $.workAddress.focus();
 };
 
@@ -34,7 +35,7 @@ finishUp = function() {
 launchNextStep = function() {
   var scrollableView;
   scrollableView = $.setupWorkAddress.getParent();
-  return scrollableView.scrollToView(2);
+  return scrollableView.scrollToView(scrollableView.currentPage + 1);
 };
 
 findAddress = function() {
@@ -45,7 +46,11 @@ findAddress = function() {
     var coords;
     coords = geodata.coords;
     Ti.API.info(coords);
-    return setPin(geodata.closestResult.formatted_address, coords);
+    setPin(geodata.closestResult.formatted_address, coords);
+    $.searchForAddress.hide();
+    $.mapContainer.show();
+    Ti.API.info($.mapContainer);
+    return Ti.API.info($.mapContainer.getVisible());
   });
 };
 
@@ -69,8 +74,7 @@ setPin = function(formattedAddress, coords) {
     id: 'workPin'
   });
   $.mapview.addAnnotation(workLocation);
-  $.mapview.annotations[0].fireEvent('click');
-  return $.confirm.show();
+  return $.mapview.annotations[0].fireEvent('click');
 };
 
 Ti.Geolocation.purpose = "Share you location";
@@ -86,5 +90,13 @@ if (Ti.Geolocation.locationServicesEnabled) {
 focusAddress = function() {
   return $.workAddress.focus();
 };
+
+$.setupWorkAddress.addEventListener('open', function() {
+  var workLocation;
+  workLocation = Ti.App.Properties.getObject('workLocation');
+  if (workLocation != null) {
+    return setPin(workLocation.address, workLocation);
+  }
+});
 
 //# sourceMappingURL=setupWorkAddress.js.map

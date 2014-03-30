@@ -1,5 +1,5 @@
 <Alloy>
-  <Window id="chooseContact" class="container">
+  <View id="chooseContact" class="container">
     <View id="confirm">
       <Label>Great!</Label>
       <Label id="message">When you leave work around {tk}, we'll send this:</Label>
@@ -8,5 +8,5 @@
         Choose who we send it to
       </Button>
     </View>
-  </Window>
+  </View>
 </Alloy>
