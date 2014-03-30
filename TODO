@@ -1,4 +1,7 @@
-* Save record of friend
-* Customize push notifications
+TODO:
 * Clean up interface
 * Add SMS/Twilio support
+
+DONE:
+x Save record of friend
+x Customize push notifications
