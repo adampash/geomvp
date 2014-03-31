@@ -4,6 +4,24 @@ Parse = require('tiparse')(
   javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
 )
 
+sendFeedback = ->
+  feedbackText = $.feedback.value
+  if feedbackText is ""
+    $.feedback.focus()
+
+  else
+    Feedback = Parse.Object.extend "Feedback"
+    feedback = new Feedback()
+    feedback.set "text", feedbackText
+    feedback.set "parent", Parse.User.current()
+
+    feedback.save().then (response) ->
+      alert "Feedback received! Thanks so much for taking the time."
+      $.feedback.value = ''
+      $.feedback.blur()
+    , (response) ->
+      alert "Sorry, had trouble saving your feedback"
+
 testSinglePush = ->
   Parse.Cloud.run 'testpush', {},
     success: (res) ->
@@ -58,20 +76,20 @@ init = ->
     Ti.API.info "User is currently logged in: " + currentUser.id
     if Ti.App.Properties.getBool('setupComplete')
       Ti.API.info "Setup is complete"
-      workLocation = Ti.App.Properties.getObject('workLocation')
+      # workLocation = Ti.App.Properties.getObject('workLocation')
 
-      if workLocation?
-        Ti.API.info 'also draw radius now?'
-        setPin(workLocation.address, workLocation)
+      # if workLocation?
+      #   Ti.API.info 'also draw radius now?'
+      #   setPin(workLocation.address, workLocation)
 
-      contactRecordId = Ti.App.Properties.getString('contactRecordId')
-      contact = Ti.Contacts.getPersonByID(parseInt(contactRecordId,10))
+      # contactRecordId = Ti.App.Properties.getString('contactRecordId')
+      # contact = Ti.Contacts.getPersonByID(parseInt(contactRecordId,10))
 
-      if contact?
-        Ti.API.info JSON.stringify contact
-        name = contact.firstName
-        name = contact.fullName.split(' ')[0] unless name?
-        $.contact.text = "we'll send " + name + " a push notification"
+      # if contact?
+      #   Ti.API.info JSON.stringify contact
+      #   name = contact.firstName
+      #   name = contact.fullName.split(' ')[0] unless name?
+      #   $.contact.text = "we'll send " + name + " a push notification"
 
       $.index.open()
 

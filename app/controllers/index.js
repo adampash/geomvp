@@ -1,4 +1,4 @@
-var Parse, ParsePush, init, launchSetup, openLogin, setPin, startOver, testSinglePush;
+var Parse, ParsePush, init, launchSetup, openLogin, sendFeedback, setPin, startOver, testSinglePush;
 
 ParsePush = require('parsePush');
 
@@ -6,6 +6,26 @@ Parse = require('tiparse')({
   applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
   javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
 });
+
+sendFeedback = function() {
+  var Feedback, feedback, feedbackText;
+  feedbackText = $.feedback.value;
+  if (feedbackText === "") {
+    return $.feedback.focus();
+  } else {
+    Feedback = Parse.Object.extend("Feedback");
+    feedback = new Feedback();
+    feedback.set("text", feedbackText);
+    feedback.set("parent", Parse.User.current());
+    return feedback.save().then(function(response) {
+      alert("Feedback received! Thanks so much for taking the time.");
+      $.feedback.value = '';
+      return $.feedback.blur();
+    }, function(response) {
+      return alert("Sorry, had trouble saving your feedback");
+    });
+  }
+};
 
 testSinglePush = function() {
   return Parse.Cloud.run('testpush', {}, {
@@ -62,27 +82,12 @@ setPin = function(formattedAddress, coords) {
 };
 
 init = function() {
-  var alwaysOn, appStates, contact, contactRecordId, currentUser, name, workLocation;
+  var alwaysOn, appStates, currentUser;
   currentUser = Parse.User.current();
   if (currentUser) {
     Ti.API.info("User is currently logged in: " + currentUser.id);
     if (Ti.App.Properties.getBool('setupComplete')) {
       Ti.API.info("Setup is complete");
-      workLocation = Ti.App.Properties.getObject('workLocation');
-      if (workLocation != null) {
-        Ti.API.info('also draw radius now?');
-        setPin(workLocation.address, workLocation);
-      }
-      contactRecordId = Ti.App.Properties.getString('contactRecordId');
-      contact = Ti.Contacts.getPersonByID(parseInt(contactRecordId, 10));
-      if (contact != null) {
-        Ti.API.info(JSON.stringify(contact));
-        name = contact.firstName;
-        if (name == null) {
-          name = contact.fullName.split(' ')[0];
-        }
-        $.contact.text = "we'll send " + name + " a push notification";
-      }
       $.index.open();
       if (Alloy.Globals.activeFence != null) {
         Alloy.Globals.activeFence.stopGeoFencing();

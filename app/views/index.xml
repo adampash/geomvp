@@ -1,13 +1,20 @@
 <Alloy>
   <Window class="container">
-    <View id="mapContainer">
-      <View class="mapOverlay" id="mapview" ns="Alloy.Globals.Map" draggable="false" />
-      <View class="mapOverlay" />
+    <!-- <View id="mapContainer"> -->
+    <!--   <View class="mapOverlay" id="mapview" ns="Alloy.Globals.Map" draggable="false" /> -->
+    <!--   <View class="mapOverlay" /> -->
+    <!-- </View> -->
+    <!-- <Label class="header">Setup complete!</Label> -->
+    <!-- <Label class="details">When you leave work between 5pm and 8pm</Label> -->
+    <!-- <Label id="contact" class="details">we'll send a push notification</Label> -->
+    <!-- <Label class="details">letting her know you're on your way</Label> -->
+    <!-- <Button onClick="startOver">Start over</Button> -->
+    <!-- <Button onClick="sendFeedback">Send feedback</Button> -->
+    <View id="completeScreen">
+      <TextArea id="feedback" hintText="Tell us what you think!" >
+      </TextArea>
+      <Button id="sendFeedback" onClick="sendFeedback">Send feedback</Button>
+      <Button onClick="startOver">Start over</Button>
     </View>
-    <Label class="header">Setup complete!</Label>
-    <Label class="details">When you leave work between 5pm and 8pm</Label>
-    <Label id="contact" class="details">we'll send a push notification</Label>
-    <Label class="details">letting her know you're on your way</Label>
-    <Button onClick="startOver">Start over</Button>
   </Window>
 </Alloy>

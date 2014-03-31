@@ -7,3 +7,4 @@ tmp
 .project
 node_modules
 Resources
+dist

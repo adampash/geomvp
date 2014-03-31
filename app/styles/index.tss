@@ -6,6 +6,27 @@
   layout: "absolute",
   height: "200dp"
 },
+"#completeScreen": {
+  layout: "vertical"
+},
+"#feedback": {
+  height: "180dp",
+  top: "25dp",
+  right: "5dp",
+  left: "5dp",
+  borderWidth: "1dp",
+  borderColor: "gray",
+  borderRadius: "8dp",
+  font: {
+    fontFamily:'Helvetica',
+    fontSize: '16dp',
+    fontStyle: 'normal',
+    fontWeight: 'normal'
+  }
+},
+"#sendFeedback": {
+  top: "5dp"
+},
 "Label": {
   width: Ti.UI.SIZE,
   height: "30dp",
