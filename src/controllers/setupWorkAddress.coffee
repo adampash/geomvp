@@ -43,7 +43,7 @@ findAddress = ->
   )
 
 setPin = (formattedAddress, coords) ->
-  if $.mapview.annotations.length > 0
+  if $.mapview.annotations? and $.mapview.annotations.length > 0
     $.mapview.removeAnnotation($.mapview.annotations[0].title)
   $.mapview.region =
     latitude: coords.latitude
@@ -75,9 +75,13 @@ focusAddress = ->
   $.workAddress.focus()
 
 
-$.setupWorkAddress.addEventListener 'open', ->
+$.setupWorkAddress.addEventListener 'postlayout', ->
   workLocation = Ti.App.Properties.getObject('workLocation')
   if workLocation?
     setPin(workLocation.address, workLocation)
-  # else
-  # focusAddress()
+    $.searchForAddress.hide()
+    $.mapContainer.show()
+  else
+    $.searchForAddress.show()
+    $.mapContainer.hide()
+

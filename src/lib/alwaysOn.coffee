@@ -2,11 +2,12 @@ geofenceHandlers = require 'geofenceHandlers'
 
 AlwaysOn =
   setupGeofence: ->
+    Ti.API.debug "AlwaysOn: setupGeofence"
     workLocation = Ti.App.Properties.getObject('workLocation')
     if OS_IOS
       if workLocation?
-        geofence = require 'geofence'
-        geofence.setup [
+        geofence = Alloy.Globals.geofence || require 'geofence'
+        Alloy.Globals.activeFence = geofence.setup [
           "title" : "Work"
           "latitude" : workLocation.latitude
           "longitude" : workLocation.longitude

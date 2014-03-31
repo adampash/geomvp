@@ -1,6 +1,17 @@
-var args;
+var args, completeSetup, startOver;
 
 args = arguments[0] || {};
+
+completeSetup = function() {
+  var index;
+  index = Alloy.createController('index').getView();
+  index.open();
+  return $.setup.close();
+};
+
+startOver = function() {
+  return $.scrollableView.scrollToView(2);
+};
 
 $.setup.addEventListener('open', function(e) {
   var control, numPages, pager, pagerControl, _i, _len, _results;
@@ -16,27 +27,43 @@ $.setup.addEventListener('open', function(e) {
 });
 
 $.setup.addEventListener('scrollend', function(e) {
-  if (e.currentPage === 1) {
+  var activeView, currentPage, helper, message, name, pushMessage, time;
+  currentPage = e.currentPage;
+  Ti.API.debug($.pagingControl.children[currentPage]);
+  $.pagingControl.children[currentPage].setOpacity(1.0);
+  activeView = $.scrollableView.getViews()[currentPage];
+  Ti.API.debug(activeView.id);
+  if (activeView.id === "setupWorkAddress") {
     Ti.API.info('focus work address');
-    return setTimeout(function() {
-      var input;
-      input = Alloy.createController('setupWorkAddress').getView('workAddress');
-      Ti.API.debug(input);
-      return input.focus();
-    }, 300);
+    if (Ti.App.Properties.getObject('workLocation') == null) {
+      activeView.children[0].children[1].focus();
+    }
+  }
+  if (activeView.id === "chooseContact") {
+    helper = require('helper');
+    Ti.API.debug("Need to update text");
+    Ti.API.debug(activeView.children[0].children);
+    pushMessage = helper.findById(activeView.children[0], 'pushMessage');
+    message = helper.findById(activeView.children[0], 'message');
+    time = Ti.App.Properties.getString('departureTime');
+    message.text = message.text.replace("{tk}", time);
+    name = Parse.User.current().get("name").split(" ")[0];
+    return pushMessage.text = pushMessage.text.replace("{tk}", name + " just left work!");
   }
 });
 
 $.setup.addEventListener('scroll', function(e) {
   var currentPage, currentPageAsFloat, opacity, views;
-  currentPageAsFloat = e.currentPageAsFloat;
-  currentPage = Math.floor(e.currentPageAsFloat);
-  views = $.pagingControl.children;
-  opacity = currentPageAsFloat - currentPage;
-  if (opacity < 0.1) {
-    opacity = 0.1;
+  currentPageAsFloat = e.currentPageAsFloat + 1;
+  currentPage = Math.floor(e.currentPageAsFloat + 1);
+  if (currentPage < $.pagingControl.children.length) {
+    views = $.pagingControl.children;
+    opacity = currentPageAsFloat - currentPage;
+    if (opacity < 0.1) {
+      opacity = 0.1;
+    }
+    return views[currentPage].setOpacity(opacity);
   }
-  return views[currentPage].setOpacity(opacity);
 });
 
 //# sourceMappingURL=setup.js.map

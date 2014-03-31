@@ -4,7 +4,6 @@ geofence = require('geofence');
 
 AppStates = {
   setup: function() {
-    Ti.API.info('Registering background service');
     Ti.App.addEventListener('pause', function() {
       return Ti.API.info('app is pause');
     });

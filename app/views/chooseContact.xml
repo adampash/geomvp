@@ -1,11 +1,11 @@
 <Alloy>
   <View id="chooseContact" class="container">
     <View id="confirm">
-      <Label>Great!</Label>
-      <Label id="message">When you leave work around {tk}, we'll send this:</Label>
-      <Label>{Message tk}</Label>
+      <Label class="heder">Great!</Label>
+      <Label id="message" class="details">If you leave work around {tk} or later, we'll send this:</Label>
+      <Label id="pushMessage" class="details">{tk}</Label>
       <Button id="contactPicker" onClick="launchContactPicker" >
-        Choose who we send it to
+        Who should we send it to?
       </Button>
     </View>
   </View>

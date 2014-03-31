@@ -56,7 +56,7 @@ findAddress = function() {
 
 setPin = function(formattedAddress, coords) {
   var workLocation;
-  if ($.mapview.annotations.length > 0) {
+  if (($.mapview.annotations != null) && $.mapview.annotations.length > 0) {
     $.mapview.removeAnnotation($.mapview.annotations[0].title);
   }
   $.mapview.region = {
@@ -91,11 +91,16 @@ focusAddress = function() {
   return $.workAddress.focus();
 };
 
-$.setupWorkAddress.addEventListener('open', function() {
+$.setupWorkAddress.addEventListener('postlayout', function() {
   var workLocation;
   workLocation = Ti.App.Properties.getObject('workLocation');
   if (workLocation != null) {
-    return setPin(workLocation.address, workLocation);
+    setPin(workLocation.address, workLocation);
+    $.searchForAddress.hide();
+    return $.mapContainer.show();
+  } else {
+    $.searchForAddress.show();
+    return $.mapContainer.hide();
   }
 });
 

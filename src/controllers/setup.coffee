@@ -1,10 +1,12 @@
 args = arguments[0] || {}
 
+completeSetup = ->
+  index = Alloy.createController('index').getView()
+  index.open()
+  $.setup.close()
 
-# setPicker = ->
-#   $.picker.setSelectedRow 0, setRows.hour, true
-#   $.picker.setSelectedRow 1, setRows.minute, true
-#   $.picker.setSelectedRow 2, setRows.meridian, true
+startOver = ->
+  $.scrollableView.scrollToView 2
 
 $.setup.addEventListener 'open', (e) ->
   numPages = $.scrollableView.getViews().length
@@ -16,24 +18,38 @@ $.setup.addEventListener 'open', (e) ->
     $.pagingControl.add(control)
 
 $.setup.addEventListener 'scrollend', (e) ->
-  if e.currentPage is 1
-    Ti.API.info 'focus work address'
+  currentPage = e.currentPage
 
-    setTimeout ->
-      input = Alloy.createController('setupWorkAddress').getView('workAddress')
-      Ti.API.debug input
-      input.focus()
-    , 300
-  # if e.currentPage is 3
-    # leaveWork = Alloy.createController('leaveWorkAt')
-    # Ti.API.info "set picker"
-    # Ti.API.info leaveWork.init()
+  Ti.API.debug $.pagingControl.children[currentPage]
+  $.pagingControl.children[currentPage].setOpacity(1.0)
+
+  activeView = $.scrollableView.getViews()[currentPage]
+  Ti.API.debug activeView.id
+
+  if activeView.id is "setupWorkAddress"
+    Ti.API.info 'focus work address'
+    unless Ti.App.Properties.getObject('workLocation')?
+      activeView.children[0].children[1].focus()
+
+  if activeView.id is "chooseContact"
+    helper = require 'helper'
+    Ti.API.debug "Need to update text"
+    Ti.API.debug activeView.children[0].children
+    pushMessage = helper.findById activeView.children[0], 'pushMessage'
+    message = helper.findById activeView.children[0], 'message'
+
+    time = Ti.App.Properties.getString('departureTime')
+    message.text = message.text.replace("{tk}", time)
+
+    name = Parse.User.current().get("name").split(" ")[0]
+    pushMessage.text = pushMessage.text.replace("{tk}", name + " just left work!")
 
 
 $.setup.addEventListener 'scroll', (e) ->
-  currentPageAsFloat = e.currentPageAsFloat
-  currentPage = Math.floor e.currentPageAsFloat
-  views = $.pagingControl.children
-  opacity = currentPageAsFloat - currentPage
-  opacity = 0.1 if opacity < 0.1
-  views[currentPage].setOpacity(opacity)
+  currentPageAsFloat = e.currentPageAsFloat + 1
+  currentPage = Math.floor e.currentPageAsFloat + 1
+  if currentPage < $.pagingControl.children.length
+    views = $.pagingControl.children
+    opacity = currentPageAsFloat - currentPage
+    opacity = 0.1 if opacity < 0.1
+    views[currentPage].setOpacity(opacity)

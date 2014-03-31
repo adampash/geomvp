@@ -5,11 +5,12 @@ geofenceHandlers = require('geofenceHandlers');
 AlwaysOn = {
   setupGeofence: function() {
     var geofence, workLocation;
+    Ti.API.debug("AlwaysOn: setupGeofence");
     workLocation = Ti.App.Properties.getObject('workLocation');
     if (OS_IOS) {
       if (workLocation != null) {
-        geofence = require('geofence');
-        return geofence.setup([
+        geofence = Alloy.Globals.geofence || require('geofence');
+        return Alloy.Globals.activeFence = geofence.setup([
           {
             "title": "Work",
             "latitude": workLocation.latitude,

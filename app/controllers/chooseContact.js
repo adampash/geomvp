@@ -1,4 +1,4 @@
-var addressBookDisallowed, args, completeSetup, contactError, init, launchContactPicker, performAddressBookFunction, setContact,
+var addressBookDisallowed, args, completeSetup, contactError, launchContactPicker, launchNextStep, performAddressBookFunction, setContact,
   __hasProp = {}.hasOwnProperty;
 
 args = arguments[0] || {};
@@ -84,21 +84,15 @@ addressBookDisallowed = function() {
   return Ti.API.info('bad stuff');
 };
 
+launchNextStep = function() {
+  var scrollableView;
+  scrollableView = $.chooseContact.getParent();
+  return scrollableView.scrollToView(scrollableView.currentPage + 1);
+};
+
 completeSetup = function() {
-  var index, setupView;
-  Ti.App.Properties.setBool('setupComplete', true);
-  index = Alloy.createController('index').getView();
-  index.open();
-  setupView = $.chooseContact.getParent().getParent();
-  return setupView.close();
+  launchNextStep();
+  return Ti.App.Properties.setBool('setupComplete', true);
 };
-
-init = function() {
-  var time;
-  time = Ti.App.Properties.getString('departureTime');
-  return $.message.text = $.message.text.replace("{tk}", time);
-};
-
-init();
 
 //# sourceMappingURL=chooseContact.js.map

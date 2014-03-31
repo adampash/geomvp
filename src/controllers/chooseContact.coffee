@@ -67,16 +67,26 @@ contactError = (error) ->
 addressBookDisallowed = () ->
   Ti.API.info 'bad stuff'
 
+launchNextStep = ->
+  scrollableView = $.chooseContact.getParent()
+  scrollableView.scrollToView scrollableView.currentPage + 1
+
 completeSetup = ->
+  launchNextStep()
   Ti.App.Properties.setBool('setupComplete', true)
-  index = Alloy.createController('index').getView()
-  index.open()
+  # index = Alloy.createController('index').getView()
+  # index.open()
 
-  setupView = $.chooseContact.getParent().getParent()
-  setupView.close()
+  # setupView = $.chooseContact.getParent().getParent()
+  # setupView.close()
 
-init = ->
-  time = Ti.App.Properties.getString('departureTime')
-  $.message.text = $.message.text.replace("{tk}", time)
-
-init()
+# init = ->
+#   if Ti.App.Properties.getString('departureTime')?
+#     time = Ti.App.Properties.getString('departureTime')
+#     $.message.text = $.message.text.replace("{tk}", time)
+# 
+#   if Parse.User.current()?
+#     name = Parse.User.current().get("name").split(" ")[0]
+#     $.pushMessage.text = $.pushMessage.text.replace("{Message tk}", name + " just left work!")
+# 
+# init()

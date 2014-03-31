@@ -13,7 +13,10 @@ testSinglePush = ->
 
 startOver = ->
   Parse.User.logOut()
-  Ti.App.Properties.setBool('setupComplete', false)
+  Ti.App.Properties.setBool('setupComplete', null)
+  Ti.App.Properties.setObject('workLocation', null)
+  Ti.App.Properties.setString('departureTime', null)
+  Ti.App.Properties.setString('contactRecordId', null)
   init()
 
 openLogin = ->
@@ -72,6 +75,9 @@ init = ->
 
       $.index.open()
 
+      if Alloy.Globals.activeFence?
+        Alloy.Globals.activeFence.stopGeoFencing()
+        Alloy.Globals.activeFence = null
       alwaysOn = require 'alwaysOn'
       alwaysOn.setupGeofence()
       if OS_IOS

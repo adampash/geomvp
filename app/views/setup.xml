@@ -8,6 +8,14 @@
       <Require type="view" src="setupWorkAddress" />
       <Require type="view" src="leaveWorkAt" />
       <Require type="view" src="chooseContact" />
+      <View id="complete" class="container">
+        <Label class="header">Hooray!</Label>
+        <Label class="details">
+          Next time you leave work at the end of your day, the magic will happen.
+        </Label>
+        <Button onClick="completeSetup">Sounds good!</Button>
+        <Button onClick="startOver">Edit my settings</Button>
+      </View>
     </ScrollableView>
   </Window>
 </Alloy>

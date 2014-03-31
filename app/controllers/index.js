@@ -20,7 +20,10 @@ testSinglePush = function() {
 
 startOver = function() {
   Parse.User.logOut();
-  Ti.App.Properties.setBool('setupComplete', false);
+  Ti.App.Properties.setBool('setupComplete', null);
+  Ti.App.Properties.setObject('workLocation', null);
+  Ti.App.Properties.setString('departureTime', null);
+  Ti.App.Properties.setString('contactRecordId', null);
   return init();
 };
 
@@ -81,6 +84,10 @@ init = function() {
         $.contact.text = "we'll send " + name + " a push notification";
       }
       $.index.open();
+      if (Alloy.Globals.activeFence != null) {
+        Alloy.Globals.activeFence.stopGeoFencing();
+        Alloy.Globals.activeFence = null;
+      }
       alwaysOn = require('alwaysOn');
       alwaysOn.setupGeofence();
       if (OS_IOS) {
