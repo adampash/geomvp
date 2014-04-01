@@ -47,20 +47,48 @@ Parse.Cloud.define("connectUsers", function(request, response) {
 
 Parse.Cloud.define("leftWorkPush", function(request, response) {
 
-  LeftFence = Parse.Object.extend("LeftFence");
-  leftFence = new LeftFence();
-  leftFence.set(request.params);
-  leftFence.set("parent", Parse.User.current());
-  leftFence.save();
+  if (!request.params.secondTry) {
+    var LeftFence = Parse.Object.extend("LeftFence");
+    var leftFence = new LeftFence();
+    leftFence.set(request.params);
+    leftFence.set("parent", Parse.User.current());
+    leftFence.save();
+  }
 
   if (request.params.identifier === "Work") {
-    user = request.user
-    objectId = user.id
+    var user = request.user
+    var objectId = user.id
 
-    var query = new Parse.Query("ConnectedUsers");
-    query.equalTo("parent", user);
+    var timeQuery = new Parse.Query("LeaveWindow");
+    timeQuery.equalTo("parent", user);
 
-    query.find().then(function(connectedUsers) {
+    timeQuery.find().then(function (leaveWindows) {
+      var leaveWindow = leaveWindows[0];
+      var utcTime = leaveWindow.get("utcTime");
+
+      var targetDate = new Date()
+      targetDate.setUTCHours(utcTime.hour);
+      targetDate.setUTCMinutes(utcTime.minute);
+      var currentDate = new Date();
+      var timeDiffInMinutes = (currentDate.getTime() - targetDate.getTime())/1000/60;
+
+      console.log("Time diff in minutes:");
+      console.log(timeDiffInMinutes);
+
+      if (timeDiffInMinutes > -180 && timeDiffInMinutes < 30) {
+        var query = new Parse.Query("ConnectedUsers");
+        query.equalTo("parent", user);
+
+        return query.find();
+      }
+      else {
+        console.log("Too soon to send notification");
+        console.log(utcTime, new Date().getUTCHours());
+        var failed = new Parse.Promise();
+        failed.reject("It's not time to send a left-work notification");
+        return failed;
+      }
+    }).then(function(connectedUsers) {
       if (connectedUsers.length === 0 && !request.params.secondTry) {
         request.params.thenPush = true
         Parse.Cloud.run("connectUsers", request.params,
@@ -73,7 +101,9 @@ Parse.Cloud.define("leftWorkPush", function(request, response) {
             }
           }
         );
-        return false;
+        var failed = new Parse.Promise();
+        failed.reject("There was no connected user to push to");
+        return failed;
       }
       else {
         user2 = connectedUsers[0].get("connectedUser");
@@ -108,23 +138,21 @@ Parse.Cloud.define("leftWorkPush", function(request, response) {
           fenceId: request.params.identifier,
           device: request.params.device
         });
-        response.success();
+        response.success("Sent a beacon");
       }
       else {
         response.error("no user2 to send to");
       }
     }, function(error) {
-      // This error handler WILL be called. error will be "There was an error.".
-      // Let's handle the error by returning a new promise.
-      return response.error("something went wrong");
+      return response.error("Broke out of chain: " + error);
     });
   }
   else {
-    Parse.Analytics.track('exit', {
-      fenceId: request.params.identifier,
-      device: request.params.device
-    });
-    response.success();
+  //   Parse.Analytics.track('exit', {
+  //     fenceId: request.params.identifier,
+  //     device: request.params.device
+  //   });
+    response.success("Left: " + request.params.identifier);
   }
 
 });
@@ -166,8 +194,8 @@ Parse.Cloud.define("sendSMS", function(request, response) {
 });
 
 Parse.Cloud.define("enteredFence", function(request, response) {
-  EnteredFence = Parse.Object.extend("EnteredFence");
-  enteredFence = new EnteredFence();
+  var EnteredFence = Parse.Object.extend("EnteredFence");
+  var enteredFence = new EnteredFence();
   enteredFence.set(request.params);
   enteredFence.set("parent", Parse.User.current());
   enteredFence.save();
