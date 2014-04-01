@@ -93,11 +93,12 @@ Parse.Cloud.define("leftWorkPush", function(request, response) {
         var query = new Parse.Query("ConnectedUsers");
         query.equalTo("parent", user);
 
+        request.params.minutesToWindow = timeDiffInMinutes;
+
         return query.find();
       }
       else {
         console.log("Too soon to send notification");
-        console.log(utcTime, new Date().getUTCHours());
         var failed = new Parse.Promise();
         failed.reject("It's not time to send a left-work notification");
         return failed;

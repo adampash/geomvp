@@ -15,6 +15,7 @@
       </TextArea>
       <Button id="sendFeedback" onClick="sendFeedback">Send feedback</Button>
       <Button onClick="startOver">Start over</Button>
+      <!-- <Button onClick="testSinglePush">Test push</Button> -->
     </View>
   </Window>
 </Alloy>
