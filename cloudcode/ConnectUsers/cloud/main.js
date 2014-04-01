@@ -55,7 +55,6 @@ Parse.Cloud.define("leftWorkPush", function(request, response) {
 
     query.find().then(function(connectedUsers) {
       if (connectedUsers.length === 0 && !request.params.secondTry) {
-        // Parse.Cloud.run("sendSMS", user);
         request.params.thenPush = true
         Parse.Cloud.run("connectUsers", request.params,
           {
@@ -157,4 +156,21 @@ Parse.Cloud.define("sendSMS", function(request, response) {
       );
     });
   }
+});
+
+Parse.Cloud.define("testapush", function(request, response) {
+  user = request.user
+  objectId = user.id
+
+  Parse.Push.send(
+    {
+      channels: [objectId],
+      data: {
+        alert: "This is only a test",
+        badge: 0,
+        sound: ""
+      }
+    });
+
+  response.success();
 });

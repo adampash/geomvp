@@ -3,6 +3,7 @@ Parse = require('tiparse')(
   applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K'
   javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
 )
+geofence = require 'geofenceWrapper'
 
 sendFeedback = ->
   feedbackText = $.feedback.value
@@ -23,11 +24,12 @@ sendFeedback = ->
       alert "Sorry, had trouble saving your feedback"
 
 testSinglePush = ->
-  Parse.Cloud.run 'testpush', {},
+  Parse.Cloud.run 'testapush', {},
     success: (res) ->
       alert 'it worked'
     error: (err) ->
       alert 'it did not work'
+      Ti.API.info JSON.stringify err
 
 startOver = ->
   Parse.User.logOut()
@@ -46,6 +48,7 @@ launchSetup = ->
   Ti.API.info "Launch setup"
   setup = Alloy.createController('setup').getView()
   setup.open()
+  $.index.close()
 
 setPin = (formattedAddress, coords) ->
   $.mapview.region =
@@ -67,6 +70,11 @@ setPin = (formattedAddress, coords) ->
   $.mapview.annotations[0].fireEvent 'click'
 
 
+$.index.addEventListener 'close', (e) ->
+  Ti.API.info 'stop geofencing'
+  geofence.stopGeoFencing()
+
+
 # If user isn't logged in, prompt user
 # If setup isn't complete, launch setup
 # Otherwise, show index
@@ -76,28 +84,11 @@ init = ->
     Ti.API.info "User is currently logged in: " + currentUser.id
     if Ti.App.Properties.getBool('setupComplete')
       Ti.API.info "Setup is complete"
-      # workLocation = Ti.App.Properties.getObject('workLocation')
-
-      # if workLocation?
-      #   Ti.API.info 'also draw radius now?'
-      #   setPin(workLocation.address, workLocation)
-
-      # contactRecordId = Ti.App.Properties.getString('contactRecordId')
-      # contact = Ti.Contacts.getPersonByID(parseInt(contactRecordId,10))
-
-      # if contact?
-      #   Ti.API.info JSON.stringify contact
-      #   name = contact.firstName
-      #   name = contact.fullName.split(' ')[0] unless name?
-      #   $.contact.text = "we'll send " + name + " a push notification"
 
       $.index.open()
 
-      if Alloy.Globals.activeFence?
-        Alloy.Globals.activeFence.stopGeoFencing()
-        Alloy.Globals.activeFence = null
       alwaysOn = require 'alwaysOn'
-      alwaysOn.setupGeofence()
+      alwaysOn.setupGeofence(geofence)
       if OS_IOS
         appStates = require 'appStates'
         appStates.setup()
@@ -106,6 +97,5 @@ init = ->
       launchSetup()
   else
     launchSetup()
-    # openLogin()
 
 init()

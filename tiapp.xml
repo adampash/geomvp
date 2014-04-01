@@ -86,7 +86,6 @@
         <module platform="android">ti.map</module>
         <module platform="iphone">ti.map</module>
         <module platform="iphone">ci.geofencing</module>
-        <module platform="iphone">ti.testflight</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>

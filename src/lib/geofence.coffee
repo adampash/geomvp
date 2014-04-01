@@ -1,7 +1,5 @@
-geofence = Alloy.Globals.ci_geofencing || require 'ci.geofencing'
-
 Geofence =
-  setup: (regionArray, callbacks) ->
+  setup: (regionArray, callbacks, geofence) ->
     callbacks = callbacks || {}
 
     if OS_IOS
@@ -9,13 +7,13 @@ Geofence =
       Ti.API.info("module is =&gt; " + geofence)
 
       geofence.startGeoFencing(regionArray, (event) ->
-        Ti.API.info('info ' + JSON.stringify(event, null, 2))
+        # Ti.API.info('info ' + JSON.stringify(event, null, 2))
 
         if event.type is "entered_region"
           callbacks.onenter(event) if callbacks.onenter?
 
         if event.type is "monitoring_region"
-          Ti.API.info 'monitoring a region'
+          Ti.API.info 'monitoring a region ' + event.identifier
 
         if event.type is "exited_region"
           Ti.API.info 'exit event'

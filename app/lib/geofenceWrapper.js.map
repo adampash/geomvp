@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "geofenceWrapper.js",
+  "sourceRoot": "../../src/lib/",
+  "sources": [
+    "geofenceWrapper.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA,IAAA,eAAA;;AAAA,eAAA,GAAkB,OAAA,CAAQ,eAAR,CAAlB,CAAA;;AAAA,MAEM,CAAC,OAAP,GAAiB,eAFjB,CAAA"
+}

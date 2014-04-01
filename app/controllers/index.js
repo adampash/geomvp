@@ -1,4 +1,4 @@
-var Parse, ParsePush, init, launchSetup, openLogin, sendFeedback, setPin, startOver, testSinglePush;
+var Parse, ParsePush, geofence, init, launchSetup, openLogin, sendFeedback, setPin, startOver, testSinglePush;
 
 ParsePush = require('parsePush');
 
@@ -6,6 +6,8 @@ Parse = require('tiparse')({
   applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
   javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
 });
+
+geofence = require('geofenceWrapper');
 
 sendFeedback = function() {
   var Feedback, feedback, feedbackText;
@@ -28,12 +30,13 @@ sendFeedback = function() {
 };
 
 testSinglePush = function() {
-  return Parse.Cloud.run('testpush', {}, {
+  return Parse.Cloud.run('testapush', {}, {
     success: function(res) {
       return alert('it worked');
     },
     error: function(err) {
-      return alert('it did not work');
+      alert('it did not work');
+      return Ti.API.info(JSON.stringify(err));
     }
   });
 };
@@ -58,7 +61,8 @@ launchSetup = function() {
   var setup;
   Ti.API.info("Launch setup");
   setup = Alloy.createController('setup').getView();
-  return setup.open();
+  setup.open();
+  return $.index.close();
 };
 
 setPin = function(formattedAddress, coords) {
@@ -81,6 +85,11 @@ setPin = function(formattedAddress, coords) {
   return $.mapview.annotations[0].fireEvent('click');
 };
 
+$.index.addEventListener('close', function(e) {
+  Ti.API.info('stop geofencing');
+  return geofence.stopGeoFencing();
+});
+
 init = function() {
   var alwaysOn, appStates, currentUser;
   currentUser = Parse.User.current();
@@ -89,12 +98,8 @@ init = function() {
     if (Ti.App.Properties.getBool('setupComplete')) {
       Ti.API.info("Setup is complete");
       $.index.open();
-      if (Alloy.Globals.activeFence != null) {
-        Alloy.Globals.activeFence.stopGeoFencing();
-        Alloy.Globals.activeFence = null;
-      }
       alwaysOn = require('alwaysOn');
-      alwaysOn.setupGeofence();
+      alwaysOn.setupGeofence(geofence);
       if (OS_IOS) {
         appStates = require('appStates');
         return appStates.setup();

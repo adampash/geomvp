@@ -3,7 +3,7 @@ var AlwaysOn, geofenceHandlers;
 geofenceHandlers = require('geofenceHandlers');
 
 AlwaysOn = {
-  setupGeofence: function() {
+  setupGeofence: function(fenceModule) {
     var geofence, workLocation;
     Ti.API.debug("AlwaysOn: setupGeofence");
     workLocation = Ti.App.Properties.getObject('workLocation');
@@ -47,7 +47,7 @@ AlwaysOn = {
             "longitude": workLocation.longitude,
             "radius": 250
           }
-        ], geofenceHandlers);
+        ], geofenceHandlers, fenceModule);
       }
     }
   }

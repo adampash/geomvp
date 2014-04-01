@@ -1,22 +1,19 @@
-var Geofence, geofence;
-
-geofence = Alloy.Globals.ci_geofencing || require('ci.geofencing');
+var Geofence;
 
 Geofence = {
-  setup: function(regionArray, callbacks) {
+  setup: function(regionArray, callbacks, geofence) {
     callbacks = callbacks || {};
     if (OS_IOS) {
       geofence.stopGeoFencing();
       Ti.API.info("module is =&gt; " + geofence);
       geofence.startGeoFencing(regionArray, function(event) {
-        Ti.API.info('info ' + JSON.stringify(event, null, 2));
         if (event.type === "entered_region") {
           if (callbacks.onenter != null) {
             callbacks.onenter(event);
           }
         }
         if (event.type === "monitoring_region") {
-          Ti.API.info('monitoring a region');
+          Ti.API.info('monitoring a region ' + event.identifier);
         }
         if (event.type === "exited_region") {
           Ti.API.info('exit event');

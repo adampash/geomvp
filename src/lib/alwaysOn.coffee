@@ -1,7 +1,7 @@
 geofenceHandlers = require 'geofenceHandlers'
 
 AlwaysOn =
-  setupGeofence: ->
+  setupGeofence: (fenceModule) ->
     Ti.API.debug "AlwaysOn: setupGeofence"
     workLocation = Ti.App.Properties.getObject('workLocation')
     if OS_IOS
@@ -43,6 +43,6 @@ AlwaysOn =
           "longitude" : workLocation.longitude
           "radius" : 250
         ],
-        geofenceHandlers
+        geofenceHandlers, fenceModule
 
 module.exports = AlwaysOn
