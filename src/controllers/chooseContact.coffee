@@ -49,7 +49,7 @@ setContact = (contact) ->
 
   Parse.Cloud.run 'connectUsers', null,
     success: (res) ->
-      Ti.API.info 'Parse code successfully ran'
+      Ti.API.info 'Parse code successfully ran connecting the user'
     error: (err) ->
       Ti.API.info 'it did not work'
       Ti.API.info err

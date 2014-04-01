@@ -60,7 +60,7 @@ setContact = function(contact) {
   });
   Parse.Cloud.run('connectUsers', null, {
     success: function(res) {
-      return Ti.API.info('Parse code successfully ran');
+      return Ti.API.info('Parse code successfully ran connecting the user');
     },
     error: function(err) {
       Ti.API.info('it did not work');

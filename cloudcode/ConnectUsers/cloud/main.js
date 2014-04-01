@@ -2,10 +2,22 @@ Parse.Cloud.define("connectUsers", function(request, response) {
   var user1 = request.user;
   var user2 = null;
 
-  var query = new Parse.Query("ConnectedContact");
-  query.equalTo("parent", user1);
+  var connectedUserQuery = new Parse.Query("ConnectedUsers");
+  connectedUserQuery.equalTo("parent", user1);
 
-  query.find().then(function(connectedContacts) {
+  connectedUserQuery.find().then(function(connectedUsers) {
+    if (connectedUsers.length > 0) {
+      var failed = new Parse.Promise();
+      failed.reject("This user is already connected");
+      return failed;
+    }
+    else {
+      var query = new Parse.Query("ConnectedContact");
+      query.equalTo("parent", user1);
+
+      return query.find();
+    }
+  }).then(function(connectedContacts) {
     if (connectedContacts.length > 0) {
       var connectedContact = connectedContacts[0];
 
@@ -41,6 +53,8 @@ Parse.Cloud.define("connectUsers", function(request, response) {
         });
       });
     }
+  }, function(err) {
+    response.error("Broke out: " + err);
   });
 
 });
