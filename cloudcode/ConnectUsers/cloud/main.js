@@ -70,7 +70,7 @@ Parse.Cloud.define("leftWorkPush", function(request, response) {
       targetDate.setUTCHours(utcTime.hour);
       targetDate.setUTCMinutes(utcTime.minute);
       var currentDate = new Date();
-      var timeDiffInMinutes = (currentDate.getTime() - targetDate.getTime())/1000/60;
+      var timeDiffInMinutes = (targetDate.getTime() - currentDate.getTime())/1000/60;
 
       console.log("Time diff in minutes:");
       console.log(timeDiffInMinutes);
