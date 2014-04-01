@@ -8,10 +8,11 @@ setLocation = function(location) {
   var coords;
   Ti.API.info("Set location");
   coords = location.coords;
-  return Alloy.Globals.location = {
+  Alloy.Globals.location = {
     latitude: coords.latitude,
     longitude: coords.longitude
   };
+  return Ti.Geolocation.removeEventListener("location", setLocation);
 };
 
 searchAgain = function() {

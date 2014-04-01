@@ -7,6 +7,7 @@ setLocation = (location) ->
   Alloy.Globals.location =
     latitude: coords.latitude
     longitude: coords.longitude
+  Ti.Geolocation.removeEventListener("location", setLocation)
 
 searchAgain = ->
   $.searchForAddress.show()

@@ -46,6 +46,13 @@ Parse.Cloud.define("connectUsers", function(request, response) {
 });
 
 Parse.Cloud.define("leftWorkPush", function(request, response) {
+
+  LeftFence = Parse.Object.extend("LeftFence");
+  leftFence = new LeftFence();
+  leftFence.set(request.params);
+  leftFence.set("parent", Parse.User.current());
+  leftFence.save();
+
   if (request.params.identifier === "Work") {
     user = request.user
     objectId = user.id
@@ -156,6 +163,20 @@ Parse.Cloud.define("sendSMS", function(request, response) {
       );
     });
   }
+});
+
+Parse.Cloud.define("enteredFence", function(request, response) {
+  EnteredFence = Parse.Object.extend("EnteredFence");
+  enteredFence = new EnteredFence();
+  enteredFence.set(request.params);
+  enteredFence.set("parent", Parse.User.current());
+  enteredFence.save();
+
+  response.success();
+
+    // Analytics.track 'entered',
+    //   fenceId: e.identifier
+    //   device: Ti.Platform.model
 });
 
 Parse.Cloud.define("testapush", function(request, response) {

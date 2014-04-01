@@ -18,19 +18,33 @@ debugNotification = (type, e) ->
 GeofenceHandlers =
   onexit: (e) ->
     Ti.API.info 'Elvis has left the building'
-    debugNotification('onexit', e)
     e.device = Ti.Platform.model
-    Parse.Cloud.run 'leftWorkPush', e,
-      success: (res) ->
-        Ti.API.info 'Parse code successfully ran'
-      error: (err) ->
-        Ti.API.info 'it did not work'
-        Ti.API.info err
+    Titanium.Geolocation.purpose = "Determine your location"
+    Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST
+    Ti.Geolocation.getCurrentPosition (position) ->
+      e.coords = position.coords
+      e.latitude = position.coords.latitude
+      e.longitude = position.coords.longitude
+      Parse.Cloud.run 'leftWorkPush', e,
+        success: (res) ->
+          Ti.API.info 'Parse code successfully ran'
+        error: (err) ->
+          Ti.API.info 'it did not work'
+          Ti.API.info err
   onenter: (e) ->
     Ti.API.info 'Elvis has entered the building'
-    debugNotification('onenter', e)
-    Analytics.track 'entered',
-      fenceId: e.identifier
-      device: Ti.Platform.model
+    e.device = Ti.Platform.model
+    Ti.Geolocation.purpose = "Determine your location"
+    Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST
+    Ti.Geolocation.getCurrentPosition (position) ->
+      e.coords = position.coords
+      e.latitude = position.coords.latitude
+      e.longitude = position.coords.longitude
+      Parse.Cloud.run 'enteredFence', e,
+        success: (res) ->
+          Ti.API.info 'Parse code successfully ran'
+        error: (err) ->
+          Ti.API.info 'it did not work'
+          Ti.API.info err
 
 module.exports = GeofenceHandlers

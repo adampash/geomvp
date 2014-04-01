@@ -25,24 +25,42 @@ debugNotification = function(type, e) {
 GeofenceHandlers = {
   onexit: function(e) {
     Ti.API.info('Elvis has left the building');
-    debugNotification('onexit', e);
     e.device = Ti.Platform.model;
-    return Parse.Cloud.run('leftWorkPush', e, {
-      success: function(res) {
-        return Ti.API.info('Parse code successfully ran');
-      },
-      error: function(err) {
-        Ti.API.info('it did not work');
-        return Ti.API.info(err);
-      }
+    Titanium.Geolocation.purpose = "Determine your location";
+    Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
+    return Ti.Geolocation.getCurrentPosition(function(position) {
+      e.coords = position.coords;
+      e.latitude = position.coords.latitude;
+      e.longitude = position.coords.longitude;
+      return Parse.Cloud.run('leftWorkPush', e, {
+        success: function(res) {
+          return Ti.API.info('Parse code successfully ran');
+        },
+        error: function(err) {
+          Ti.API.info('it did not work');
+          return Ti.API.info(err);
+        }
+      });
     });
   },
   onenter: function(e) {
     Ti.API.info('Elvis has entered the building');
-    debugNotification('onenter', e);
-    return Analytics.track('entered', {
-      fenceId: e.identifier,
-      device: Ti.Platform.model
+    e.device = Ti.Platform.model;
+    Ti.Geolocation.purpose = "Determine your location";
+    Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
+    return Ti.Geolocation.getCurrentPosition(function(position) {
+      e.coords = position.coords;
+      e.latitude = position.coords.latitude;
+      e.longitude = position.coords.longitude;
+      return Parse.Cloud.run('enteredFence', e, {
+        success: function(res) {
+          return Ti.API.info('Parse code successfully ran');
+        },
+        error: function(err) {
+          Ti.API.info('it did not work');
+          return Ti.API.info(err);
+        }
+      });
     });
   }
 };
