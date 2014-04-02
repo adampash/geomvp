@@ -8,6 +8,7 @@ module.exports = (grunt) ->
 
     project:
       app: 'app'
+      build: 'dist'
       assets: '<%= project.app %>/assets'
       src: 'src'
       css: [
@@ -69,6 +70,10 @@ module.exports = (grunt) ->
         files: '<%= project.assets %>/js/test.js'
         tasks: ['jshint']
 
+      builds:
+        files: 'dist/*.ipa'
+        tasks: ['testflight:iOS']
+
     sass:
       dev:
         options:
@@ -82,9 +87,20 @@ module.exports = (grunt) ->
         files:
           '<%= project.assets %>/css/style.css': '<%= project.css %>'
 
+    testflight:
+      iOS:
+        options:
+          apiToken: '68e6290c29d97ff85d9cb5c5f3c20ca6_MjAwMDg2MjAxMS0xMC0yOCAxNzo1OTo1NC4yMTAyMjc'
+          teamToken: 'e8516c3d088bd3a362fc5afbc9f16152_MzYwNjM3MjAxNC0wMy0yOSAxODozNDo0NS4zNDU2MTY'
+          file: '<%= project.build %>/OMW.ipa'
+          notes: "Automated test push"
+          distributionLists: ['Testers']
+          notify: false
+
   grunt.loadNpmTasks 'grunt-contrib-sass'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-testflight'
   # grunt.loadNpmTasks 'grunt-contrib-jshint'
   # grunt.loadNpmTasks('grunt-contrib-connect')
   # grunt.loadNpmTasks('grunt-contrib-jasmine')

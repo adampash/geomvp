@@ -3,5 +3,6 @@ TODO:
 * Add SMS/Twilio support
 
 DONE:
+x Set up testflight + ad hoc distribution
 x Save record of friend
 x Customize push notifications

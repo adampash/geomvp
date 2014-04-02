@@ -1,5 +1,5 @@
 var baseUrl = 'https://api.parse.com/1',
-  appId = Alloy.Globals.parseKeys.appKey,
+  appId = Alloy.Globals.parseKeys.appId,
   apiKey = Alloy.Globals.parseKeys.restKey; // make sure to use the REST API Key
 
 var _register = function(params, lambda, lambdaerror) {

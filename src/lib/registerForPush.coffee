@@ -33,7 +33,6 @@ PushRegistration =
       deviceToken: e.deviceToken
       channels: [Parse.User.current().id]
       appName: appConfig.name
-      # timeZone: "America/Los_Angeles"
     , @registeredWithParse
     , @errorFromParse
 
@@ -44,10 +43,11 @@ PushRegistration =
     Error = Parse.Object.extend "Error"
     error = new Error()
     error.set e
+    error.set "parent", Parse.User.current()
     error.set 'when', 'registering push notifications: registerForPush'
     error.save()
-    alert "We had trouble registering your device for push notifications. We're looking into it."
-    alert JSON.stringify e
+    # alert "We had trouble registering your device for push notifications. We're looking into it."
+    # alert JSON.stringify e
 
 
 module.exports = PushRegistration

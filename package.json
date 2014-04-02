@@ -9,6 +9,7 @@
     "grunt-contrib-livereload": "~0.1.2",
     "grunt-contrib-watch": "~0.6.0",
     "grunt-contrib-coffee": "~0.10.1",
-    "grunt-contrib-connect": "~0.7.1"
+    "grunt-contrib-connect": "~0.7.1",
+    "grunt-testflight": "~0.1.1"
   }
 }
