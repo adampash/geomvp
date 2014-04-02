@@ -39,8 +39,7 @@ PushRegistration = {
       deviceType: 'ios',
       deviceToken: e.deviceToken,
       channels: [Parse.User.current().id],
-      appName: appConfig.name,
-      timeZone: "America/Los_Angeles"
+      appName: appConfig.name
     }, this.registeredWithParse, this.errorFromParse);
   },
   registeredWithParse: function(e, status) {

@@ -33,7 +33,7 @@ PushRegistration =
       deviceToken: e.deviceToken
       channels: [Parse.User.current().id]
       appName: appConfig.name
-      timeZone: "America/Los_Angeles"
+      # timeZone: "America/Los_Angeles"
     , @registeredWithParse
     , @errorFromParse
 

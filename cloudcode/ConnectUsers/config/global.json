@@ -4,6 +4,10 @@
             "applicationId": "1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K", 
             "masterKey": "84pNHLNg5JVqJQpyexYvoOcgBqA7a2BzNbJH5k3b"
         }, 
+        "GeoMVP Ad Hoc": {
+            "applicationId": "X5sxI92oDBOT0VVAAumiG8IfPtFeF6bYzVvYxheu", 
+            "masterKey": "LXqYBtQJakChjXe0jnFrXtbRXJ86jIzBaCzcPc8p"
+        }, 
         "_default": {
             "link": "GeoMVP"
         }
