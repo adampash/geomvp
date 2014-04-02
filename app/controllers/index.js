@@ -1,10 +1,12 @@
 var Parse, ParsePush, geofence, init, launchSetup, openLogin, sendFeedback, setPin, startOver, testSinglePush;
 
+Ti.API.info("starting index.js");
+
 ParsePush = require('parsePush');
 
 Parse = require('tiparse')({
-  applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
-  javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
+  applicationId: Alloy.Globals.parseKeys.appId,
+  javascriptkey: Alloy.Globals.parseKeys.appKey
 });
 
 geofence = require('geofenceWrapper');

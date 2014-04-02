@@ -28,3 +28,18 @@ Alloy.Globals.halfWidth = Ti.UI.Size / 2
 
 Alloy.Globals.geofence = require('geofence')
 Alloy.Globals.ci_geofencing = require('ci.geofencing')
+
+
+// Set up API keys
+var config = require('config');
+if (Ti.App.deployType === "test" || Ti.App.deployType === 'development') {
+  var parseKeys = config.parseDev;
+}
+else {
+  var parseKeys = config.parseAdHoc;
+}
+
+Ti.API.info("Deploy type is: " + Ti.App.deployType);
+Ti.API.info(JSON.stringify(parseKeys));
+
+Alloy.Globals.parseKeys = parseKeys;
