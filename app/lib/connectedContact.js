@@ -1,9 +1,4 @@
-var ConnectedContact, ConnectedContactFactory, Parse;
-
-Parse = Parse || require('tiparse')({
-  applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
-  javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
-});
+var ConnectedContact, ConnectedContactFactory;
 
 ConnectedContact = Parse.Object.extend("ConnectedContact");
 

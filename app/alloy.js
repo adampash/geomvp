@@ -40,6 +40,7 @@ else {
 }
 
 Ti.API.info("Deploy type is: " + Ti.App.deployType);
+Ti.API.info(Alloy.CFG);
 Ti.API.info(JSON.stringify(parseKeys));
 
 Alloy.Globals.parseKeys = parseKeys;

@@ -1,9 +1,4 @@
-var Analytics, GeofenceHandlers, Parse, debugNotification;
-
-Parse = require('tiparse')({
-  applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
-  javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
-});
+var Analytics, GeofenceHandlers, debugNotification;
 
 Analytics = require('analytics');
 

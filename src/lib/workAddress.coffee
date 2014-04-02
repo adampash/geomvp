@@ -1,8 +1,3 @@
-Parse = Parse || require('tiparse')(
-  applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K'
-  javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
-)
-
 WorkAddress = Parse.Object.extend("WorkAddress")
 
 WorkAddressFactory =

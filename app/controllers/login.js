@@ -1,9 +1,4 @@
-var Parse, args, changeToLogin, changeToRegister, createUser, focusEmail, focusPassword, getUserCredentials, launchSetup, loginUser, registerForPush;
-
-Parse = require('tiparse')({
-  applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
-  javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
-});
+var args, changeToLogin, changeToRegister, createUser, focusEmail, focusPassword, getUserCredentials, launchSetup, loginUser, registerForPush;
 
 args = arguments[0] || {};
 

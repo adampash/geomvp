@@ -1,9 +1,4 @@
-var Parse, WorkAddress, WorkAddressFactory;
-
-Parse = Parse || require('tiparse')({
-  applicationId: '1oZOjHVjsgSksvkBQvoSKBdSrpEXCpz4FTUn7R9K',
-  javascriptkey: '4bQEME68IFKo8NCaFN4UCyBzFFeehwiZnjD1lf6v'
-});
+var WorkAddress, WorkAddressFactory;
 
 WorkAddress = Parse.Object.extend("WorkAddress");
 
