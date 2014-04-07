@@ -89,7 +89,7 @@ Parse.Cloud.define("leftWorkPush", function(request, response) {
       console.log("Time diff in minutes:");
       console.log(timeDiffInMinutes);
 
-      if (timeDiffInMinutes > -180 && timeDiffInMinutes < 30) {
+      if (timeDiffInMinutes > -240 && timeDiffInMinutes < 30) {
         var query = new Parse.Query("ConnectedUsers");
         query.equalTo("parent", user);
 
