@@ -59,13 +59,38 @@ Parse.Cloud.define("connectUsers", function(request, response) {
 
 });
 
+
+convertToRadian = function(num) {
+  return num * Math.PI / 180;
+};
+
+calculateDistance = function(a, b) {
+  var R = 6371000; // meters
+  var dLat = convertToRadian(b.latitude-a.latitude);
+  var dLon = convertToRadian(b.longitude-a.longitude);
+  var lat1 = convertToRadian(a.latitude);
+  var lat2 = convertToRadian(b.latitude);
+
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  var d = R * c;
+  return Math.round(d);
+};
+
 Parse.Cloud.define("leftWorkPush", function(request, response) {
 
   if (!request.params.secondTry) {
     var LeftFence = Parse.Object.extend("LeftFence");
     var leftFence = new LeftFence();
+
     leftFence.set(request.params);
     leftFence.set("parent", Parse.User.current());
+
+    // calculate distance from fence center
+    var distanceFromCenter = calculateDistance(request.params.coords, request.params.workCoords);
+    leftFence.set("distanceFromCenter", distanceFromCenter);
+
     leftFence.save();
   }
 

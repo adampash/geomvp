@@ -14,6 +14,7 @@ debugNotification = (type, e) ->
 GeofenceHandlers =
   onexit: (e) ->
     Ti.API.info 'Elvis has left the building'
+    Ti.API.info e
     e.device = Ti.Platform.model
     Titanium.Geolocation.purpose = "Determine your location"
     Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST
@@ -21,6 +22,7 @@ GeofenceHandlers =
       e.coords = position.coords
       e.latitude = position.coords.latitude
       e.longitude = position.coords.longitude
+      e.workCoords = Ti.App.Properties.getObject('workLocation')
       Parse.Cloud.run 'leftWorkPush', e,
         success: (res) ->
           Ti.API.info 'Parse code successfully ran'
