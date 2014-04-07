@@ -7,24 +7,7 @@
   height: "200dp"
 },
 "#completeScreen": {
-  layout: "vertical"
-},
-"#feedback": {
-  height: "180dp",
-  top: "25dp",
-  right: "30dp",
-  left: "30dp",
-  borderWidth: "1dp",
-  borderColor: "#DBDBDB",
-  font: {
-    fontFamily:'Helvetica',
-    fontSize: '16dp',
-    fontStyle: 'normal',
-    fontWeight: 'normal'
-  }
-},
-"#sendFeedback": {
-  top: "5dp"
+  layout: "absolute"
 },
 "Label": {
   width: Ti.UI.SIZE,
@@ -41,17 +24,17 @@
   bottom: 5
 },
 "#completeMessage": {
-  top: "35dp",
+  top: "235dp",
   height: Ti.UI.SIZE,
   width: Ti.UI.FILL,
   textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
 },
-"#sendFeedback": {
-  top: "10dp",
-  right: "30dp",
-  left: "30dp"
+"#actions": {
+  layout: "vertical",
+  bottom: 0,
+  height: Ti.UI.SIZE,
 },
-"#edit": {
+".recessive": {
   backgroundColor: "white",
   color: "blue",
   right: "30dp",

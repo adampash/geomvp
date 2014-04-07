@@ -8,30 +8,8 @@ Parse = require('tiparse')(
 geofence = require 'geofenceWrapper'
 
 sendFeedback = ->
-  feedbackText = $.feedback.value
-  if feedbackText is ""
-    $.feedback.focus()
-
-  else
-    Feedback = Parse.Object.extend "Feedback"
-    feedback = new Feedback()
-    feedback.set "text", feedbackText
-    feedback.set "parent", Parse.User.current()
-
-    feedback.save().then (response) ->
-      Ti.UI.createAlertDialog({
-        message: 'Thanks so much for taking the time.'
-        ok: 'OK'
-        title: 'Feedback received!'
-      }).show()
-      $.feedback.value = ''
-      $.feedback.blur()
-    , (response) ->
-      Ti.UI.createAlertDialog({
-        message: 'Sorry, we had trouble saving your feedback.'
-        ok: 'OK'
-        title: 'Feedback failed'
-      }).show()
+  feedback = Alloy.createController('feedback').getView()
+  feedback.open()
 
 testSinglePush = ->
   Parse.Cloud.run 'testapush', {},

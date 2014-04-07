@@ -12,31 +12,9 @@ Parse = require('tiparse')({
 geofence = require('geofenceWrapper');
 
 sendFeedback = function() {
-  var Feedback, feedback, feedbackText;
-  feedbackText = $.feedback.value;
-  if (feedbackText === "") {
-    return $.feedback.focus();
-  } else {
-    Feedback = Parse.Object.extend("Feedback");
-    feedback = new Feedback();
-    feedback.set("text", feedbackText);
-    feedback.set("parent", Parse.User.current());
-    return feedback.save().then(function(response) {
-      Ti.UI.createAlertDialog({
-        message: 'Thanks so much for taking the time.',
-        ok: 'OK',
-        title: 'Feedback received!'
-      }).show();
-      $.feedback.value = '';
-      return $.feedback.blur();
-    }, function(response) {
-      return Ti.UI.createAlertDialog({
-        message: 'Sorry, we had trouble saving your feedback.',
-        ok: 'OK',
-        title: 'Feedback failed'
-      }).show();
-    });
-  }
+  var feedback;
+  feedback = Alloy.createController('feedback').getView();
+  return feedback.open();
 };
 
 testSinglePush = function() {

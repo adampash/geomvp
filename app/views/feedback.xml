@@ -1,0 +1,11 @@
+<Alloy>
+  <Window class="container" modal="true" id="feedback">
+    <View class="headerBar">
+      <Label class="header">Send feedback</Label>
+      <Label class="cancel" onClick="cancel">Cancel</Label>
+    </View>
+    <TextArea id="feedbackForm" hintText="Tell us what you think!" onReturn="sendFeedback" >
+    </TextArea>
+    <!-- <Button id="sendFeedback" onClick="sendFeedback">Send feedback</Button> -->
+  </Window>
+</Alloy>

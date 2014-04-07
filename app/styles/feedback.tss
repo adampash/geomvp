@@ -1,0 +1,31 @@
+".container" : {
+  layout: "vertical",
+  height: Ti.UI.FILL
+},
+".headerBar": {
+  height: "60dp",
+  top: 0,
+  backgroundColor: "blue",
+  layout: "absolute"
+},
+".header": {
+  top: "30dp",
+  color: "white"
+},
+".cancel": {
+  right: "5dp",
+  top: "30dp",
+  font: {
+    fontSize: "14dp"
+  },
+  color: "white"
+},
+"#feedbackForm": {
+  left: "15dp",
+  right: "15dp",
+  height: "200dp",
+  font: {
+    fontSize: "16dp"
+  },
+  returnKeyType: Ti.UI.RETURNKEY_SEND
+},

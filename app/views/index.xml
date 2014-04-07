@@ -12,10 +12,10 @@
     <!-- <Button onClick="sendFeedback">Send feedback</Button> -->
     <View id="completeScreen">
       <Label class="details" id="completeMessage">The magic is happening!\nYou can now close the app.</Label>
-      <TextArea id="feedback" hintText="Tell us what you think!" >
-      </TextArea>
-      <Button id="sendFeedback" onClick="sendFeedback">Send feedback</Button>
-      <Button id="edit" onClick="startOver">Edit my settings</Button>
+      <View id="actions">
+        <Button class="recessive" id="sendFeedback" onClick="sendFeedback">Send feedback</Button>
+        <Button class="recessive" id="edit" onClick="startOver">Edit my settings</Button>
+      </View>
       <!-- <Button onClick="startOver">Start over</Button> -->
       <!-- <Button onClick="testSinglePush">Test push</Button> -->
     </View>
