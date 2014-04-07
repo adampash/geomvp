@@ -31,7 +31,7 @@
 },
 "#actions": {
   layout: "vertical",
-  bottom: "15dp",
+  bottom: "20dp",
   height: Ti.UI.SIZE,
 },
 ".recessive": {
