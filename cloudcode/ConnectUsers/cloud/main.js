@@ -174,10 +174,7 @@ Parse.Cloud.define("leftWorkPush", function(request, response) {
         beacon.set(request.params);
         beacon.set("parent", Parse.User.current());
         beacon.save();
-        Parse.Analytics.track('exit', {
-          fenceId: request.params.identifier,
-          device: request.params.device
-        });
+        Parse.Analytics.track('beacon', {});
         response.success("Sent a beacon");
       }
       else {
@@ -188,10 +185,6 @@ Parse.Cloud.define("leftWorkPush", function(request, response) {
     });
   }
   else {
-  //   Parse.Analytics.track('exit', {
-  //     fenceId: request.params.identifier,
-  //     device: request.params.device
-  //   });
     response.success("Left: " + request.params.identifier);
   }
 
