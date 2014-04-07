@@ -1,6 +1,13 @@
-var args, changeToLogin, changeToRegister, createUser, focusEmail, focusPassword, getUserCredentials, launchSetup, loginUser, registerForPush;
+var Parse, args, changeToLogin, changeToRegister, createUser, focusEmail, focusPassword, getUserCredentials, launchSetup, loginUser, register, registerForPush, registerOrLogin;
 
 args = arguments[0] || {};
+
+register = true;
+
+Parse = Parse || require('tiparse')({
+  applicationId: Alloy.Globals.parseKeys.appId,
+  javascriptkey: Alloy.Globals.parseKeys.appKey
+});
 
 launchSetup = function() {
   var scrollableView;
@@ -19,6 +26,7 @@ focusPassword = function() {
 
 createUser = function() {
   var user, userCredentials;
+  Ti.API.info('create user');
   userCredentials = getUserCredentials();
   user = new Parse.User();
   user.set('username', userCredentials.email);
@@ -44,7 +52,17 @@ createUser = function() {
   });
 };
 
+registerOrLogin = function() {
+  Ti.API.debug("register?", register);
+  if (register) {
+    return createUser();
+  } else {
+    return loginUser();
+  }
+};
+
 changeToLogin = function() {
+  register = false;
   $.name.hide();
   $.email.focus();
   $.nameLabel.hide();
@@ -53,6 +71,7 @@ changeToLogin = function() {
 };
 
 changeToRegister = function() {
+  register = true;
   $.name.show();
   $.name.focus();
   $.nameLabel.show();
@@ -62,6 +81,7 @@ changeToRegister = function() {
 
 loginUser = function() {
   var userCredentials;
+  Ti.API.info('login user');
   userCredentials = getUserCredentials();
   return Parse.User.logIn(userCredentials.email, userCredentials.password).then(function(user) {
     return registerForPush();

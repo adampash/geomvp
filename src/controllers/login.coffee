@@ -1,5 +1,12 @@
 args = arguments[0] || {}
 
+register = true
+
+Parse = Parse || require('tiparse')(
+  applicationId: Alloy.Globals.parseKeys.appId
+  javascriptkey: Alloy.Globals.parseKeys.appKey
+)
+
 launchSetup = ->
   Ti.API.info "Launch setup"
 
@@ -13,6 +20,7 @@ focusPassword = ->
 
 
 createUser = ->
+  Ti.API.info 'create user'
   userCredentials = getUserCredentials()
   user = new Parse.User()
   user.set 'username', userCredentials.email
@@ -34,7 +42,15 @@ createUser = ->
       alert "Error: " + error.code + " " + error.message
   )
 
+registerOrLogin = ->
+  Ti.API.debug "register?", register
+  if register
+    createUser()
+  else
+    loginUser()
+
 changeToLogin = ->
+  register = false
   $.name.hide()
   $.email.focus()
   $.nameLabel.hide()
@@ -42,6 +58,7 @@ changeToLogin = ->
   $.changeToRegister.show()
 
 changeToRegister = ->
+  register = true
   $.name.show()
   $.name.focus()
   $.nameLabel.show()
@@ -49,6 +66,7 @@ changeToRegister = ->
   $.changeToRegister.hide()
 
 loginUser = ->
+  Ti.API.info 'login user'
   userCredentials = getUserCredentials()
   Parse.User.logIn(
     userCredentials.email,

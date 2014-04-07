@@ -7,7 +7,7 @@
       <Label class="textfieldLabel">Email</Label>
       <TextField id="email" hintText="your.email@example.com" returnKeyType="Ti.UI.RETURNKEY_NEXT" onReturn="focusPassword" />
       <Label class="textfieldLabel">Password</Label>
-      <TextField id="password" hintText="*********" returnKeyType="Ti.UI.RETURNKEY_DONE" onReturn="loginUser" />
+      <TextField id="password" hintText="*********" returnKeyType="Ti.UI.RETURNKEY_DONE" onReturn="registerOrLogin" />
       <View id="changeLoginType">
         <Label onClick="changeToLogin" class="change" id="changeToLogin">I already have an account.</Label>
         <Label onClick="changeToRegister" class="change" id="changeToRegister">I need to register for an account.</Label>
