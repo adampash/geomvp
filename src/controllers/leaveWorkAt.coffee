@@ -8,6 +8,7 @@ saveTime = ->
   LeaveWindow.findOrCreate(
     humanTime: timeToString()
     utcTime: getUTCTime()
+    timezoneOffset: new Date().getTimezoneOffset()/60
   )
 
   launchNextStep()

@@ -10,7 +10,8 @@ saveTime = function() {
   LeaveWindow = require('leaveWindow');
   LeaveWindow.findOrCreate({
     humanTime: timeToString(),
-    utcTime: getUTCTime()
+    utcTime: getUTCTime(),
+    timezoneOffset: new Date().getTimezoneOffset() / 60
   });
   return launchNextStep();
 };
