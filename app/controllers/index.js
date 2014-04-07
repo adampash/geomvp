@@ -22,11 +22,19 @@ sendFeedback = function() {
     feedback.set("text", feedbackText);
     feedback.set("parent", Parse.User.current());
     return feedback.save().then(function(response) {
-      alert("Feedback received! Thanks so much for taking the time.");
+      Ti.UI.createAlertDialog({
+        message: 'Thanks so much for taking the time.',
+        ok: 'OK',
+        title: 'Feedback received!'
+      }).show();
       $.feedback.value = '';
       return $.feedback.blur();
     }, function(response) {
-      return alert("Sorry, had trouble saving your feedback");
+      return Ti.UI.createAlertDialog({
+        message: 'Sorry, we had trouble saving your feedback.',
+        ok: 'OK',
+        title: 'Feedback failed'
+      }).show();
     });
   }
 };

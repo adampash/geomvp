@@ -27,7 +27,7 @@ $.setup.addEventListener('open', function(e) {
 });
 
 $.setup.addEventListener('scrollend', function(e) {
-  var activeView, currentPage, helper, message, name, pushMessage, time;
+  var activeView, completeMessage, contactName, currentPage, helper, message, name, pushMessage, time;
   currentPage = e.currentPage;
   Ti.API.debug($.pagingControl.children[currentPage]);
   $.pagingControl.children[currentPage].setOpacity(1.0);
@@ -48,7 +48,13 @@ $.setup.addEventListener('scrollend', function(e) {
     time = Ti.App.Properties.getString('departureTime');
     message.text = message.text.replace("{tk}", time);
     name = Parse.User.current().get("name").split(" ")[0];
-    return pushMessage.text = pushMessage.text.replace("{tk}", name + " just left work!");
+    pushMessage.text = pushMessage.text.replace("{tk}", name);
+  }
+  if (activeView.id === "complete") {
+    helper = require('helper');
+    completeMessage = helper.findById(activeView, 'completeMessage');
+    contactName = helper.getContactName();
+    return completeMessage.text = completeMessage.text.replace(/\{tk\}/g, contactName);
   }
 });
 

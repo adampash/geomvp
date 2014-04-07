@@ -42,8 +42,15 @@ $.setup.addEventListener 'scrollend', (e) ->
     message.text = message.text.replace("{tk}", time)
 
     name = Parse.User.current().get("name").split(" ")[0]
-    pushMessage.text = pushMessage.text.replace("{tk}", name + " just left work!")
+    pushMessage.text = pushMessage.text.replace("{tk}", name)
 
+  if activeView.id is "complete"
+    helper = require 'helper'
+    completeMessage = helper.findById activeView, 'completeMessage'
+
+    contactName = helper.getContactName()
+
+    completeMessage.text = completeMessage.text.replace(/\{tk\}/g, contactName)
 
 $.setup.addEventListener 'scroll', (e) ->
   currentPageAsFloat = e.currentPageAsFloat + 1

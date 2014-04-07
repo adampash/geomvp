@@ -1,3 +1,18 @@
 ".header": {
   top: "30dp"
+},
+"#welcomeMessage": {
+  top: "40dp",
+  layout: "vertical",
+  height: Ti.UI.SIZE,
+  right: "20dp",
+  left: "20dp",
+},
+".details": {
+  textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
+},
+"#getStarted": {
+  top: "40dp",
+  right: "30dp",
+  left: "30dp"
 }

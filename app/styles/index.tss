@@ -40,4 +40,22 @@
 },
 "Button": {
   bottom: 5
+},
+"#completeMessage": {
+  top: "35dp",
+  right: "20dp",
+  left: "20dp",
+  height: Ti.UI.SIZE,
+  textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
+},
+"#sendFeedback": {
+  top: "10dp",
+  right: "30dp",
+  left: "30dp"
+},
+"#edit": {
+  backgroundColor: "white",
+  color: "blue",
+  right: "30dp",
+  left: "30dp"
 }

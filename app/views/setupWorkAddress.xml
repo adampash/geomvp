@@ -1,8 +1,8 @@
 <Alloy>
   <View id="setupWorkAddress" class="container">
     <View id="searchForAddress">
-      <Label class="header">What's your work address?</Label>
-      <TextField id="workAddress" hintText="Your work address"
+      <Label class="header">Enter your work address</Label>
+      <TextField id="workAddress" hintText="1600 Pennsylvania Ave"
         onReturn="findAddress" returnKeyType="Ti.UI.RETURNKEY_DONE" />
     </View>
     <View id="mapContainer">

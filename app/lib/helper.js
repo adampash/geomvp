@@ -13,6 +13,17 @@ helper = {
         return obj;
       }
     }
+  },
+  getContactName: function() {
+    var contact, recordId;
+    recordId = Ti.App.Properties.getString('contactRecordId');
+    contact = this.getContact(recordId);
+    return contact.firstName || contact.fullName.split(" ")[0];
+  },
+  getContact: function(recordId) {
+    var contact;
+    contact = Ti.Contacts.getPersonByID(parseInt(recordId));
+    return contact;
   }
 };
 

@@ -19,11 +19,19 @@ sendFeedback = ->
     feedback.set "parent", Parse.User.current()
 
     feedback.save().then (response) ->
-      alert "Feedback received! Thanks so much for taking the time."
+      Ti.UI.createAlertDialog({
+        message: 'Thanks so much for taking the time.'
+        ok: 'OK'
+        title: 'Feedback received!'
+      }).show()
       $.feedback.value = ''
       $.feedback.blur()
     , (response) ->
-      alert "Sorry, had trouble saving your feedback"
+      Ti.UI.createAlertDialog({
+        message: 'Sorry, we had trouble saving your feedback.'
+        ok: 'OK'
+        title: 'Feedback failed'
+      }).show()
 
 testSinglePush = ->
   Parse.Cloud.run 'testapush', {},

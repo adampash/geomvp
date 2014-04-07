@@ -11,10 +11,14 @@
     <!-- <Button onClick="startOver">Start over</Button> -->
     <!-- <Button onClick="sendFeedback">Send feedback</Button> -->
     <View id="completeScreen">
+      <Label class="details" id="completeMessage">
+        The magic is happening! You can now close the app. Thanks again!
+      </Label>
       <TextArea id="feedback" hintText="Tell us what you think!" >
       </TextArea>
       <Button id="sendFeedback" onClick="sendFeedback">Send feedback</Button>
-      <Button onClick="startOver">Start over</Button>
+      <Button id="edit" onClick="startOver">Edit my settings</Button>
+      <!-- <Button onClick="startOver">Start over</Button> -->
       <!-- <Button onClick="testSinglePush">Test push</Button> -->
     </View>
   </Window>

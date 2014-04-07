@@ -45,16 +45,12 @@ createUser = function() {
 };
 
 changeToLogin = function() {
-  $.loginButton.show();
-  $.createButton.hide();
   $.name.hide();
   $.changeToLogin.hide();
   return $.changeToRegister.show();
 };
 
 changeToRegister = function() {
-  $.loginButton.hide();
-  $.createButton.show();
   $.name.show();
   $.changeToLogin.show();
   return $.changeToRegister.hide();

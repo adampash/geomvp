@@ -35,15 +35,11 @@ createUser = ->
   )
 
 changeToLogin = ->
-  $.loginButton.show()
-  $.createButton.hide()
   $.name.hide()
   $.changeToLogin.hide()
   $.changeToRegister.show()
 
 changeToRegister = ->
-  $.loginButton.hide()
-  $.createButton.show()
   $.name.show()
   $.changeToLogin.show()
   $.changeToRegister.hide()

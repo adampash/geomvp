@@ -1,9 +1,9 @@
 <Alloy>
   <View id="chooseContact" class="container">
     <View id="confirm">
-      <Label class="heder">Great!</Label>
-      <Label id="message" class="details">If you leave work around {tk} or later, we'll send this:</Label>
-      <Label id="pushMessage" class="details">{tk}</Label>
+      <Label class="header">Great!</Label>
+      <Label id="message" class="details">When you leave work around {tk} or later, we'll send the following message:</Label>
+      <Label id="pushMessage" class="details">{tk} just left work.</Label>
       <Button id="contactPicker" onClick="launchContactPicker" >
         Who should we send it to?
       </Button>
