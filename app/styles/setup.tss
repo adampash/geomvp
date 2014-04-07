@@ -10,10 +10,11 @@
   height: Ti.UI.FILL
 },
 "#pagingControl": {
-  backgroundColor: 'white',
-  top: "50dp",
-  right: "10dp",
-  left: "10dp",
+  backgroundColor: '#DBDBDB',
+  top: "55dp",
+  right: "35dp",
+  left: "35dp",
+  height: Ti.UI.SIZE,
   layout: "horizontal",
   horizontalWrap: false
 },
@@ -21,14 +22,12 @@
   textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
 },
 "#completeMessage": {
-  top: "40dp",
-  right: "20dp",
-  left: "20dp"
+  top: "35dp",
 },
 "#confirm": {
   top: "40dp",
-  right: "30dp",
-  left: "30dp"
+  right: "35dp",
+  left: "35dp"
 },
 "#edit": {
   top: "10dp",
@@ -37,3 +36,6 @@
   color: "blue",
   backgroundColor: "white"
 }
+".header": {
+  top: "45dp"
+},

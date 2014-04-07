@@ -36,11 +36,15 @@ createUser = ->
 
 changeToLogin = ->
   $.name.hide()
+  $.email.focus()
+  $.nameLabel.hide()
   $.changeToLogin.hide()
   $.changeToRegister.show()
 
 changeToRegister = ->
   $.name.show()
+  $.name.focus()
+  $.nameLabel.show()
   $.changeToLogin.show()
   $.changeToRegister.hide()
 

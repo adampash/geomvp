@@ -1,6 +1,46 @@
 ".container" : {
-  "backgroundColor": "#dddddd",
   layout: "vertical"
+},
+"#form": {
+  "backgroundColor": "#dddddd",
+  layout: "vertical",
+  height: Ti.UI.FILL
+},
+".textfieldLabel": {
+  font: {
+    fontFamily:'Helvetica',
+    fontSize: '12dp',
+    fontStyle: 'normal',
+    fontWeight: 'normal'
+  },
+  height: "18dp",
+  top: "12dp",
+  color: "#808080",
+  left: "15dp"
+},
+"TextField": {
+  left: "15dp",
+  right: "15dp",
+  top: "2dp",
+  height: "32dp",
+  width: Ti.UI.FILL,
+  backgroundColor: "white",
+  autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+  paddingLeft: "15dp",
+  paddingRight: "15dp",
+  font: {
+    fontFamily:'Helvetica',
+    fontSize: '16dp',
+    fontStyle: 'normal',
+    fontWeight: 'normal'
+  }
+},
+".header": {
+  font: {
+    fontSize: '16dp',
+    fontWeight: 'bold'
+  },
+  height: "38dp"
 },
 ".actionButtons": {
   layout: "absolute",
@@ -10,22 +50,16 @@
   layout: "absolute",
   height: "50dp",
 },
-"#header": {
-  marginTop: 150
+".change": {
+  font: {
+    fontSize: "14dp"
+  },
+  color: "blue"
 },
 "Label" : {
   "height": "50dp",
   "width": Ti.UI.SIZE,
   margin: 10
-},
-"TextField": {
-  left: "5dp",
-  right: "5dp",
-  height: "50dp",
-  width: Ti.UI.FILL,
-  backgroundColor: "white",
-  marginTop: "10p",
-  autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE
 },
 "#name": {
   autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS

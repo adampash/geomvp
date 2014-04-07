@@ -8,10 +8,10 @@ PagingControl =
 
     for num in [0...numViews]
       view = Ti.UI.createView(
-        opacity: 0.1
+        opacity: 0
         width: size + "%"
         height: "10dp"
-        backgroundColor: colors[num] || 'gray'
+        backgroundColor: colors[num] || 'blue'
       )
       views.push view
 

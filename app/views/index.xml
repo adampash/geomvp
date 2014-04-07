@@ -11,9 +11,7 @@
     <!-- <Button onClick="startOver">Start over</Button> -->
     <!-- <Button onClick="sendFeedback">Send feedback</Button> -->
     <View id="completeScreen">
-      <Label class="details" id="completeMessage">
-        The magic is happening! You can now close the app. Thanks again!
-      </Label>
+      <Label class="details" id="completeMessage">The magic is happening!\nYou can now close the app.</Label>
       <TextArea id="feedback" hintText="Tell us what you think!" >
       </TextArea>
       <Button id="sendFeedback" onClick="sendFeedback">Send feedback</Button>

@@ -9,10 +9,10 @@ PagingControl = {
     size = 100 / numViews;
     for (num = _i = 0; 0 <= numViews ? _i < numViews : _i > numViews; num = 0 <= numViews ? ++_i : --_i) {
       view = Ti.UI.createView({
-        opacity: 0.1,
+        opacity: 0,
         width: size + "%",
         height: "10dp",
-        backgroundColor: colors[num] || 'gray'
+        backgroundColor: colors[num] || 'blue'
       });
       views.push(view);
     }

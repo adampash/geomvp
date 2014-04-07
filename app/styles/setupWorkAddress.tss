@@ -1,49 +1,60 @@
 ".container" : {
-  "backgroundColor": "#dddddd",
   layout: "absolute"
 },
   "#searchForAddress": {
+    "backgroundColor": "#dddddd",
     layout: "absolute",
     visible: true,
-    top: 0,
+    top: "38dp",
     bottom: 0,
     left: 0,
-    right: 0
+    right: 0,
   },
     ".header": {
-      top: "10dp"
+      top: "0dp",
+      font: {
+        fontSize: '16dp',
+        fontWeight: 'bold'
+      },
+      height: "38dp"
     },
     "#workAddress": {
-      left: "5dp",
-      right: "5dp",
-      top: "40dp",
+      left: "15dp",
+      right: "15dp",
+      top: "34dp",
       height: "50dp",
       width: Ti.UI.FILL,
       backgroundColor: "white",
+      paddingLeft: "15dp",
+      paddingRight: "15dp",
+      height: "34dp"
     },
 
 
 
   "#mapContainer": {
     visible: false,
-    top: 0,
-    bottom: 0,
+    top: "10dp",
+    height: Ti.UI.FILL,
     left: 0,
     right: 0
   },
     "#confirmText" : {
-      "height": "50dp",
-      "width": Ti.UI.SIZE,
-      margin: 10
+      "height": "35dp",
+      "width": Ti.UI.FILL,
+      top: "15dp",
+      textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
     },
     "#mapview": {
-      mapType: Alloy.Globals.Map.NORMAL_TYPE
+      mapType: Alloy.Globals.Map.NORMAL_TYPE,
+      bottom: "200dp",
+      top: "0dp"
     },
     "#confirm": {
       backgroundColor: "white",
       layout: "vertical",
       bottom: 0,
-      height: "150dp",
+      height: "200dp",
       right: 0,
       left: 0
     },
@@ -51,8 +62,10 @@
       layout: "horizontal"
     },
     ".confirmButton": {
-      width: Ti.UI.FILL,
       height: "50dp",
+      left: "30dp",
+      right: "30dp",
+      top: "10dp",
       backgroundColor: "blue",
       color: "white"
     }

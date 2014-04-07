@@ -1,6 +1,6 @@
 <Alloy>
   <Window id="setup" class="container">
-    <View id="pagingControl" layout="horizontal" height="20dp" />
+    <View id="pagingControl" layout="horizontal" />
     <ScrollableView id="scrollableView" showPagingControl="false"
       scrollingEnabled="false" >
       <Require type="view" src="welcome" />

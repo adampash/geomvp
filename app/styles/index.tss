@@ -12,11 +12,10 @@
 "#feedback": {
   height: "180dp",
   top: "25dp",
-  right: "5dp",
-  left: "5dp",
+  right: "30dp",
+  left: "30dp",
   borderWidth: "1dp",
-  borderColor: "gray",
-  borderRadius: "8dp",
+  borderColor: "#DBDBDB",
   font: {
     fontFamily:'Helvetica',
     fontSize: '16dp',
@@ -43,9 +42,8 @@
 },
 "#completeMessage": {
   top: "35dp",
-  right: "20dp",
-  left: "20dp",
   height: Ti.UI.SIZE,
+  width: Ti.UI.FILL,
   textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
 },
 "#sendFeedback": {

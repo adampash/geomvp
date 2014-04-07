@@ -46,12 +46,16 @@ createUser = function() {
 
 changeToLogin = function() {
   $.name.hide();
+  $.email.focus();
+  $.nameLabel.hide();
   $.changeToLogin.hide();
   return $.changeToRegister.show();
 };
 
 changeToRegister = function() {
   $.name.show();
+  $.name.focus();
+  $.nameLabel.show();
   $.changeToLogin.show();
   return $.changeToRegister.hide();
 };

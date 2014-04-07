@@ -1,9 +1,9 @@
 <Alloy>
   <View id="welcome" class="container">
-    <Label class="header">Hi friend!</Label>
+    <Label class="header">Hello Friend!</Label>
     <View id="welcomeMessage">
       <Label class="details">
-        Thanks so much for helping us out with this initial experiment. It should only take a couple of minutes to set up.
+        Thanks for helping us out with this initial experiment. It should only take a couple of minutes to set up.
       </Label>
     </View>
     <Button id="getStarted" onClick="launchNextStep">Get started!</Button>

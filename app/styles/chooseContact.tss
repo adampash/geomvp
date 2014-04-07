@@ -22,6 +22,13 @@
   right: "20dp",
   left: "20dp"
 },
+"#pushMessage": {
+  top: "20dp",
+  font: {
+    fontWeight: "bold",
+    fontSize: "20dp"
+  }
+},
 "#contactPicker": {
   top: "40dp",
   right: "30dp",

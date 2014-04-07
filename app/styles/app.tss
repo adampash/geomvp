@@ -6,7 +6,7 @@
 ".header": {
   font: {
     fontFamily:'Helvetica',
-    fontSize: '18dp',
+    fontSize: '19dp',
     fontStyle: 'normal',
     fontWeight: 'bold'
   }
@@ -14,10 +14,13 @@
 ".details": {
   font: {
     fontFamily:'Helvetica',
-    fontSize: '14dp',
+    fontSize: '19dp',
     fontStyle: 'normal',
     fontWeight: 'normal'
-  }
+  },
+  color: "#808080",
+  right: "35dp",
+  left: "35dp"
 },
 "Button": {
   left: "5dp",

@@ -1,14 +1,14 @@
 <Alloy>
   <View id="setupWorkAddress" class="container">
+    <Label class="header">Enter your work address</Label>
     <View id="searchForAddress">
-      <Label class="header">Enter your work address</Label>
       <TextField id="workAddress" hintText="1600 Pennsylvania Ave"
         onReturn="findAddress" returnKeyType="Ti.UI.RETURNKEY_DONE" />
     </View>
     <View id="mapContainer">
       <View id="mapview" ns="Alloy.Globals.Map" animate="true" />
       <View id="confirm">
-        <Label id="confirmText">Is this where you work?</Label>
+        <Label id="confirmText" class="details">Is this where you work?</Label>
         <View id="buttons">
           <Button class="confirmButton" onClick="finishUp" >Yep!</Button>
           <Button class="confirmButton" onClick="searchAgain" >Nope</Button>
