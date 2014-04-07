@@ -1,9 +1,14 @@
-var args, completeSetup, startOver;
+var InstallProgress, args, completeSetup, startOver;
 
 args = arguments[0] || {};
 
+InstallProgress = require('installProgress');
+
 completeSetup = function() {
   var index;
+  InstallProgress.findOrCreate({
+    greenLight: true
+  });
   index = Alloy.createController('index').getView();
   index.open();
   return $.setup.close();
@@ -27,7 +32,7 @@ $.setup.addEventListener('open', function(e) {
 });
 
 $.setup.addEventListener('scrollend', function(e) {
-  var activeView, completeMessage, contactName, currentPage, helper, message, name, pushMessage, time;
+  var activeView, completeMessage, contactName, currentPage, helper, message, name, params, pushMessage, time;
   if (e.currentPage != null) {
     currentPage = e.currentPage;
     Ti.API.debug($.pagingControl.children[currentPage]);
@@ -59,7 +64,12 @@ $.setup.addEventListener('scrollend', function(e) {
       helper = require('helper');
       completeMessage = helper.findById(activeView, 'completeMessage');
       contactName = helper.getContactName();
-      return completeMessage.text = completeMessage.text.replace(/\{tk\}/g, contactName);
+      completeMessage.text = completeMessage.text.replace(/\{tk\}/g, contactName);
+    }
+    if (Parse.User.current()) {
+      params = {};
+      params[activeView.id] = true;
+      return InstallProgress.findOrCreate(params);
     }
   }
 });

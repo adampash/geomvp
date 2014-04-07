@@ -1,6 +1,10 @@
 args = arguments[0] || {}
 
+InstallProgress = require 'installProgress'
+
 completeSetup = ->
+  InstallProgress.findOrCreate
+    greenLight: true
   index = Alloy.createController('index').getView()
   index.open()
   $.setup.close()
@@ -56,6 +60,12 @@ $.setup.addEventListener 'scrollend', (e) ->
       contactName = helper.getContactName()
 
       completeMessage.text = completeMessage.text.replace(/\{tk\}/g, contactName)
+
+    if Parse.User.current()
+      params = {}
+      params[activeView.id] = true
+      InstallProgress.findOrCreate params
+
 
 $.setup.addEventListener 'scroll', (e) ->
   currentPageAsFloat = e.currentPageAsFloat + 1
