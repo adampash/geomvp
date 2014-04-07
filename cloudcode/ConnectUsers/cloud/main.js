@@ -238,6 +238,11 @@ Parse.Cloud.define("enteredFence", function(request, response) {
   var enteredFence = new EnteredFence();
   enteredFence.set(request.params);
   enteredFence.set("parent", Parse.User.current());
+
+  // calculate distance from fence center
+  var distanceFromCenter = calculateDistance(request.params.coords, request.params.workCoords);
+  enteredFence.set("distanceFromCenter", distanceFromCenter);
+
   enteredFence.save();
 
   response.success();

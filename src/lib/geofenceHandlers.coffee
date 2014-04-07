@@ -38,6 +38,7 @@ GeofenceHandlers =
       e.coords = position.coords
       e.latitude = position.coords.latitude
       e.longitude = position.coords.longitude
+      e.workCoords = Ti.App.Properties.getObject('workLocation')
       Parse.Cloud.run 'enteredFence', e,
         success: (res) ->
           Ti.API.info 'Parse code successfully ran'
