@@ -1,4 +1,4 @@
-var Parse, ParsePush, geofence, init, launchSetup, openLogin, sendFeedback, setPin, startOver, testSinglePush;
+var Parse, ParsePush, editSettings, geofence, init, launchSetup, openLogin, sendFeedback, setPin, startOver, testSinglePush;
 
 Ti.API.info("starting index.js");
 
@@ -27,6 +27,15 @@ testSinglePush = function() {
       return Ti.API.info(JSON.stringify(err));
     }
   });
+};
+
+editSettings = function() {
+  var setup;
+  setup = Alloy.createController('setup', {
+    edit: true
+  }).getView();
+  setup.open();
+  return $.index.close();
 };
 
 startOver = function() {

@@ -15,6 +15,17 @@ completeSetup = function() {
 };
 
 startOver = function() {
+  var index, view, views, _i, _len;
+  views = $.pagingControl.children;
+  for (index = _i = 0, _len = views.length; _i < _len; index = ++_i) {
+    view = views[index];
+    if (index < 3) {
+      view.setOpacity(1);
+    }
+    if (index >= 3) {
+      view.setOpacity(0);
+    }
+  }
   return $.scrollableView.scrollToView(2);
 };
 
@@ -84,5 +95,13 @@ $.setup.addEventListener('scroll', function(e) {
     return views[currentPage].setOpacity(opacity);
   }
 });
+
+Ti.API.info(args);
+
+if (args.edit) {
+  $.setup.addEventListener('open', function() {
+    return startOver();
+  });
+}
 
 //# sourceMappingURL=setup.js.map

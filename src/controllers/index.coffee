@@ -19,6 +19,11 @@ testSinglePush = ->
       alert 'it did not work'
       Ti.API.info JSON.stringify err
 
+editSettings = ->
+  setup = Alloy.createController('setup', edit: true).getView()
+  setup.open()
+  $.index.close()
+
 startOver = ->
   Parse.User.logOut()
   Ti.App.Properties.setBool('setupComplete', null)

@@ -14,7 +14,7 @@
       <Label class="details" id="completeMessage">The magic is happening!\nYou can now close the app.</Label>
       <View id="actions">
         <Button class="recessive" id="sendFeedback" onClick="sendFeedback">Send feedback</Button>
-        <Button class="recessive" id="edit" onClick="startOver">Edit my settings</Button>
+        <Button class="recessive" id="edit" onClick="editSettings">Edit my settings</Button>
       </View>
       <!-- <Button onClick="startOver">Start over</Button> -->
       <!-- <Button onClick="testSinglePush">Test push</Button> -->

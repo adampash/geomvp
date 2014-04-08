@@ -10,6 +10,10 @@ completeSetup = ->
   $.setup.close()
 
 startOver = ->
+  views = $.pagingControl.children
+  for view, index in views
+    view.setOpacity(1) if index < 3
+    view.setOpacity(0) if index >= 3
   $.scrollableView.scrollToView 2
 
 $.setup.addEventListener 'open', (e) ->
@@ -78,3 +82,8 @@ $.setup.addEventListener 'scroll', (e) ->
     # else
     #   views[currentPage].setBackgroundColor("blue")
     views[currentPage].setOpacity(opacity)
+
+Ti.API.info args
+if args.edit
+  $.setup.addEventListener 'open', ->
+    startOver()
