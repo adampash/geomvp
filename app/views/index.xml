@@ -15,7 +15,7 @@
       <View id="actions">
         <Button class="recessive" id="sendFeedback" onClick="sendFeedback">Send feedback</Button>
         <Button class="recessive" id="edit" onClick="editSettings">Edit my settings</Button>
-        <Button class="recessive" onClick="startOver">Logout</Button>
+        <!-- <Button class="recessive" onClick="startOver">Logout</Button> -->
       </View>
       <!-- <Button onClick="testSinglePush">Test push</Button> -->
     </View>

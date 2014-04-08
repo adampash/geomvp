@@ -73,6 +73,7 @@ module.exports = (grunt) ->
       builds:
         files: 'dist/*.ipa'
         tasks: ['testflight:iOS']
+        # tasks: ['config:prompt:testflight', 'testflight:iOS']
 
     sass:
       dev:
@@ -97,8 +98,23 @@ module.exports = (grunt) ->
           distributionLists: ['Testers']
           notify: false
 
+    config:
+      prompt:
+        testflight:
+          options:
+            questions: [
+                config: 'testflightMessage'
+                type: 'input'
+                message: 'What would you like the release message to say?'
+                default: ''
+                choices: ['dot', 'spec', 'nyan', 'TAP', 'landing', 'list',
+                  'progress', 'json', 'JSONconv', 'HTMLconv', 'min', 'doc']
+            ]
+
+
   grunt.loadNpmTasks 'grunt-contrib-sass'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-testflight'
+  grunt.loadNpmTasks 'grunt-prompt'
   # grunt.loadNpmTasks('grunt-contrib-jasmine')

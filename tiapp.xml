@@ -8,7 +8,7 @@
     <property name="acs-api-key-development" type="string">5sQDWLbVLVysxrm4YSsriqE5mPltubXh</property>
     <id>com.adampash.geomvp</id>
     <name>Beacon</name>
-    <version>1.0</version>
+    <version>1.0.0.1</version>
     <publisher>Adam Pash</publisher>
     <url>http://adampash.com</url>
     <description>not specified</description>
