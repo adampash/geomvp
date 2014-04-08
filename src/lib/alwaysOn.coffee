@@ -6,6 +6,8 @@ AlwaysOn =
     workLocation = Ti.App.Properties.getObject('workLocation')
     if OS_IOS
       if workLocation?
+        Ti.API.info 'work location is'
+        Ti.API.info workLocation
         geofence = Alloy.Globals.geofence || require 'geofence'
         Alloy.Globals.activeFence = geofence.setup [
           "title" : "Work"

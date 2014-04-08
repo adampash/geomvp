@@ -84,16 +84,23 @@ $.index.addEventListener('close', function(e) {
   return geofence.stopGeoFencing();
 });
 
+Ti.App.addEventListener('refreshGeofence', function(e) {
+  var alwaysOn;
+  Ti.API.info('refreshing the geofence');
+  geofence.stopGeoFencing();
+  alwaysOn = require('alwaysOn');
+  return alwaysOn.setupGeofence(geofence);
+});
+
 init = function() {
-  var alwaysOn, appStates, currentUser;
+  var appStates, currentUser;
   currentUser = Parse.User.current();
   if (currentUser) {
     Ti.API.info("User is currently logged in: " + currentUser.id);
     if (Ti.App.Properties.getBool('setupComplete')) {
       Ti.API.info("Setup is complete");
       $.index.open();
-      alwaysOn = require('alwaysOn');
-      alwaysOn.setupGeofence(geofence);
+      Ti.App.fireEvent('refreshGeofence');
       if (OS_IOS) {
         appStates = require('appStates');
         return appStates.setup();

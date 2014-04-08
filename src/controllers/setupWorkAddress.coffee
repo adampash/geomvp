@@ -22,6 +22,7 @@ finishUp = ->
   Ti.App.Properties.setObject('workLocation', workLocation)
   WorkAddress.findOrCreate(workLocation)
   launchNextStep()
+  Ti.App.fireEvent 'refreshGeofence'
 
 launchNextStep = ->
   scrollableView = $.setupWorkAddress.getParent()

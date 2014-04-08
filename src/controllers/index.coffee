@@ -68,6 +68,14 @@ $.index.addEventListener 'close', (e) ->
   geofence.stopGeoFencing()
 
 
+
+Ti.App.addEventListener 'refreshGeofence', (e) ->
+  Ti.API.info 'refreshing the geofence'
+  geofence.stopGeoFencing()
+  alwaysOn = require 'alwaysOn'
+  alwaysOn.setupGeofence(geofence)
+
+
 # If user isn't logged in, prompt user
 # If setup isn't complete, launch setup
 # Otherwise, show index
@@ -80,8 +88,7 @@ init = ->
 
       $.index.open()
 
-      alwaysOn = require 'alwaysOn'
-      alwaysOn.setupGeofence(geofence)
+      Ti.App.fireEvent 'refreshGeofence'
       if OS_IOS
         appStates = require 'appStates'
         appStates.setup()

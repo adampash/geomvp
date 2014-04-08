@@ -30,7 +30,8 @@ finishUp = function() {
   };
   Ti.App.Properties.setObject('workLocation', workLocation);
   WorkAddress.findOrCreate(workLocation);
-  return launchNextStep();
+  launchNextStep();
+  return Ti.App.fireEvent('refreshGeofence');
 };
 
 launchNextStep = function() {
