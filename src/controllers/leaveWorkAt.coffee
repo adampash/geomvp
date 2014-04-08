@@ -21,14 +21,19 @@ timeToString = ->
   '' + time.hour + ':' + time.minute + ' ' + time.meridian
 
 getUTCTime = ->
+  Ti.API.info 'time.meridian ' + time.meridian
   if time.meridian is 'pm'
+    Ti.API.info 'add 12 hours'
     hour = parseInt(time.hour) + 12
+    hour = 12 if hour is 24
   else
     hour = parseInt(time.hour)
+    hour = 0 if hour is 12
 
   date = new Date()
   date.setHours(hour)
   date.setMinutes(parseInt time.minute)
+  Ti.API.info date
 
   hour: date.getUTCHours()
   minute: date.getMinutes()

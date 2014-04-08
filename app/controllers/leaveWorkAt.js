@@ -28,14 +28,23 @@ timeToString = function() {
 
 getUTCTime = function() {
   var date, hour;
+  Ti.API.info('time.meridian ' + time.meridian);
   if (time.meridian === 'pm') {
+    Ti.API.info('add 12 hours');
     hour = parseInt(time.hour) + 12;
+    if (hour === 24) {
+      hour = 12;
+    }
   } else {
     hour = parseInt(time.hour);
+    if (hour === 12) {
+      hour = 0;
+    }
   }
   date = new Date();
   date.setHours(hour);
   date.setMinutes(parseInt(time.minute));
+  Ti.API.info(date);
   return {
     hour: date.getUTCHours(),
     minute: date.getMinutes()
