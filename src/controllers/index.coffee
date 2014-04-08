@@ -31,6 +31,7 @@ startOver = ->
   Ti.App.Properties.setString('departureTime', null)
   Ti.App.Properties.setString('contactRecordId', null)
   init()
+  Ti.App.fireEvent 'refreshGeofence'
 
 openLogin = ->
   Ti.API.info "Open login"
@@ -72,8 +73,10 @@ $.index.addEventListener 'close', (e) ->
 Ti.App.addEventListener 'refreshGeofence', (e) ->
   Ti.API.info 'refreshing the geofence'
   geofence.stopGeoFencing()
-  alwaysOn = require 'alwaysOn'
-  alwaysOn.setupGeofence(geofence)
+
+  if Ti.App.Properties.getObject('workLocation')?
+    alwaysOn = require 'alwaysOn'
+    alwaysOn.setupGeofence(geofence)
 
 
 # If user isn't logged in, prompt user
@@ -88,7 +91,6 @@ init = ->
 
       $.index.open()
 
-      Ti.App.fireEvent 'refreshGeofence'
       if OS_IOS
         appStates = require 'appStates'
         appStates.setup()

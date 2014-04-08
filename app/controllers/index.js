@@ -41,7 +41,8 @@ startOver = function() {
   Ti.App.Properties.setObject('workLocation', null);
   Ti.App.Properties.setString('departureTime', null);
   Ti.App.Properties.setString('contactRecordId', null);
-  return init();
+  init();
+  return Ti.App.fireEvent('refreshGeofence');
 };
 
 openLogin = function() {
@@ -88,8 +89,10 @@ Ti.App.addEventListener('refreshGeofence', function(e) {
   var alwaysOn;
   Ti.API.info('refreshing the geofence');
   geofence.stopGeoFencing();
-  alwaysOn = require('alwaysOn');
-  return alwaysOn.setupGeofence(geofence);
+  if (Ti.App.Properties.getObject('workLocation') != null) {
+    alwaysOn = require('alwaysOn');
+    return alwaysOn.setupGeofence(geofence);
+  }
 });
 
 init = function() {
@@ -100,7 +103,6 @@ init = function() {
     if (Ti.App.Properties.getBool('setupComplete')) {
       Ti.API.info("Setup is complete");
       $.index.open();
-      Ti.App.fireEvent('refreshGeofence');
       if (OS_IOS) {
         appStates = require('appStates');
         return appStates.setup();
