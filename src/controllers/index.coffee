@@ -20,9 +20,9 @@ testSinglePush = ->
       Ti.API.info JSON.stringify err
 
 editSettings = ->
-  setup = Alloy.createController('setup', edit: true).getView()
-  setup.open()
-  $.index.close()
+  edit = Alloy.createController('editSettings').getView()
+  edit.open()
+  # $.index.close()
 
 startOver = ->
   Parse.User.logOut()

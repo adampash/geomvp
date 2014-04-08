@@ -29,4 +29,10 @@
   width: Ti.UI.FILL,
   color: "white",
   backgroundColor: "blue"
+},
+".recessive": {
+  backgroundColor: "white",
+  color: "blue",
+  right: "30dp",
+  left: "30dp"
 }

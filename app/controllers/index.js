@@ -30,12 +30,9 @@ testSinglePush = function() {
 };
 
 editSettings = function() {
-  var setup;
-  setup = Alloy.createController('setup', {
-    edit: true
-  }).getView();
-  setup.open();
-  return $.index.close();
+  var edit;
+  edit = Alloy.createController('editSettings').getView();
+  return edit.open();
 };
 
 startOver = function() {

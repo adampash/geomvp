@@ -90,4 +90,8 @@ $.leaveWorkAt.addEventListener('postlayout', function(e) {
   return init();
 });
 
+if (args.leaveWindowSet) {
+  init();
+}
+
 //# sourceMappingURL=leaveWorkAt.js.map

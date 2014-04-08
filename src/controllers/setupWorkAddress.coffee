@@ -86,3 +86,11 @@ $.setupWorkAddress.addEventListener 'postlayout', ->
     $.searchForAddress.show()
     $.mapContainer.hide()
 
+
+if args.addressPicked
+  workLocation = Ti.App.Properties.getObject('workLocation')
+  if workLocation?
+    setPin(workLocation.address, workLocation)
+    $.searchForAddress.hide()
+    $.mapContainer.show()
+

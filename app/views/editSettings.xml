@@ -1,0 +1,20 @@
+<Alloy>
+  <Window id="editSettings" modal="true">
+    <View id="settingsContainer">
+      <View id="pagingControl" layout="horizontal" />
+      <ScrollableView id="scrollableView" showPagingControl="false"
+        scrollingEnabled="false" >
+        <Require type="view" src="setupWorkAddress" addressPicked="true" />
+        <Require type="view" src="leaveWorkAt" leaveWindowSet="true" />
+        <Require type="view" src="chooseContact" />
+        <View id="complete" class="container">
+          <Label class="header">We've updated your settings.</Label>
+          <Label class="details" id="completeMessage">
+            If both you and {tk} have signed up, we’re good to go! Next time you leave work at the end of the day, we’ll send {tk} a notification that you’re on your way.
+          </Label>
+          <Button id="confirm" onClick="completeSetup">Sounds good!</Button>
+        </View>
+      </ScrollableView>
+    </View>
+  </Window>
+</Alloy>

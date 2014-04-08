@@ -1,4 +1,4 @@
-var WorkAddress, args, findAddress, finishUp, focusAddress, launchNextStep, searchAgain, setLocation, setPin;
+var WorkAddress, args, findAddress, finishUp, focusAddress, launchNextStep, searchAgain, setLocation, setPin, workLocation;
 
 args = arguments[0] || {};
 
@@ -104,5 +104,14 @@ $.setupWorkAddress.addEventListener('postlayout', function() {
     return $.mapContainer.hide();
   }
 });
+
+if (args.addressPicked) {
+  workLocation = Ti.App.Properties.getObject('workLocation');
+  if (workLocation != null) {
+    setPin(workLocation.address, workLocation);
+    $.searchForAddress.hide();
+    $.mapContainer.show();
+  }
+}
 
 //# sourceMappingURL=setupWorkAddress.js.map

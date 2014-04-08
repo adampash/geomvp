@@ -1,0 +1,59 @@
+"#editSettings": {
+  layout: "absolute",
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  backgroundColor: 'white',
+  height: Ti.UI.FILL
+},
+"#settingsContainer": {
+  layout: "vertical",
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  backgroundColor: 'white'
+},
+".cancel": {
+  layout: "absolute",
+  right: "5dp",
+  top:"30dp",
+  font: {
+    fontSize: "14dp"
+  },
+  width: "80dp",
+},
+"ScrollableView": {
+  height: Ti.UI.FILL
+},
+"#pagingControl": {
+  backgroundColor: '#DBDBDB',
+  top: "55dp",
+  right: "35dp",
+  left: "35dp",
+  height: Ti.UI.SIZE,
+  layout: "horizontal",
+  horizontalWrap: false
+},
+".details": {
+  textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
+},
+"#completeMessage": {
+  top: "35dp",
+},
+"#confirm": {
+  top: "40dp",
+  right: "35dp",
+  left: "35dp"
+},
+"#edit": {
+  top: "10dp",
+  right: "30dp",
+  left: "30dp",
+  color: "blue",
+  backgroundColor: "white"
+}
+".header": {
+  top: "45dp"
+},

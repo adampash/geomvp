@@ -76,3 +76,7 @@ init = ->
 
 $.leaveWorkAt.addEventListener 'postlayout', (e) ->
   init()
+
+
+if args.leaveWindowSet
+  init()
