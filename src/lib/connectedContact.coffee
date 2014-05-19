@@ -24,7 +24,14 @@ ConnectedContactFactory =
 
   create: (params) ->
     connectedContact = new ConnectedContact()
-    connectedContact.set params
+    # connectedContact.set params
+    connectedContact.set 'name', params.name
+    connectedContact.set 'email', []
+    for email in emails
+      connectedContact.add 'email', email
+    connectedContact.set 'email', []
+    for phone in phones
+      connectedContact.add 'phone', phone
     connectedContact.set "parent", Parse.User.current()
     Ti.API.info "Saving connected contact"
     connectedContact.save()

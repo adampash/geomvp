@@ -20,43 +20,39 @@ Parse.Cloud.define("connectUsers", function(request, response) {
   }).then(function(connectedContacts) {
     if (connectedContacts.length > 0) {
       var connectedContact = connectedContacts[0];
+      console.log("Time to look for a user");
 
-      connectedContact.get("emails").forEach(function(email, index, emails) {
-        var innerQuery = new Parse.Query("User")
-        innerQuery.equalTo("email", email)
-        innerQuery.find().then(function(users) {
-          if (users.length > 0) {
-            user2 = users[0];
+      emails = connectedContact.get("emails")
+      console.log(emails);
+      var innerQuery = new Parse.Query("User")
+      innerQuery.containedIn("email", emails)
+      innerQuery.find().then(function(users) {
+        console.log(users);
+        if (users.length > 0) {
+          console.log("Found a user");
+          user2 = users[0];
+          console.log("It's all over and we've got our user");
+          var ConnectedUsers = Parse.Object.extend("ConnectedUsers");
+          connectedUsers = new ConnectedUsers();
+          connectedUsers.set("parent", Parse.User.current());
+          connectedUsers.set("connectedUser", user2);
+          connectedUsers.save();
+          if (request.params.thenPush) {
+            console.log("Now try pushing again");
+            request.params.secondTry = true
+            Parse.Cloud.run("leftWorkPush", request.params);
           }
-          else {
-            console.log("Didn't find user this round");
-          }
-          if (index === emails.length - 1) {
-            if (user2 !== null) {
-              console.log("It's all over and we've got our user");
-              var ConnectedUsers = Parse.Object.extend("ConnectedUsers");
-              connectedUsers = new ConnectedUsers();
-              connectedUsers.set("parent", Parse.User.current());
-              connectedUsers.set("connectedUser", user2);
-              connectedUsers.save();
-              if (request.params.thenPush) {
-                console.log("Now try pushing again");
-                request.params.secondTry = true
-                Parse.Cloud.run("leftWorkPush", request.params);
-              }
-              response.success();
-            }
-            else {
-              response.error("No user to connect to");
-            }
-          }
-        });
+          response.success();
+        }
+        else {
+          console.log("Didn't find user");
+          response.error("No user to connect to");
+        }
       });
     }
   }, function(err) {
     response.error("Broke out: " + err);
   });
-
 });
 
 
